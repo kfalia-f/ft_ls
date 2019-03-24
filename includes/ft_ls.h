@@ -6,12 +6,14 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/23 20:11:47 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/24 15:25:45 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
+
+# define TRUE_LS 1
 
 # include <dirent.h>
 # include <libft.h>
@@ -55,6 +57,10 @@ typedef struct      s_argv
 	unsigned char   len;
 }                   t_argv;
 
-void	ft_without_args(char *str);
-
+void				ft_without_args(char *str);
+t_data				*new_node(struct dirent *dp);
+void				push_back(t_data **head, t_data *node);
+t_argv				*new_argv(char *str);
+void				push_back_argv(t_argv **head, t_argv *node);
+t_data				*ft_ascii_sort(t_data **head);
 #endif

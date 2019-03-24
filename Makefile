@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/03/23 20:11:17 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/03/24 15:16:54 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ FLAGS = -Wall -Wextra -Werror
 SRC = srcs/
 
 SOURCES = $(SRC)main.c \
-		  $(SRC)ft_without_args.c
+		  $(SRC)ft_without_args.c \
+		  $(SRC)ft_sort.c \
+		  $(SRC)list.c \
+		  $(SRC)argvlist.c
 
 LIBFT_FOLDER = libft
 
