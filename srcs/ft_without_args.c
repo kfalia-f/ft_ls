@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 20:01:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/24 15:27:45 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/25 17:52:38 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,28 @@
 /*
 **Need to rework
 */
+
+static void	ft_output(t_data *data)
+{
+	t_data	*tmp;
+	int		max_namlen;
+
+	tmp = data;
+	max_namlen = ft_max_namlen(tmp);
+	while (tmp->next)
+	{
+		while ((*tmp->name) == '.')
+		{
+			tmp = tmp->next;
+			continue ;
+		}
+		ft_putstr(tmp->name);
+		ft_output_spaces(' ', max_namlen - tmp->len + 1);
+		ft_putchar('\t');
+		tmp = tmp->next;
+	}
+	ft_putendl(tmp->name, 0);
+}
 
 static void	ft_without_args_true(char *str)
 {
@@ -31,18 +53,8 @@ static void	ft_without_args_true(char *str)
 		push_back(&head, node);
 	}
 	closedir(dirp);
-	// ascii sort
 	node = ft_ascii_sort(&head);
-	// print sorted list
-	head = node;
-	while (head->next)
-	{
-		printf("%s\t", head->name);
-		head = head->next;
-	}
-	printf("%s\n", head->name);
-	// split to columns
-	// print
+	ft_output(node);
 }
 
 void		ft_without_args(char *str)

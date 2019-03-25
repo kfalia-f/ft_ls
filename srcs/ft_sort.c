@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 15:03:30 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/24 15:29:16 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/25 17:49:40 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,34 @@
 
 t_data	*ft_ascii_sort(t_data **head)
 {
-	t_data	*tmp;
-	char	*strtmp;
+	t_data	**prev;
+	t_data	*curr;
+	t_data	*next;
+	int		done;
 
-	tmp = *head;
-	while ((*head)->next)
+	done = 0;
+	if (*head == NULL || (*head)->next == NULL)
+		return (NULL);
+	while (!done)
 	{
-		if (ft_strcmp((*head)->name, (*head)->next->name) > 0)
+		prev = head;
+		curr = *head;
+		next = (*head)->next;
+		done = 1;
+		while (next)
 		{
-			strtmp = (*head)->name;
-			(*head)->name = (*head)->next->name;
-			(*head)->next->name = strtmp;
-			*head = tmp;
+			if (ft_strcmp(curr->name, next->name) > 0)
+			{
+				curr->next = next->next;
+				next->next = curr;
+				*prev = next;
+				done = 0;
+			}
+			prev = &curr->next;
+			curr = next;
+			next = next->next;
 		}
-		else
-			(*head) = (*head)->next;
 	}
-	*head = tmp;
 	return (*head);
 }
 

@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/24 15:25:45 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/25 17:47:17 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,6 @@ void				push_back(t_data **head, t_data *node);
 t_argv				*new_argv(char *str);
 void				push_back_argv(t_argv **head, t_argv *node);
 t_data				*ft_ascii_sort(t_data **head);
+int					ft_max_namlen(t_data *data);
+void				ft_output_spaces(char c, int len);
 #endif
