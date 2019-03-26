@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 20:01:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/25 17:52:38 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/26 16:16:17 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 **Need to rework
 */
 
+// TODO: need to know the window size to make real columns
 static void	ft_output(t_data *data)
 {
-	t_data	*tmp;
-	int		max_namlen;
+	struct winsize	w;
+	t_data			*tmp;
+	int				max_namlen;
 
+	ioctl(0, TIOCGWINSZ, &w);
 	tmp = data;
 	max_namlen = ft_max_namlen(tmp);
 	while (tmp->next)
