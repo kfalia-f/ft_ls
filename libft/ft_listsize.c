@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstinsert_at.c                                  :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/12 20:29:53 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/26 19:08:08 by kfalia-f         ###   ########.fr       */
+/*   Created: 2018/12/07 21:50:08 by koparker          #+#    #+#             */
+/*   Updated: 2019/03/26 19:03:19 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	ft_lstinsert_at(t_list **alst, t_list *node, size_t pos)
-{
-	t_list	*prev;
-	t_list	*post;
+/*
+** null not included
+*/
 
-	if (*alst == NULL)
-		ft_lstadd(alst, node);
-	else if (pos == 0)
-		ft_lstadd(alst, node);
-	else if (((*alst)->next == NULL && pos == 1) || (pos == ft_listsize(*alst)))
-		ft_lstpush_back(alst, node);
-	else
+size_t	ft_listsize(t_list *lst)
+{
+	size_t	i;
+	t_list	*tmp;
+
+	i = 0;
+	tmp = lst;
+	if (lst == NULL)
+		return (0);
+	while (tmp != NULL)
 	{
-		prev = ft_lstat(*alst, pos - 1);
-		post = ft_lstat(*alst, pos);
-		prev->next = node;
-		node->next = post;
+		i++;
+		tmp = tmp->next;
 	}
+	return (i);
 }

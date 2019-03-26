@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:53:25 by koparker          #+#    #+#             */
-/*   Updated: 2019/02/01 16:59:44 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/26 19:07:45 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 t_list	*ft_lstback(t_list *lst)
 {
 	if (lst)
-		return (ft_lstat(lst, ft_lstsize(lst) - 1));
+		return (ft_lstat(lst, ft_listsize(lst) - 1));
 	return (NULL);
 }

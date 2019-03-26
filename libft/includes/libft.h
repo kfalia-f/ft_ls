@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:37:14 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/20 19:55:44 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/26 19:12:30 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
-size_t				ft_lstsize(t_list *lst);
+size_t				ft_listsize(t_list *lst);
 void				ft_lstpush_back(t_list **alst, t_list *new);
 t_list				*ft_lstback(t_list *lst);
 t_list				*ft_lstat(t_list *lst, size_t pos);
@@ -95,6 +95,7 @@ int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2i, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoinre(char *s1, const char *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 void				ft_putchar(char c);
@@ -106,6 +107,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_itoa(int n);
+char				**ft_memalloc2(size_t i, size_t j);
 
 int					get_next_line(const int fd, char **line);
 #endif

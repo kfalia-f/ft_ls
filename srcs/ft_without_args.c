@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 20:01:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/26 16:16:17 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/26 20:13:43 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,65 @@
 */
 
 // TODO: need to know the window size to make real columns
-static void	ft_output(t_data *data)
-{
-	struct winsize	w;
-	t_data			*tmp;
-	int				max_namlen;
 
-	ioctl(0, TIOCGWINSZ, &w);
+char		**ft_lsttomass(char **arr, t_data *data)
+{
+	int		i;
+	t_data	*tmp;
+
+	i = 0;
 	tmp = data;
-	max_namlen = ft_max_namlen(tmp);
-	while (tmp->next)
+	while (tmp != NULL)
 	{
-		while ((*tmp->name) == '.')
-		{
-			tmp = tmp->next;
-			continue ;
-		}
-		ft_putstr(tmp->name);
-		ft_output_spaces(' ', max_namlen - tmp->len + 1);
-		ft_putchar('\t');
+		arr[i] = ft_strcpy(arr[i], tmp->name);
+		i++;
 		tmp = tmp->next;
 	}
-	ft_putendl(tmp->name, 0);
+	return (arr);
+}
+
+void		ft_output(char **arr, int row, size_t list_size, int max_namlen)
+{
+	int		i;
+	int		col;
+	int		j;
+	int		k;
+
+	k = 0;
+	while (arr[k][0] == '.')
+		k++;
+	col = (list_size - k) / row + 1;
+	j = 0;
+	while (j < col)
+	{
+		i = k + j;
+		while (i < (int)list_size)
+		{
+			ft_putstr(arr[i]);
+			ft_output_spaces(' ', max_namlen - ft_strlen(arr[i]) + 1);
+			ft_putchar('\t');
+			i += col;
+		}
+		ft_putchar('\n');
+		j++;
+	}
+}
+
+static void	ft_window(t_data *data)
+{
+	struct winsize	w;
+	size_t			list_size;
+	int				max_namlen;
+	int				row;
+	char			**arr;
+
+	ioctl(0, TIOCGWINSZ, &w);
+	max_namlen = ft_max_namlen(data);
+	row = w.ws_col / (max_namlen + TAB + 1);
+	list_size = ft_lstsize(data);
+	arr = ft_memalloc2(list_size, 8);
+	arr = ft_lsttomass(arr, data);
+	ft_output(arr, row, list_size, max_namlen);
 }
 
 static void	ft_without_args_true(char *str)
@@ -57,7 +94,7 @@ static void	ft_without_args_true(char *str)
 	}
 	closedir(dirp);
 	node = ft_ascii_sort(&head);
-	ft_output(node);
+	ft_window(node);
 }
 
 void		ft_without_args(char *str)

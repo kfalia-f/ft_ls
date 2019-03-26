@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_strjoinre.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/07 21:50:08 by koparker          #+#    #+#             */
-/*   Updated: 2019/02/01 17:02:36 by koparker         ###   ########.fr       */
+/*   Created: 2018/12/06 17:22:37 by kfalia-f          #+#    #+#             */
+/*   Updated: 2019/03/26 16:49:54 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-/*
-** null not included
-*/
-
-size_t	ft_lstsize(t_list *lst)
+char	*ft_strjoinre(char *s1, const char *s2)
 {
-	size_t	i;
-	t_list	*tmp;
+	char	*s;
 
-	i = 0;
-	tmp = lst;
-	if (lst == NULL)
-		return (0);
-	while (tmp != NULL)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
+	if ((s = ft_strjoin(s1, s2)) == NULL)
+		return (NULL);
+	free(s1);
+	return (s);
 }

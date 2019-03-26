@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/25 18:09:13 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/26 19:02:54 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LS_H
 
 # define TRUE_LS 1
+# define TAB 8
 
 # include <dirent.h>
 # include <libft.h>
@@ -66,4 +67,6 @@ void				push_back_argv(t_argv **head, t_argv *node);
 t_data				*ft_ascii_sort(t_data **head);
 int					ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, int len);
+size_t				ft_lsit_size(t_data *lst);
+size_t				ft_lstsize(t_data *lst);
 #endif

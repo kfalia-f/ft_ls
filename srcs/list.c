@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/24 14:29:23 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/26 17:37:19 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,21 @@ void    push_back(t_data **head, t_data *node)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = node;
+}
+
+size_t	ft_list_size(t_data *lst)
+{
+	size_t	i;
+	t_data	*tmp;
+
+	i = 0;
+	tmp = lst;
+	if (lst == NULL)
+		return (0);
+	while (tmp != NULL)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }
