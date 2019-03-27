@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:17:39 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/26 19:22:39 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/27 15:28:21 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,23 @@ void	*ft_del(char ***a, int n)
 	return (NULL);
 }
 
-char	**ft_memalloc_2d_clean(size_t i, size_t j)
+char	**ft_memalloc_2d_clean(size_t str_num, size_t str_size)
 {
 	char	**s;
 	size_t	k;
 
 	k = -1;
-	if ((s = (char **)malloc(sizeof(char *) * (i + 1))) == NULL)
+	if ((s = (char **)malloc(sizeof(char *) * (str_num + 1))) == NULL)
 		return (NULL);
-	while (++k < i)
-		if ((s[k] = (char *)malloc(sizeof(char) * (j + 1))) == NULL)
+	while (++k < str_num)
+		if ((s[k] = (char *)malloc(sizeof(char) * (str_size + 1))) == NULL)
 			return (ft_del(&s, k));
 	k = 0;
-	while (k < i)
+	while (k < str_num)
 	{
 		ft_bzero(s[k], '\0');
 		k++;
 	}
-	s[i] = NULL;
+	s[str_num] = NULL;
 	return (s);
 }

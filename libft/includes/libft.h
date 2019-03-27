@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:37:14 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/26 19:12:30 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/27 15:28:39 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_itoa(int n);
-char				**ft_memalloc_2d_clean(size_t i, size_t j);
+char				**ft_memalloc_2d_clean(size_t str_num, size_t str_size);
 
 int					get_next_line(const int fd, char **line);
 #endif
