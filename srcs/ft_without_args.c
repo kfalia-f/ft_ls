@@ -28,6 +28,8 @@ char		**ft_lstname_to_str_arr(char **arr, t_data *data)
 	return (arr);
 }
 
+// doesn't work properly with some cols and row.
+// Also need to row<->col in naming
 void		ft_output(char **arr, size_t row, size_t list_size, size_t max_namlen)
 {
 	size_t	i;
@@ -55,6 +57,7 @@ void		ft_output(char **arr, size_t row, size_t list_size, size_t max_namlen)
 	}
 }
 
+//some problem may lay here. look at ../tmp/ft_without_args_TEST.c
 static void	ft_window(t_data *data)
 {
 	struct winsize	w;
@@ -67,7 +70,7 @@ static void	ft_window(t_data *data)
 	max_namlen = ft_max_namlen(data);
 	row = w.ws_col / (max_namlen + TAB + 1);
 	list_size = ft_lstsize(data);
-	arr = ft_memalloc_2d_clean(list_size, 8); //what does this magic number (8) mean?
+	arr = ft_memalloc_2d_clean(list_size, max_namlen);
 	arr = ft_lstname_to_str_arr(arr, data);
 	ft_output(arr, row, list_size, max_namlen);
 }

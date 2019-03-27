@@ -21,7 +21,8 @@ SOURCES = $(SRC)main.c \
 		  $(SRC)ft_sort.c \
 		  $(SRC)list.c \
 		  $(SRC)argvlist.c \
-		  $(SRC)ft_output_helpers.c
+		  $(SRC)ft_output_helpers.c \
+          $(SRC)ft_flags.c
 
 LIBFT_FOLDER = libft
 

@@ -69,4 +69,5 @@ size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
 size_t				ft_lsit_size(t_data *lst);
 size_t				ft_lstsize(t_data *lst);
+size_t              ft_flags(int ac, char **av, t_flags flags);
 #endif

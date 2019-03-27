@@ -14,11 +14,15 @@
 
 int		main(int ac, char **av)
 {
+    t_flags flags;
+    size_t  flags_offset;
+
 	if (ac == 1)
 	{
 		ft_without_args(".");
 		return (0);
 	}
-	(void)av;
+    flags.value = 0;
+	flags_offset = ft_flags(ac, av, flags);
 	return (0);
 }
