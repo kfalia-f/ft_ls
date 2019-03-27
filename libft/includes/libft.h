@@ -107,7 +107,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_itoa(int n);
-char				**ft_memalloc2(size_t i, size_t j);
+char				**ft_memalloc_2d_clean(size_t i, size_t j);
 
 int					get_next_line(const int fd, char **line);
 #endif

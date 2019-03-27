@@ -12,10 +12,10 @@
 
 #include <ft_ls.h>
 
-int		ft_max_namlen(t_data *data)
+size_t	ft_max_namlen(t_data *data)
 {
 	t_data	*tmp;
-	int		max;
+	size_t	max;
 
 	if (data == NULL)
 		return (0);
@@ -30,13 +30,16 @@ int		ft_max_namlen(t_data *data)
 	return (max);
 }
 
-void	ft_output_spaces(char c, int len)
+void	ft_output_spaces(char c, size_t len)
 {
-	int		i;
+	size_t	i;
 
-	i = -1;
-	while (++i < len)
+	i = 0;
+	while (i < len)
+    {
 		ft_putchar(c);
+        i++;
+    }
 }
 
 size_t  ft_lstsize(t_data *lst)

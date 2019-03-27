@@ -12,13 +12,7 @@
 
 #include <ft_ls.h>
 
-/*
-**Need to rework
-*/
-
-// TODO: need to know the window size to make real columns
-
-char		**ft_lsttomass(char **arr, t_data *data)
+char		**ft_lstname_to_str_arr(char **arr, t_data *data)
 {
 	int		i;
 	t_data	*tmp;
@@ -34,12 +28,12 @@ char		**ft_lsttomass(char **arr, t_data *data)
 	return (arr);
 }
 
-void		ft_output(char **arr, int row, size_t list_size, int max_namlen)
+void		ft_output(char **arr, size_t row, size_t list_size, size_t max_namlen)
 {
-	int		i;
-	int		col;
-	int		j;
-	int		k;
+	size_t	i;
+	size_t	col;
+	size_t	j;
+	size_t	k;
 
 	k = 0;
 	while (arr[k][0] == '.')
@@ -49,7 +43,7 @@ void		ft_output(char **arr, int row, size_t list_size, int max_namlen)
 	while (j < col)
 	{
 		i = k + j;
-		while (i < (int)list_size)
+		while (i < list_size)
 		{
 			ft_putstr(arr[i]);
 			ft_output_spaces(' ', max_namlen - ft_strlen(arr[i]) + 1);
@@ -65,16 +59,16 @@ static void	ft_window(t_data *data)
 {
 	struct winsize	w;
 	size_t			list_size;
-	int				max_namlen;
-	int				row;
+	size_t			max_namlen;
+	size_t			row;
 	char			**arr;
 
 	ioctl(0, TIOCGWINSZ, &w);
 	max_namlen = ft_max_namlen(data);
 	row = w.ws_col / (max_namlen + TAB + 1);
 	list_size = ft_lstsize(data);
-	arr = ft_memalloc2(list_size, 8);
-	arr = ft_lsttomass(arr, data);
+	arr = ft_memalloc_2d_clean(list_size, 8); //what does this magic number (8) mean?
+	arr = ft_lstname_to_str_arr(arr, data);
 	ft_output(arr, row, list_size, max_namlen);
 }
 

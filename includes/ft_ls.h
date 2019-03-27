@@ -65,8 +65,8 @@ void				push_back(t_data **head, t_data *node);
 t_argv				*new_argv(char *str);
 void				push_back_argv(t_argv **head, t_argv *node);
 t_data				*ft_ascii_sort(t_data **head);
-int					ft_max_namlen(t_data *data);
-void				ft_output_spaces(char c, int len);
+size_t				ft_max_namlen(t_data *data);
+void				ft_output_spaces(char c, size_t len);
 size_t				ft_lsit_size(t_data *lst);
 size_t				ft_lstsize(t_data *lst);
 #endif

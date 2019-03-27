@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc2.c                                     :+:      :+:    :+:   */
+/*   ft_memalloc_2d_clean.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -28,7 +28,7 @@ void	*ft_del(char ***a, int n)
 	return (NULL);
 }
 
-char	**ft_memalloc2(size_t i, size_t j)
+char	**ft_memalloc_2d_clean(size_t i, size_t j)
 {
 	char	**s;
 	size_t	k;
