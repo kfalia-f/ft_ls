@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/28 15:45:08 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/28 16:58:54 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ size_t        ft_flags(int ac, char **av, t_flags flags)
         if (av[i][0] == '-' && av[i][1] == '-')
         {
             num_of_flags++;
-			if (av[i][2] != '\0' && av[i][2] != ' ' && av[i][2] != '\t' && av[i][2] != '\n')
+			if (av[i][2] != '\0')
 				ft_wrong_flag('-');
             break ;
         }
