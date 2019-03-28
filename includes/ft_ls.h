@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/26 19:02:54 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/28 16:00:19 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void				ft_output_spaces(char c, size_t len);
 size_t				ft_lsit_size(t_data *lst);
 size_t				ft_lstsize(t_data *lst);
 size_t              ft_flags(int ac, char **av, t_flags flags);
+void				ft_sort_params(int ac, char **av);
 #endif
