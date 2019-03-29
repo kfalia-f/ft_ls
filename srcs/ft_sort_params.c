@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 18:27:45 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/28 15:59:43 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/29 15:28:24 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ void	ft_swap(char **a, char **b)
 	*b = tmp;
 }
 
-void	ft_sort_params(int ac, char **av)
+void	ft_sort_params(char **av)
 {
-	int     i;
-	int     j;
+	int	i;
+	int j;;
 
-	i = ac;
-	while (i > 1)
+	i = 0;
+	while (av[i] != NULL)
 	{
-		j = 1;
-		while (j < ac - 1)
+		j = 0;
+		while (av[j + 1] != NULL)
 		{
 			if (ft_strcmp(av[j], av[j + 1]) > 0)
 				ft_swap(&av[j], &av[j + 1]);
 			j++;
 		}
-		i--;
+		i++;
 	}
 }

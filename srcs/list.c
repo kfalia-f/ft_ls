@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/26 17:37:19 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/29 18:38:15 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ t_data	*new_node(struct dirent *dp)
 	}
 	node->name = dp->d_name;
 	node->len = dp->d_namlen;
+	node->next = NULL;
+	return (node);
+}
+
+t_data	*new_file(char *str)
+{
+	t_data  *node;
+
+	if (!(node = (t_data *)malloc(sizeof(t_data))))
+	{
+		ft_putendl("doesn't malloced for a new file", 0);
+		return (NULL);
+	}
+	node->name = str;
 	node->next = NULL;
 	return (node);
 }

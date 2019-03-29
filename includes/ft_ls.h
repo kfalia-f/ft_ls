@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/29 13:38:46 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/29 18:55:23 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct      s_argv
 
 void				ft_without_args(char *str);
 t_data				*new_node(struct dirent *dp);
+t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);
 t_argv				*new_argv(char *str);
 void				push_back_argv(t_argv **head, t_argv *node);
@@ -68,6 +69,9 @@ t_data				*ft_ascii_sort(t_data **head);
 size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
 size_t				ft_list_size(t_data *lst);
-size_t              ft_flags(int ac, char **av, t_flags flags);
-void				ft_sort_params(int ac, char **av);
+int					ft_flags(int ac, char **av, t_flags flags);
+void				ft_sort_params(char **av);
+t_data				*ft_read_data(char *str);
+t_argv				*ft_argv(char **av);
+
 #endif

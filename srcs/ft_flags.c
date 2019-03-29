@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/28 16:58:54 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/29 14:59:14 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static void    ft_check_flag(char *str, t_flags flags)
     }
 }
 
-size_t        ft_flags(int ac, char **av, t_flags flags)
+int			ft_flags(int ac, char **av, t_flags flags)
 {
-    int  i;
-    size_t  num_of_flags;
+    int	i;
+    int	num_of_flags;
 
     i = 1;
     num_of_flags = 0;
