@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:24:54 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/26 19:06:44 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:38:14 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,4 @@ void	ft_output_spaces(char c, size_t len)
 		ft_putchar(c);
         i++;
     }
-}
-
-size_t  ft_lstsize(t_data *lst)
-{
-	size_t  i;
-	t_data  *tmp;
-
-	i = 0;
-	tmp = lst;
-	if (lst == NULL)
-		return (0);
-	while (tmp != NULL)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
 }

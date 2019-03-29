@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 20:01:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/26 20:13:43 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:37:55 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ft_window(t_data *data)
 	ioctl(0, TIOCGWINSZ, &w);
 	max_namlen = ft_max_namlen(data);
 	row = w.ws_col / (max_namlen + TAB + 1);
-	list_size = ft_lstsize(data);
+	list_size = ft_list_size(data);
 	arr = ft_memalloc_2d_clean(list_size, max_namlen);
 	arr = ft_lstname_to_str_arr(arr, data);
 	ft_output(arr, row, list_size, max_namlen);
