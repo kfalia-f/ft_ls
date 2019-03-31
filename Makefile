@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/03/31 19:54:08 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/03/31 20:08:51 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SOURCES = $(SRC)main.c \
           $(SRC)ft_flags.c \
 		  $(SRC)ft_sort_params.c \
 		  $(SRC)ft_with_args.c \
-		  $(SRC)ft_sort_balancer.c
+		  $(SRC)ft_sort_balancer.c \
+		  $(SRC)ft_recurcion_flag.c
 
 LIBFT_FOLDER = libft
 
