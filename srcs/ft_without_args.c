@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 20:01:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/31 15:56:29 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/31 22:32:18 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		ft_output(char **arr, size_t row, size_t list_size, size_t max_namlen)
 }
 
 //some problem may lay here. look at ../tmp/ft_without_args_TEST.c
-static void	ft_window(t_data *data)
+void	ft_window(t_data *data)
 {
 	struct winsize	w;
 	size_t			list_size;
@@ -75,7 +75,7 @@ static void	ft_window(t_data *data)
 	ft_output(arr, row, list_size, max_namlen);
 }
 
-static void	ft_without_args_true(char *str)
+void	ft_without_args(char *str)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
@@ -92,20 +92,4 @@ static void	ft_without_args_true(char *str)
 	closedir(dirp);
 	node = ft_ascii_sort(&head);
 	ft_window(node);
-}
-
-void		ft_without_args(char *str)
-{
-	DIR				*dirp;
-	struct dirent	*dp;
-
-	if (TRUE_LS == 1)
-	{
-		ft_without_args_true(str);
-		return ;
-	}
-	dirp = opendir(str);
-	while ((dp = readdir(dirp)) != NULL)
-		ft_putendl(dp->d_name, 0);
-	closedir(dirp);
 }
