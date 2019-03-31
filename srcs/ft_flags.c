@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/29 14:59:14 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/31 19:40:05 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void    ft_wrong_flag(char c)
 	exit(EXIT_FAILURE);
 }
 
-static void    ft_check_flag(char *str, t_flags flags)
+static void    ft_check_flag(char *str, t_flags *flags)
 {
     size_t  i;
 	size_t	bits_to_shift;
@@ -35,12 +35,12 @@ static void    ft_check_flag(char *str, t_flags flags)
 			bits_to_shift = s - cmp;
 		else
 			ft_wrong_flag(str[i]);
-		flags.value |= (1 << bits_to_shift);
+		flags->value |= (1 << bits_to_shift);
 		i++;
     }
 }
 
-int			ft_flags(int ac, char **av, t_flags flags)
+int			ft_flags(int ac, char **av, t_flags *flags)
 {
     int	i;
     int	num_of_flags;

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/31 16:18:46 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/31 19:39:43 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_data				*ft_ascii_sort(t_data **head);
 size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
 size_t				ft_list_size(t_data *lst);
-int					ft_flags(int ac, char **av, t_flags flags);
+int					ft_flags(int ac, char **av, t_flags *flags);
 void				ft_sort_params(char **av);
 t_data				*ft_read_data(char *str);
 void				ft_argv(char **av, int n);
