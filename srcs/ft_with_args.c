@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_with_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/29 18:58:37 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/31 16:22:29 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,30 @@ t_data	*ft_read_data(char *str)
 }
 
 // fill external list
-t_argv	*ft_argv(char **av)
+void	ft_argv(char **av, int n)
 {
-	t_argv	*head;
-	t_argv	*node;
+	t_data	*head;
 	int		i;
 
 	i = 0;
 	head = NULL;
 	while (av[i] != NULL)
 	{
-		node = new_argv(av[i]);
-		if ((node->data = ft_read_data(av[i])) == NULL)
+		if ((ft_read_data(av[i])) != NULL)
 		{
-			i++;
-			continue ;
+			head = ft_read_data(av[i]);
+			// replace ascii_sort for balansing sort function later
+			if (n == 1)
+				ft_without_args(av[i]);
+			else
+			{
+				ft_putendl(av[i], 1);
+				ft_without_args(av[i]);
+				if (av[i + 1] != NULL)
+					ft_putchar('\n');
+			}
+			//ft_free_list();
 		}
-		push_back_argv(&head, node);
 		i++;
 	}
-	return (head);
 }

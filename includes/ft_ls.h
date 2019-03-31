@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/29 18:55:23 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/31 16:18:46 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ size_t				ft_list_size(t_data *lst);
 int					ft_flags(int ac, char **av, t_flags flags);
 void				ft_sort_params(char **av);
 t_data				*ft_read_data(char *str);
-t_argv				*ft_argv(char **av);
+void				ft_argv(char **av, int n);
 
 #endif

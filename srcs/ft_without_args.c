@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_without_args.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 20:01:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/29 13:37:55 by koparker         ###   ########.fr       */
+/*   Updated: 2019/03/31 15:56:29 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void		ft_without_args(char *str)
 	{
 		ft_without_args_true(str);
 		return ;
-	}	
+	}
 	dirp = opendir(str);
 	while ((dp = readdir(dirp)) != NULL)
 		ft_putendl(dp->d_name, 0);
