@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:37:14 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/27 15:28:39 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/02 20:31:19 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+
+typedef struct		s_data
+{
+	struct s_data	*next;
+	char			*name;
+	size_t			len;
+}					t_data;
 
 typedef struct		s_list
 {
@@ -108,6 +115,8 @@ void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_itoa(int n);
 char				**ft_memalloc_2d_clean(size_t str_num, size_t str_size);
+void				ft_free_list(t_data *head);
+char				*ft_str_path(char *str1, char *str2);
 
 int					get_next_line(const int fd, char **line);
 #endif

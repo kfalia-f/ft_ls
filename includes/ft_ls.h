@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/31 20:21:55 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/02 17:43:03 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ typedef union		u_flags
 	unsigned int	value;
 	struct s_bits	bits;
 }					t_flags;
-
-typedef struct      s_data
-{
-	struct s_data   *next;
-	char            *name;
-	unsigned char   len;
-}                   t_data;
 
 typedef struct      s_argv
 {

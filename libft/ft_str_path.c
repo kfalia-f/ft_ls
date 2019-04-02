@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_str_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 21:44:08 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/02 21:15:07 by kfalia-f         ###   ########.fr       */
+/*   Created: 2019/04/02 20:22:10 by kfalia-f          #+#    #+#             */
+/*   Updated: 2019/04/02 20:37:30 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	ft_putendl(char const *s, int flag)
+char	*ft_str_path(char *str1, char *str2)
 {
-	if (flag == 2)
-		ft_putchar_base('\n', 1);
-	ft_putstr_base(s, 1);
-	if (flag != 0)
-		ft_putchar_base(':', 1);
-	ft_putchar_base('\n', 1);
+	char	*str3;
+
+	str3 = ft_strjoin(str1, "/");
+	str3 = ft_strjoinre(str3, str2);
+	return (str3);
 }

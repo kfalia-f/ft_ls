@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_free_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 21:44:08 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/02 21:15:07 by kfalia-f         ###   ########.fr       */
+/*   Created: 2019/04/02 17:27:58 by kfalia-f          #+#    #+#             */
+/*   Updated: 2019/04/02 17:33:56 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	ft_putendl(char const *s, int flag)
+void	ft_free_list(t_data *head)
 {
-	if (flag == 2)
-		ft_putchar_base('\n', 1);
-	ft_putstr_base(s, 1);
-	if (flag != 0)
-		ft_putchar_base(':', 1);
-	ft_putchar_base('\n', 1);
+	t_data	*tmp;
+
+	if (head == NULL)
+		return ;
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+		tmp = NULL;
+	}
 }

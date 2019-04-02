@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/31 20:24:25 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/02 21:17:49 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int		main(int ac, char **av)
 	}
     flags.value = 0;
 	num_of_flags = ft_flags(ac, av, &flags);
-	flag = (ac - num_of_flags - 1) == 0 ? 0 : 1;
-	printf("%d\n", flag);
+	flag = ac - num_of_flags - 1;
 	if (flags.bits.f == 0 && flags.bits.t == 0)
 		ft_sort_params(av + num_of_flags + 1);
 	else
