@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:37:14 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/27 15:28:39 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/02 17:43:01 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void				ft_lstinsert_at(t_list **alst, t_list *node, size_t pos);
 void				ft_lstfree_node(void *node, size_t size);
 
 size_t				ft_strlen(const char *s);
+size_t				ft_2d_strlen(char **str);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);

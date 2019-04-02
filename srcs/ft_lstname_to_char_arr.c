@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_base.c                                   :+:      :+:    :+:   */
+/*   ft_lstname_to_char_arr.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 17:16:22 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/02 15:14:46 by koparker         ###   ########.fr       */
+/*   Created: 2019/04/02 17:33:28 by koparker          #+#    #+#             */
+/*   Updated: 2019/04/02 17:34:42 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <ft_ls.h>
 
-void	ft_putstr_base(char const *s, int out)
+char	**ft_lstname_to_char_arr(char **arr, t_data *data)
 {
-	size_t i;
+	int     i;
+	t_data  *tmp;
 
 	i = 0;
-	while (s[i] != '\0')
-		ft_putchar_base(s[i++], out);
+	tmp = data;
+	while (tmp != NULL)
+	{
+		arr[i] = ft_strcpy(arr[i], tmp->name);
+		i++;
+		tmp = tmp->next;
+	}
+	return (arr);
 }

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_base.c                                   :+:      :+:    :+:   */
+/*   ft_2d_strlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 17:16:22 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/02 15:14:46 by koparker         ###   ########.fr       */
+/*   Created: 2019/02/11 16:32:08 by koparker          #+#    #+#             */
+/*   Updated: 2019/04/02 17:46:53 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	ft_putstr_base(char const *s, int out)
+size_t	ft_2d_strlen(char **str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
-		ft_putchar_base(s[i++], out);
+	while (str[i])
+		i++;
+	return (i);
 }

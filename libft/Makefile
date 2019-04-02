@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 17:39:07 by koparker          #+#    #+#              #
-#    Updated: 2019/03/26 19:12:56 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/04/02 17:42:20 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.
 	  ft_listsize.c ft_lstpush_back.c ft_lstback.c ft_lstat.c \
 	  ft_lstinsert_at.c ft_lstfree_node.c \
 	  ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c ft_memcmp.c \
-	  ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c ft_strncat.c ft_strlcat.c \
+	  ft_strlen.c ft_2d_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c ft_strncat.c ft_strlcat.c \
 	  ft_strchr.c ft_strrchr.c ft_strstr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c ft_atoi.c \
 	  ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_toupper.c ft_tolower.c \
 	  ft_putchar_base.c ft_putstr_base.c ft_putnbr_base.c ft_strrev.c ft_memcpy_backwards.c \

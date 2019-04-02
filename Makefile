@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/03/29 16:29:47 by koparker         ###   ########.fr        #
+#    Updated: 2019/04/02 19:14:59 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,12 @@ SOURCES = $(SRC)main.c \
 		  $(SRC)ft_without_args.c \
 		  $(SRC)ft_sort.c \
 		  $(SRC)list.c \
-		  $(SRC)argvlist.c \
 		  $(SRC)ft_output_helpers.c \
           $(SRC)ft_flags.c \
 		  $(SRC)ft_sort_params.c \
-		  $(SRC)ft_with_args.c
+		  $(SRC)ft_with_args.c \
+		  $(SRC)ft_print.c \
+		  $(SRC)ft_lstname_to_char_arr.c
 
 LIBFT_FOLDER = libft
 

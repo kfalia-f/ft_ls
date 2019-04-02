@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/31 22:32:42 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/02 19:15:44 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,8 @@ typedef struct      s_data
 	struct s_data   *next;
 	char            *name;
 	struct s_data	*elem;
-	unsigned char   len;
+	size_t			len;
 }                   t_data;
-
-typedef struct      s_holder
-{
-	struct s_holder	*next;
-	struct s_data	*elem;
-}                   t_holder;
-
-typedef struct      s_argv
-{
-	struct s_argv   *next;
-	struct s_data   *data;
-	char            *path_name;
-	unsigned char   len;
-}                   t_argv;
 
 char				**ft_lstname_to_str_arr(char **arr, t_data *data);
 void				ft_output(char **arr, size_t row, size_t list_size, size_t max_namlen);
@@ -72,17 +58,16 @@ void				ft_window(t_data *data);
 void				ft_without_args(char *str);
 t_data				*new_node(struct dirent *dp);
 t_data				*new_file(char *str);
-t_holder			*new_elem(t_data *elem);
 void				push_back(t_data **head, t_data *node);
-t_argv				*new_argv(char *str);
-void				push_back_argv(t_argv **head, t_argv *node);
+
 t_data				*ft_ascii_sort(t_data **head);
 size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
 size_t				ft_list_size(t_data *lst);
 int					ft_flags(int ac, char **av, t_flags flags);
 void				ft_sort_params(char **av);
-t_holder			*ft_read_data(char *str);
 void				ft_argv(char **av, int n);
 
+char				**ft_lstname_to_char_arr(char **arr, t_data *data);
+void				ft_print(t_data *head);
 #endif
