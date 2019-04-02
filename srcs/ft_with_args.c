@@ -33,7 +33,7 @@ void	ft_nonexistent_argv_error(char *name)
 }
 
 // read argv
-t_holder	*ft_read_data(char *str)
+/*t_holder	*ft_read_data(char *str)
 {
 	// opendir, read data, closedir. Output error OR Store errors
 	DIR				*dirp;
@@ -65,27 +65,27 @@ t_holder	*ft_read_data(char *str)
 	holder->next = new_elem(head_dir);
 	closedir(dirp);
 	return (holder);
-}
+}*/
 
-void	ft_output_files(t_holder *head)
+void	ft_output_files(t_data *head)
 {
 	t_data	*tmp;
 
-	tmp = head->elem;
+	tmp = head;
 	while (tmp != NULL)
 	{
-		if (ft_strcmp(tmp->name, "-1") == 0)
-			tmp = tmp->next;
+//		if (ft_strcmp(tmp->name, "-1") == 0)
+//			tmp = tmp->next;
 		ft_window(ft_ascii_sort(&tmp));
 		tmp = tmp->next;
 	}
 }
 
-void	ft_output_dirs(t_holder *head, int n)
+void	ft_output_dirs(t_data *head, int n)
 {
 	t_data	*tmp;
 
-	tmp = head->elem;
+	tmp = head;
 	while (tmp != NULL)
 	{
 		if (n == 1)
@@ -104,44 +104,46 @@ void	ft_output_dirs(t_holder *head, int n)
 // fill external list
 void	ft_argv(char **av, int n)
 {
-	t_holder	*tmp;
+	DIR			*dirp;
+	t_data		*head_file;
+	t_data		*head_dir;
 	int			i;
 
 	i = 0;
-	(void)n;
+	head_file = NULL;
+	head_dir = NULL;
+//	push_back(&head_file, new_file("-1"));
 	while (av[i] != NULL)
 	{
-		/*if ((tmp = ft_read_data(av[i])) != NULL)
-		{
-			// TODO: replace ascii_sort for balansing sort function later.
-			if (n == 1)
-				ft_window(ft_ascii_sort(&head));
-			else
-			{
-				printf("null\n");
-				// TODO: if there are files, don't place ':' and '\n' after the filename. 
-				ft_putendl(av[i], 1);
-				ft_window(ft_ascii_sort(&head));
-				if (av[i + 1] != NULL)
-					ft_putchar('\n');
-			}
-			//ft_free_list();
-		}*/
-		tmp = ft_read_data(av[i]);
-		i++;
-	}
-	t_data	*file = tmp->elem;
-	//t_data	*dir = tmp->elem->next;
+    	if (!(dirp = opendir(av[i])))
+    	{
+    		if (errno != 20)
+    			ft_nonexistent_argv_error(av[i]);
+    		else
+    		{
+    			push_back(&head_file, new_file(av[i]));
+    		}
+    	}
+    	else
+        {
+            push_back(&head_dir, ft_readdir(dirp));
+    	    closedir(dirp);
+        }
+    	i++;
+    }
+    // TODO: ft_window() is corrupted.
+    (void)n;
+    t_data	*file = head_file;;
 	while (file != NULL)
 	{
 		printf("%s\n", file->name);
-		file = file->next;		
+		file = file->next;
 	}
 	/*while (dir != NULL)
 	{
 		printf("%s\n", dir->name);
 		dir = dir->next;		
 	}*/
-	//ft_output_files(tmp);
-	//ft_output_dirs(tmp->next, n);
+//	ft_output_files(head_file);
+//	ft_output_dirs(head_dir, n);
 }
