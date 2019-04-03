@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/03 20:37:35 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/03 21:07:45 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ void				ft_recurcion_flag(char **av, int i, int flag);
 void				ft_l_flag(char **av, int i, int flag, t_flags flags);
 
 char				**ft_lstname_to_char_arr(char **arr, t_data *data);
+t_data				*ft_readdir(DIR *dirp);
+void				ft_print_without_args(t_data *head);
 void				ft_print(t_data *head, t_flags fl);
 #endif
