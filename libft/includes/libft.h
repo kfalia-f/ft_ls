@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:37:14 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/03 18:04:01 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:36:21 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-
-typedef struct		s_data
-{
-	struct s_data	*next;
-	char			*name;
-	size_t			len;
-}					t_data;
 
 typedef struct		s_list
 {
@@ -54,6 +47,7 @@ void				ft_lstinsert_at(t_list **alst, t_list *node, size_t pos);
 void				ft_lstfree_node(void *node, size_t size);
 
 size_t				ft_strlen(const char *s);
+size_t				ft_2d_strlen(char **str);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
@@ -116,7 +110,6 @@ void				ft_putnbr_fd(int n, int fd);
 char				*ft_itoa(int n);
 char				**ft_memalloc_2d_clean(size_t str_num, size_t str_size);
 
-void				ft_free_list(t_data *head);
 char				*ft_str_path(char *str1, char *str2);
 char				*ft_ls_path_to_file(char *path);
 

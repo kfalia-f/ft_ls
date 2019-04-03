@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 20:04:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/03 17:32:43 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:42:30 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_recurcion_flag(char **av, int i, int flag)
 
 	if (flag == 0)
 	{
+		ft_putendl(".", 1);
 		ft_recurs(".");
 		return ;
 	}

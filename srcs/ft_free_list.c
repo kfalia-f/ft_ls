@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_base.c                                   :+:      :+:    :+:   */
+/*   ft_free_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 17:16:22 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/02 15:14:46 by koparker         ###   ########.fr       */
+/*   Created: 2019/04/02 17:27:58 by kfalia-f          #+#    #+#             */
+/*   Updated: 2019/04/03 17:51:23 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	ft_putstr_base(char const *s, int out)
+void	ft_free_list(t_data *head)
 {
-	size_t i;
+	t_data	*tmp;
 
-	i = 0;
-	while (s[i] != '\0')
-		ft_putchar_base(s[i++], out);
+	if (head == NULL)
+		return ;
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+		tmp = NULL;
+	}
 }

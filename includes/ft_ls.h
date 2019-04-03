@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/03 20:20:35 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:37:35 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,35 @@ typedef union		u_flags
 	struct s_bits	bits;
 }					t_flags;
 
-typedef struct      s_argv
+typedef struct      s_data
 {
-	struct s_argv   *next;
-	struct s_data   *data;
-	char            *path_name;
-	unsigned char   len;
-}                   t_argv;
+	struct s_data   *next;
+	char            *name;
+	struct s_data	*elem;
+	size_t			len;
+}                   t_data;
 
+char				**ft_lstname_to_str_arr(char **arr, t_data *data);
+void				ft_output(char **arr, size_t row, size_t list_size, size_t max_namlen);
+void				ft_window(t_data *data);
 void				ft_without_args(char *str);
 t_data				*new_node(struct dirent *dp);
 t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);
-t_argv				*new_argv(char *str);
-void				push_back_argv(t_argv **head, t_argv *node);
+void				ft_free_list(t_data *head);
+
 t_data				*ft_ascii_sort(t_data **head);
 size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
 size_t				ft_list_size(t_data *lst);
 int					ft_flags(int ac, char **av, t_flags *flags);
 void				ft_sort_params(char **av);
-t_data				*ft_read_data(char *str);
-void				ft_argv(char **av, int n);
+void				ft_argv(char **av, int n, t_flags fl);
 
 void				ft_sort_balancer(t_flags flag, t_data *head);
 void				ft_recurcion_flag(char **av, int i, int flag);
 void				ft_l_flag(char **av, int i, int flag, t_flags flags);
 
+char				**ft_lstname_to_char_arr(char **arr, t_data *data);
+void				ft_print(t_data *head, t_flags fl);
 #endif

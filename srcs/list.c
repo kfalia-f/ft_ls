@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/29 18:38:15 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/03 17:58:25 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_data	*new_node(struct dirent *dp)
 		return (NULL);
 	}
 	node->name = dp->d_name;
-	node->len = dp->d_namlen;
+	node->len = ft_strlen(node->name);
 	node->next = NULL;
 	return (node);
 }
@@ -37,6 +37,7 @@ t_data	*new_file(char *str)
 		return (NULL);
 	}
 	node->name = str;
+	node->len = ft_strlen(node->name);
 	node->next = NULL;
 	return (node);
 }
@@ -71,4 +72,19 @@ size_t	ft_list_size(t_data *lst)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+void	ft_free_list(t_data *head)
+{
+	t_data	*tmp;
+
+	if (head == NULL)
+		return ;
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+		tmp = NULL;
+	}
 }

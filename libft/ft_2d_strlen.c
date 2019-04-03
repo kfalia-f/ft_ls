@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_list.c                                     :+:      :+:    :+:   */
+/*   ft_2d_strlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 17:27:58 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/02 17:33:56 by kfalia-f         ###   ########.fr       */
+/*   Created: 2019/02/11 16:32:08 by koparker          #+#    #+#             */
+/*   Updated: 2019/04/02 17:46:53 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	ft_free_list(t_data *head)
+size_t	ft_2d_strlen(char **str)
 {
-	t_data	*tmp;
+	size_t	i;
 
-	if (head == NULL)
-		return ;
-	while (head != NULL)
-	{
-		tmp = head;
-		head = head->next;
-		free(tmp);
-		tmp = NULL;
-	}
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

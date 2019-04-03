@@ -6,76 +6,86 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/03/31 16:22:29 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:40:42 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-// read argv
-t_data	*ft_read_data(char *str)
+t_data	*ft_readdir(DIR *dirp)
 {
-	// opendir, read data, closedir. Output error OR Store errors
-	DIR				*dirp;
 	struct dirent	*dp;
 	t_data			*head;
-	t_data			*node;
 
 	head = NULL;
-	if (!(dirp = opendir(str)))
-	{
-		// use 'stat' to obtain info dir OR file (not errno code)
-		if (errno != 20)
-		{
-			ft_putstr("ft_ls: ");
-			ft_putstr(str);
-			ft_putstr(": ");
-			ft_putstr(strerror(errno));
-			ft_putchar('\n');
-		}
-		else
-		{
-			node = new_file(str);
-			push_back(&head, node);
-			return (head);
-			// node who accepts char *, but doesn't need dp
-		}
-		return (NULL);
-	}
 	while ((dp = readdir(dirp)) != NULL)
-	{
-		node = new_node(dp);
-		push_back(&head, node);
-	}
-	closedir(dirp);
+		push_back(&head, new_node(dp));
 	return (head);
 }
 
-// fill external list
-void	ft_argv(char **av, int n)
+void	ft_nonexistent_argv_error(char *name)
 {
-	t_data	*head;
-	int		i;
+	ft_putstr("ft_ls: ");
+	ft_putstr(name);
+	ft_putstr(": ");
+	ft_putstr(strerror(errno));
+	ft_putchar('\n');
+}
+
+void	ft_output_dirs(char *dir_name, t_data *head, int n, t_flags fl)
+{
+	if (n == 1)
+		ft_print(ft_ascii_sort(&head), fl);
+	else
+	{
+		ft_putendl(dir_name, 1);
+		ft_print(ft_ascii_sort(&head), fl);
+	}
+}
+
+void	ft_push_file(char *name, DIR *dirp, t_data **head_file)
+{
+	if ((dirp = opendir(name)) == NULL)
+	{
+		if (errno != 20)
+			ft_nonexistent_argv_error(name);
+		else
+			push_back(head_file, new_file(name));
+	}
+}
+
+void	ft_argv(char **av, int n, t_flags fl)
+{
+	DIR			*dirp;
+	t_data		*head_file;
+	t_data		*head_dir;
+	int			i;
 
 	i = 0;
-	head = NULL;
+	head_file = NULL;
+	head_dir = NULL;
+	dirp = NULL;
 	while (av[i] != NULL)
 	{
-		if ((ft_read_data(av[i])) != NULL)
+		ft_push_file(av[i], dirp, &head_file);
+		i++;
+	}
+	if (head_file != NULL)
+		ft_print(head_file, fl);
+	i = 0;
+	while (av[i] != NULL)
+	{
+		if ((dirp = opendir(av[i])) == NULL)
 		{
-			head = ft_read_data(av[i]);
-			// replace ascii_sort for balansing sort function later
-			if (n == 1)
-				ft_without_args(av[i]);
-			else
-			{
-				ft_putendl(av[i], 1);
-				ft_without_args(av[i]);
-				if (av[i + 1] != NULL)
-					ft_putchar('\n');
-			}
-			//ft_free_list();
+			i++;
+			continue ;
 		}
+		head_dir = ft_readdir(dirp);
+		closedir(dirp);
+		ft_output_dirs(av[i], head_dir, n, fl);
+		if (av[i + 1] != NULL)
+			ft_putchar('\n');
+		ft_free_list(head_dir);
 		i++;
 	}
 }
