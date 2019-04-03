@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 20:04:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/02 21:26:18 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/03 17:32:43 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,12 @@ void	ft_recurs(char *path_name)
 		node = new_node(dp);
 		push_back(&head, node);
 	}
+	closedir(dirp);
+	node = head;
 	if (ft_files(head) == 1)
 	{
 		ft_output_r(head);
-		ft_free_list(head);
+		ft_free_list(node);
 		return ;
 	}
 	if (head != NULL)
@@ -80,7 +82,7 @@ void	ft_recurs(char *path_name)
 			}
 		head = head->next;
 	}
-	ft_free_list(head);
+	ft_free_list(node);
 }
 
 void	ft_recurcion_flag(char **av, int i, int flag)

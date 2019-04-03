@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/02 17:43:03 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/03 18:15:19 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void				ft_argv(char **av, int n);
 
 void				ft_sort_balancer(t_flags flag, t_data *head);
 void				ft_recurcion_flag(char **av, int i, int flag);
+void				ft_l_flag(char **av, int i, int flag, t_flags flags);
 
 #endif
