@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/03 16:09:34 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/03 18:19:38 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,16 @@ void	ft_nonexistent_argv_error(char *name)
 	ft_putchar('\n');
 }
 
-/*void	ft_output_dirs(t_data *head, int n)
+void	ft_output_dirs(char *dir_name, t_data *head, int n, t_flags fl)
 {
-	t_data	*tmp;
-
-	tmp = head;
-	while (tmp != NULL)
+	if (n == 1)
+		ft_print(ft_ascii_sort(&head), fl);
+	else
 	{
-		if (n == 1)
-			ft_print(ft_ascii_sort(&tmp));
-		else
-		{
-			ft_putendl(tmp->name, 1);
-			ft_print(ft_ascii_sort(&tmp));
-			if (tmp->next->name != NULL)
-				ft_putchar('\n');
-		}
-		tmp = tmp->next;
+		ft_putendl(dir_name, 1);
+		ft_print(ft_ascii_sort(&head), fl);
 	}
-}*/
+}
 
 void	ft_argv(char **av, int n)
 {
@@ -75,15 +66,16 @@ void	ft_argv(char **av, int n)
     	}
     	i++;
     }
-	(void)n;
+//	(void)n;
 	t_flags	fl;
 	char	*s;
 	s = "";
 	fl.value = 0;
 	int num_of_flags = ft_flags(1, &s, fl);
 	num_of_flags = 0;
-	ft_print(head_file, fl);
-/*	i = 0;
+	if (head_file != NULL)
+		ft_print(head_file, fl);
+	i = 0;
 	while (av[i] != NULL)
 	{
 		if ((dirp = opendir(av[i])) == NULL)
@@ -91,10 +83,12 @@ void	ft_argv(char **av, int n)
 			i++;
 			continue ;
 		}
-		push_back(&head_dir, ft_readdir(dirp));
+		head_dir = ft_readdir(dirp);
 		closedir(dirp);
-		ft_output_dirs(head_dir, n);
-		head_dir = NULL;
+		ft_output_dirs(av[i], head_dir, n, fl);
+		if (av[i +1] != NULL)
+			ft_putchar('\n');
+		ft_free_list(head_dir);
 		i++;
-	}*/
+	}
 }
