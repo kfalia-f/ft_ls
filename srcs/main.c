@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/31 19:57:45 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:04:42 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int		main(int ac, char **av)
 	num_of_flags = ft_flags(ac, av, flags);
 	if (flags.bits.f == 0 && flags.bits.t == 0)
 		ft_sort_params(av + num_of_flags + 1);
-	ft_argv(av + num_of_flags + 1, ac - num_of_flags - 1);
+	ft_argv(av + num_of_flags + 1, ac - num_of_flags - 1, flags);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/03 18:19:38 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:16:22 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ void	ft_output_dirs(char *dir_name, t_data *head, int n, t_flags fl)
 	}
 }
 
+void	ft_push_file(char *name, DIR *dirp, t_data **head_file)
+{
+	if ((dirp = opendir(s)) == NULL)
+	{
+		if (errno != 20)
+			ft_nonexistent_argv_error(s);
+		else
+			push_back(head_file, new_file(s));
+	}
+}
+
 void	ft_argv(char **av, int n)
 {
 	DIR			*dirp;
@@ -55,24 +66,9 @@ void	ft_argv(char **av, int n)
 	head_dir = NULL;
 	while (av[i] != NULL)
 	{
-		if ((dirp = opendir(av[i])) == NULL)
-		{
-    		if (errno != 20)
-    			ft_nonexistent_argv_error(av[i]);
-    		else
-    		{
-    			push_back(&head_file, new_file(av[i]));
-    		}
-    	}
-    	i++;
-    }
-//	(void)n;
-	t_flags	fl;
-	char	*s;
-	s = "";
-	fl.value = 0;
-	int num_of_flags = ft_flags(1, &s, fl);
-	num_of_flags = 0;
+		ft_push_file(av[i], dirp, &head_file);
+		i++;
+	}
 	if (head_file != NULL)
 		ft_print(head_file, fl);
 	i = 0;
@@ -86,7 +82,7 @@ void	ft_argv(char **av, int n)
 		head_dir = ft_readdir(dirp);
 		closedir(dirp);
 		ft_output_dirs(av[i], head_dir, n, fl);
-		if (av[i +1] != NULL)
+		if (av[i + 1] != NULL)
 			ft_putchar('\n');
 		ft_free_list(head_dir);
 		i++;
