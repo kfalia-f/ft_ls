@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/02 19:15:44 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/03 16:04:51 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ void				ft_sort_params(char **av);
 void				ft_argv(char **av, int n);
 
 char				**ft_lstname_to_char_arr(char **arr, t_data *data);
-void				ft_print(t_data *head);
+void				ft_print(t_data *head, t_flags fl);
 #endif

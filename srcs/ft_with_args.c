@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/02 19:41:29 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/03 16:09:34 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_nonexistent_argv_error(char *name)
 	ft_putchar('\n');
 }
 
-void	ft_output_dirs(t_data *head, int n)
+/*void	ft_output_dirs(t_data *head, int n)
 {
 	t_data	*tmp;
 
@@ -50,7 +50,7 @@ void	ft_output_dirs(t_data *head, int n)
 		}
 		tmp = tmp->next;
 	}
-}
+}*/
 
 void	ft_argv(char **av, int n)
 {
@@ -75,8 +75,15 @@ void	ft_argv(char **av, int n)
     	}
     	i++;
     }
-	ft_print(head_file);
-	i = 0;
+	(void)n;
+	t_flags	fl;
+	char	*s;
+	s = "";
+	fl.value = 0;
+	int num_of_flags = ft_flags(1, &s, fl);
+	num_of_flags = 0;
+	ft_print(head_file, fl);
+/*	i = 0;
 	while (av[i] != NULL)
 	{
 		if ((dirp = opendir(av[i])) == NULL)
@@ -89,5 +96,5 @@ void	ft_argv(char **av, int n)
 		ft_output_dirs(head_dir, n);
 		head_dir = NULL;
 		i++;
-	}
+	}*/
 }
