@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/03 18:16:08 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:20:51 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,20 @@ void	get_permission(mode_t st_mode)
 void	get_info(char *file_name)
 {
 	struct stat		buff;
+	struct passwd	*pwd;
+	struct group	*gr;
 
 	stat(file_name, &buff);
+	pwd = getpwuid(buff.st_uid);
 	get_file_type(buff.st_mode);
 	get_permission(buff.st_mode);
+	ft_putchar(' ');
+	ft_putnbr(buff.st_nlink);
+	ft_putchar('\t');
+	ft_putstr(pwd->pw_name);
+	ft_putchar(' ');
+	gr = getgrgid(buff.st_gid);
+	ft_putstr(gr->gr_name);
 	ft_putchar(' ');
 	ft_putendl(ft_ls_path_to_file(file_name), 0);
 }
