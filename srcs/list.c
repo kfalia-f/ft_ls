@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/03 17:58:25 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:44:19 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_data	*new_node(struct dirent *dp)
 {
-	t_data  *node;
+	t_data	*node;
 
 	if (!(node = (t_data *)malloc(sizeof(t_data))))
 	{
@@ -29,7 +29,7 @@ t_data	*new_node(struct dirent *dp)
 
 t_data	*new_file(char *str)
 {
-	t_data  *node;
+	t_data	*node;
 
 	if (!(node = (t_data *)malloc(sizeof(t_data))))
 	{
@@ -42,9 +42,9 @@ t_data	*new_file(char *str)
 	return (node);
 }
 
-void    push_back(t_data **head, t_data *node)
+void	push_back(t_data **head, t_data *node)
 {
-	t_data  *tmp;
+	t_data	*tmp;
 
 	if (*head == NULL)
 	{

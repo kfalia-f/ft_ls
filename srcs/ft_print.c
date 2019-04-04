@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/04 15:08:48 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:53:28 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,29 @@ void	ft_pr(char **names, size_t max_len, size_t row, size_t num_of_elems)
 
 void	ft_print_contents(char **names, size_t max_len)
 {
-	struct	winsize w;
-	size_t	row;
-	size_t	len;
-	size_t	col;
-	size_t	num_of_elems;
+	struct winsize	w;
+	size_t			row;
+	size_t			len;
+	size_t			col;
+	size_t			num_of_elems;
 
 	ioctl(0, TIOCGWINSZ, &w);
 	len = max_len;
 	while ((len + 1) % 8 != 0)
 		len++;
-	(col = (size_t)w.ws_col / (len + 1)) == 0 ? col = 1 : col;
+	(col = (size_t)w.ws_col / (len + 1)) == 0 ? (col++) : col;
 	num_of_elems = ft_2d_strlen(names);
-	((row = num_of_elems / col) && (num_of_elems % col == 0)) ? row : (row = row + 1);
+	((row = num_of_elems / col) && (num_of_elems % col == 0)) ? row : (row++);
 	if (col == 1)
 		ft_print_first(names, w, row);
 	else
-		ft_pr(names, max_len, row, num_of_elems);	
+		ft_pr(names, max_len, row, num_of_elems);
 }
 
-void	ft_print(t_data	*head, t_flags fl)
+void	ft_print(t_data *head, t_flags fl)
 {
-	char			**names;
-	size_t			max_len;
-
+	char	**names;
+	size_t	max_len;
 
 	if (fl.bits.a == 0 || fl.bits.f == 0)
 	{

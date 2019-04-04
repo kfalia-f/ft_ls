@@ -6,16 +6,16 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/03 21:24:46 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:45:50 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    t_flags flags;
-    int		num_of_flags;
+	t_flags flags;
+	int		num_of_flags;
 	int		flag;
 
 	if (ac == 1)
@@ -23,7 +23,7 @@ int		main(int ac, char **av)
 		ft_without_args(".");
 		return (0);
 	}
-    flags.value = 0;
+	flags.value = 0;
 	num_of_flags = ft_flags(ac, av, &flags);
 	flag = ac - num_of_flags - 1;
 	if (flags.bits.f == 0 && flags.bits.t == 0)

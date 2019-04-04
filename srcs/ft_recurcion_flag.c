@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 20:04:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/03 21:27:55 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:48:14 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_recurs(char *path_name, t_flags flags)
 	struct stat		buff;
 	t_data			*head;
 	t_data			*node;
-	
+
 	head = NULL;
 	if (!(dirp = opendir(path_name)))
 		return ;
@@ -71,7 +71,7 @@ void	ft_recurs(char *path_name, t_flags flags)
 		return ;
 	}
 	if (head != NULL)
-		ft_print(ft_ascii_sort(&head),flags);
+		ft_print(ft_ascii_sort(&head), flags);
 	while (head != NULL)
 	{
 		if ((stat(head->name, &buff) >= 0))

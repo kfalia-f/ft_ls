@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:24:54 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/03 20:54:14 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:54:12 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	ft_output_spaces(char c, size_t len)
 
 	i = 0;
 	while (i < len)
-    {
+	{
 		ft_putchar(c);
-        i++;
-    }
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/03 20:20:51 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:46:30 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	get_file_type(mode_t st_mode)
 
 void	get_permission(mode_t st_mode)
 {
-	char 		c;
+	char	c;
 
 	ft_putchar((c = st_mode & S_IRUSR ? 'r' : '-'));
 	ft_putchar((c = st_mode & S_IWUSR ? 'w' : '-'));
