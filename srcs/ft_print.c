@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/03 21:13:23 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:08:48 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_pr(char **names, size_t max_len, size_t row, size_t num_of_elems)
 	}
 }
 
-void	ft_print_contents(char **names, size_t max_len, t_flags fl)
+void	ft_print_contents(char **names, size_t max_len)
 {
 	struct	winsize w;
 	size_t	row;
@@ -60,11 +60,6 @@ void	ft_print_contents(char **names, size_t max_len, t_flags fl)
 	size_t	col;
 	size_t	num_of_elems;
 
-	if (fl.bits.a != 0 || fl.bits.f != 0)
-	{
-		while (*names[0] == '.')
-			(*names)++;
-	}
 	ioctl(0, TIOCGWINSZ, &w);
 	len = max_len;
 	while ((len + 1) % 8 != 0)
@@ -83,10 +78,16 @@ void	ft_print(t_data	*head, t_flags fl)
 	char			**names;
 	size_t			max_len;
 
+
+	if (fl.bits.a == 0 || fl.bits.f == 0)
+	{
+		while ((*head->name) == '.')
+			head = head->next;
+	}
 	max_len = ft_max_namlen(head);
 	names = ft_memalloc_2d_clean(ft_list_size(head), max_len);
 	names = ft_lstname_to_char_arr(names, head);
-	ft_print_contents(names, max_len, fl);
+	ft_print_contents(names, max_len);
 }
 
 void	ft_print_without_args(t_data *head)
@@ -101,5 +102,5 @@ void	ft_print_without_args(t_data *head)
 	max_len = ft_max_namlen(head);
 	names = ft_memalloc_2d_clean(ft_list_size(head), max_len);
 	names = ft_lstname_to_char_arr(names, head);
-	ft_print_contents(names, max_len, fl);
+	ft_print_contents(names, max_len);
 }

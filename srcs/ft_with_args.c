@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/03 21:00:39 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:28:25 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,21 @@ void	ft_argv(char **av, int n, t_flags fl)
 	t_data		*head_file;
 	t_data		*head_dir;
 	int			i;
+	int			flag;
 
 	i = 0;
+	flag = 0;
 	head_file = NULL;
 	head_dir = NULL;
 	dirp = NULL;
 	while (av[i] != NULL)
 		ft_push_file(av[i++], dirp, &head_file);
 	if (head_file != NULL)
+	{
+		flag = 1;
 		ft_print(head_file, fl);
+		ft_free_list(head_file);
+	}
 	i = 0;
 	while (av[i] != NULL)
 	{
@@ -79,6 +85,11 @@ void	ft_argv(char **av, int n, t_flags fl)
 		}
 		head_dir = ft_readdir(dirp);
 		closedir(dirp);
+		if (flag == 1)
+		{
+			flag = 2;
+			ft_putchar('\n');
+		}
 		ft_output_dirs(av[i], head_dir, n, fl);
 		if (av[i + 1] != NULL)
 			ft_putchar('\n');
