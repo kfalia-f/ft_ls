@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/04 15:44:19 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/05 22:38:22 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,25 @@ size_t	ft_list_size(t_data *lst)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+void	ft_rev_list(t_data **head)
+{
+	t_data	*prev;
+	t_data	*curr;
+	t_data	*next;
+
+	prev = NULL;
+	next = NULL;
+	curr = *head;
+	while (curr)
+	{
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+	}
+	*head = prev;
 }
 
 void	ft_free_list(t_data *head)

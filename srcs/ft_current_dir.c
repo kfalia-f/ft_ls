@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_without_args.c                                  :+:      :+:    :+:   */
+/*   ft_current_dir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/23 20:01:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/05 22:00:03 by koparker         ###   ########.fr       */
+/*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
+/*   Updated: 2019/04/05 21:59:54 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	ft_without_args(char *str)
+t_data	*ft_current_dir(char *s)
 {
+	DIR		*dirp;
 	t_data	*head;
 
-	head = ft_current_dir(str);
-	ft_print_without_args(ft_ascii_sort(&head));
+	head = NULL;
+	dirp = opendir(s);
+	head = ft_readdir(dirp);
+	closedir(dirp);
+	return (head);
 }

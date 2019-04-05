@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 18:27:45 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/05 20:11:25 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/05 21:19:14 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_lmt_sort_params(char **av, long *mtime)
 // under construction
 void	ft_sort_params(char **av, int num_of_flags, t_flags fl)
 {
-	if (num_of_flags == 0 || fl.bits.a == 1 || fl.bits.l == 1)
+	if (num_of_flags == 0 || fl.bits.a == 1 || fl.bits.l == 1 || fl.bits.one == 1)
 		ft_ascii_sort_params(av);
 	if (fl.bits.t == 1)
 	{

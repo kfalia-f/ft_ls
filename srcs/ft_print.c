@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/05 18:07:44 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/05 22:46:17 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ void	ft_print_contents(char **names, size_t max_len)
 		ft_print_first(names, w, row);
 	else
 		ft_pr(names, max_len, row, num_of_elems);
+}
+
+void	ft_print_simple(t_data **head)
+{
+	t_data	*tmp;
+
+	tmp = *head;
+	while (tmp)
+	{
+		ft_putendl(tmp->name, 0);
+		tmp = tmp->next;
+	}
 }
 
 void	ft_print(t_data *head, t_flags fl)
