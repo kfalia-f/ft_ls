@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_balanser.c                                 :+:      :+:    :+:   */
+/*   ft_cmp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/05 17:16:00 by koparker         ###   ########.fr       */
+/*   Created: 2019/04/05 17:23:54 by koparker          #+#    #+#             */
+/*   Updated: 2019/04/05 17:43:24 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	ft_sort_balancer(t_flags flag, t_data *head)
+int	ft_mtimecmp(long a, long b)
 {
-	if (flag.bits.t)
-		printf("T\n");
-	if (flag.bits.f)
-		printf("F\n");
-	(void)head;
+	if (a >= b)
+		return (0);
+	return (1);
 }

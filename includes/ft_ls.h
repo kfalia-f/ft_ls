@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/04 15:06:57 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/05 18:07:47 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct      s_data
 {
 	struct s_data   *next;
 	char            *name;
-	struct s_data	*elem;
 	size_t			len;
 }                   t_data;
 
@@ -69,7 +68,7 @@ size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
 size_t				ft_list_size(t_data *lst);
 int					ft_flags(int ac, char **av, t_flags *flags);
-void				ft_sort_params(char **av);
+void				ft_sort_params(char **av, int num_of_flags, t_flags fl);
 void				ft_argv(char **av, int n, t_flags fl);
 
 void				ft_sort_balancer(t_flags flag, t_data *head);
@@ -80,4 +79,6 @@ char				**ft_lstname_to_char_arr(char **arr, t_data *data);
 t_data				*ft_readdir(DIR *dirp);
 void				ft_print_without_args(t_data *head);
 void				ft_print(t_data *head, t_flags fl);
+
+int					ft_mtimecmp(long a, long b);
 #endif

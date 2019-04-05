@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/04/03 20:35:20 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/04/05 17:25:05 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SOURCES = $(SRC)main.c \
 		  $(SRC)ft_recurcion_flag.c \
 		  $(SRC)ft_l_flag.c \
 		  $(SRC)ft_print.c \
-		  $(SRC)ft_lstname_to_char_arr.c
+		  $(SRC)ft_lstname_to_char_arr.c \
+		  $(SRC)ft_cmp.c
 
 LIBFT_FOLDER = libft
 
