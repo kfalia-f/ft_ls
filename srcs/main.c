@@ -6,26 +6,19 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/05 22:46:53 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/06 15:12:25 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	ft_print_current(t_data *head, t_flags fl)
+void	ft_print_current(t_data *head)
 {
 	t_data	*tmp;
 
 	tmp = head;
-	if (fl.bits.a == 0 && fl.bits.f == 0)
-	{
-		while ((*tmp->name) == '.')
-			tmp = tmp->next;
-	}
 	while (tmp)
 	{
-		if (fl.bits.r == 1 && (*tmp->name) == '.')
-			break ;
 		ft_putendl(tmp->name, 0);
 		tmp = tmp->next;
 	}
@@ -36,9 +29,13 @@ void	process_current_dir(char *s, t_flags fl)
 	t_data	*head;
 
 	head = ft_current_dir(s);
+	if (fl.bits.t == 1)
+		ft_set_mtime(&head);
+	if (fl.bits.a == 0 && fl.bits.f == 0)
+		ft_skip_starting_dots(&head);
 	head = ft_balanser_sort(&head, fl);
 	if (fl.bits.one == 1)
-		ft_print_current(head, fl);
+		ft_print_current(head);
 	//modified versin of ft_without_args(s);
 }
 

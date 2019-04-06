@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 15:03:30 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/05 22:24:23 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/06 14:49:18 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,35 @@ t_data	*ft_ascii_sort(t_data **head)
 	return (*head);
 }
 
-// prototype of a balanser function of various sort algs for flags for example
-// void	ft_sort(t_argv *head, t_flags flag);
+t_data	*ft_lmt_sort(t_data **head)
+{
+	t_data	**prev;
+	t_data	*curr;
+	t_data	*next;
+	int		done;
+
+	done = 0;
+	if (*head == NULL || (*head)->next == NULL)
+		return (NULL);
+	while (!done)
+	{
+		prev = head;
+		curr = *head;
+		next = (*head)->next;
+		done = 1;
+		while (next)
+		{
+			if (curr->time < next->time)
+			{
+				curr->next = next->next;
+				next->next = curr;
+				*prev = next;
+				done = 0;
+			}
+			prev = &curr->next;
+			curr = next;
+			next = next->next;
+		}
+	}
+	return (*head);
+}

@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/05 22:46:17 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/06 15:09:48 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,7 @@ void	ft_print(t_data *head, t_flags fl)
 	size_t	max_len;
 
 	if (fl.bits.a == 0 || fl.bits.f == 0)
-	{
-		while ((*head->name) == '.')
-			head = head->next;
-	}
+		ft_skip_starting_dots(&head);
 	max_len = ft_max_namlen(head);
 	names = ft_memalloc_2d_clean(ft_list_size(head), max_len);
 	names = ft_lstname_to_char_arr(names, head);
@@ -108,8 +105,7 @@ void	ft_print_without_args(t_data *head)
 	size_t			max_len;
 
 	fl.value = 0;
-	while ((*head->name) == '.')
-		head = head->next;
+	ft_skip_starting_dots(&head);
 	max_len = ft_max_namlen(head);
 	names = ft_memalloc_2d_clean(ft_list_size(head), max_len);
 	names = ft_lstname_to_char_arr(names, head);

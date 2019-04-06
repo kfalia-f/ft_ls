@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/05 22:29:54 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/06 15:01:44 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ typedef union		u_flags
 	struct s_bits	bits;
 }					t_flags;
 
-typedef struct      s_data
+typedef struct		s_data
 {
-	struct s_data   *next;
-	char            *name;
+	struct s_data	*next;
+	char			*name;
 	size_t			len;
 	long			time;
-}                   t_data;
+}					t_data;
 
 char				**ft_lstname_to_str_arr(char **arr, t_data *data);
 void				ft_output(char **arr, size_t row, size_t list_size, size_t max_namlen);
@@ -83,7 +83,10 @@ void				ft_print_without_args(t_data *head);
 void				ft_print(t_data *head, t_flags fl);
 
 int					ft_mtimecmp(long a, long b);
-t_data				*ft_lmt_sort(t_data **head, t_flags fl);
+t_data				*ft_lmt_sort(t_data **head);
 t_data				*ft_balanser_sort(t_data **head, t_flags fl);
 t_data				*ft_current_dir(char *s);
+void				ft_set_mtime(t_data **head);
+void				ft_skip_starting_dots(t_data **head);
+
 #endif
