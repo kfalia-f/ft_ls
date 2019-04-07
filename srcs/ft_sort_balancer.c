@@ -6,20 +6,11 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/06 15:06:13 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/07 20:51:39 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
-
-void	ft_sort_balancer(t_flags flag, t_data *head)
-{
-	if (flag.bits.t)
-		printf("T\n");
-	if (flag.bits.f)
-		printf("F\n");
-	(void)head;
-}
 
 t_data	*ft_balanser_sort(t_data **head, t_flags fl)
 {

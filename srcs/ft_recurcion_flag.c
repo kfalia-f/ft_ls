@@ -6,27 +6,11 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 20:04:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/04 15:48:14 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/07 20:47:58 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
-
-void	ft_output_r(t_data *head)
-{
-	while (head != NULL)
-	{
-		if (*(head->name) == '.')
-		{
-			head = head->next;
-			continue ;
-		}
-		ft_putstr(head->name);
-		ft_putchar('\t');
-		head = head->next;
-	}
-	ft_putchar('\n');
-}
 
 int		ft_files(t_data *head)
 {
