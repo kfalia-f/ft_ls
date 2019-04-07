@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/06 15:01:44 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/06 16:44:15 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void				ft_output_spaces(char c, size_t len);
 size_t				ft_list_size(t_data *lst);
 int					ft_flags(int ac, char **av, t_flags *flags);
 void				ft_sort_params(char **av, int num_of_flags, t_flags fl);
-void				ft_argv(char **av, int n, t_flags fl);
+void				ft_argv(t_data **head, int n, t_flags fl);
 
 void				ft_sort_balancer(t_flags flag, t_data *head);
 void				ft_recurcion_flag(char **av, int i, int flag, t_flags flags);
@@ -88,5 +88,6 @@ t_data				*ft_balanser_sort(t_data **head, t_flags fl);
 t_data				*ft_current_dir(char *s);
 void				ft_set_mtime(t_data **head);
 void				ft_skip_starting_dots(t_data **head);
+t_data				*ft_convert_args(char **av);
 
 #endif

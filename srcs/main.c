@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/06 15:12:25 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/06 16:57:15 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	process_current_dir(char *s, t_flags fl)
 int	main(int ac, char **av)
 {
 	t_flags flags;
+	t_data	*args;
 	int		num_of_flags;
 	int		flag;
 
@@ -55,13 +56,13 @@ int	main(int ac, char **av)
 	flag = ac - num_of_flags - 1;
 	if (flag == 0)
 		process_current_dir(".", flags);
-	ft_sort_params(av + num_of_flags + 1, num_of_flags, flags);
+//	ft_sort_params(av + num_of_flags + 1, num_of_flags, flags);
 /*	
 	if (flags.bits.f == 0 && flags.bits.t == 0)
 		ft_sort_params(av + num_of_flags + 1);
 	else
 		ft_sort_balancer(num_of_flags, flags, NULL);
-*/	if (flags.bits.upper_r)
+	if (flags.bits.upper_r)
 	{
 		ft_recurcion_flag(av, num_of_flags + 1, flag, flags);
 		return (0);
@@ -71,6 +72,7 @@ int	main(int ac, char **av)
 		ft_l_flag(av, num_of_flags + 1, flag, flags);
 		return (0);
 	}
-	ft_argv(av + num_of_flags + 1, ac - num_of_flags - 1, flags);
+*/	args = ft_convert_args(av + num_of_flags + 1);
+	ft_argv(&args, ac - num_of_flags - 1, flags);
 	return (0);
 }

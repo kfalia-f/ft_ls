@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/05 22:00:01 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/07 18:53:45 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,45 @@ void	ft_push_file(char *name, DIR *dirp, t_data **head_file)
 	}
 }
 
-void	ft_argv(char **av, int n, t_flags fl)
+size_t	ft_process_flags(t_data **head, DIR *dirp, t_flags fl)
 {
-	DIR			*dirp;
-	t_data		*head_file;
-	t_data		*head_dir;
-	int			i;
-	int			flag;
+	t_data	*head_file;
+	t_data	*tmp;
+	size_t	flag;
 
-	i = 0;
-	flag = 0;
+	flag = 0;	
 	head_file = NULL;
-	head_dir = NULL;
-	dirp = NULL;
-	while (av[i] != NULL)
-		ft_push_file(av[i++], dirp, &head_file);
+	tmp = *head;
+	while (tmp)
+	{
+		ft_push_file(tmp->name, dirp, &head_file);
+		tmp = tmp->next;
+	}
 	if (head_file != NULL)
 	{
 		flag = 1;
 		ft_print(head_file, fl);
 		ft_free_list(head_file);
 	}
-	i = 0;
-	while (av[i] != NULL)
+	return (flag);
+}
+
+void	ft_argv(t_data **head, int n, t_flags fl)
+{
+	DIR			*dirp;
+	t_data		*head_dir;
+	t_data		*tmp;
+	size_t		flag;
+
+	head_dir = NULL;
+	dirp = NULL;
+	flag = ft_process_flags(head, dirp, fl);
+	tmp = *head;
+	while (tmp)
 	{
-		if ((dirp = opendir(av[i])) == NULL)
+		if ((dirp = opendir(tmp->name)) == NULL)
 		{
-			i++;
+			tmp = tmp->next;
 			continue ;
 		}
 		head_dir = ft_readdir(dirp);
@@ -90,10 +102,10 @@ void	ft_argv(char **av, int n, t_flags fl)
 			flag = 2;
 			ft_putchar('\n');
 		}
-		ft_output_dirs(av[i], head_dir, n, fl);
-		if (av[i + 1] != NULL)
+		ft_output_dirs(tmp->name, head_dir, n, fl);
+		if (!tmp->next)
 			ft_putchar('\n');
 		ft_free_list(head_dir);
-		i++;
+		tmp = tmp->next;
 	}
 }

@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/04/05 21:56:15 by koparker         ###   ########.fr        #
+#    Updated: 2019/04/06 16:50:13 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SOURCES = $(SRC)main.c \
 		  $(SRC)ft_print.c \
 		  $(SRC)ft_lstname_to_char_arr.c \
 		  $(SRC)ft_cmp.c \
-		  $(SRC)ft_current_dir.c
+		  $(SRC)ft_current_dir.c \
+		  $(SRC)ft_convert_args.c
 
 LIBFT_FOLDER = libft
 
@@ -41,7 +42,7 @@ OBJECTS = $(SOURCES:.c=.o)
 HEADERS = -I includes -I $(LIBFT_FOLDER)/includes
 
 %.o: %.c $(INCLUDES)
-	@gcc $(FLAGS) $(HEADERS) -c $< -o $@
+	@gcc -g $(FLAGS) $(HEADERS) -c $< -o $@
 
 $(NAME): $(OBJECTS)
 	@make -C $(LIBFT_FOLDER)
