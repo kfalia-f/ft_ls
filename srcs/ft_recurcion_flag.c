@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 20:04:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/07 20:47:58 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/07 21:40:04 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,15 @@ void	ft_recurs(char *path_name, t_flags flags)
 		head = head->next;
 	}
 	ft_free_list(node);
+	return ;
 }
 
-void	ft_recurcion_flag(char **av, int i, int flag, t_flags flags)
+void	ft_recurcion_flag(char **av, int flag, t_flags flags)
 {
 	struct stat		buff;
+	int				i;
 
+	i = 0;
 	if (flag == 0)
 	{
 		ft_recurs(".", flags);

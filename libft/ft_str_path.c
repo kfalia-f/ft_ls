@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:22:10 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/03 20:58:15 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/07 21:22:41 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ char	*ft_str_path(char *str1, char *str2)
 	char	*str3;
 
 	str3 = ft_strjoin(str1, "/");
-	str3 = ft_strjoin(str3, str2);
+	str3 = ft_strjoinre(str3, str2);
 	return (str3);
 }
