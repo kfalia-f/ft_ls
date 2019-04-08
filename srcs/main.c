@@ -6,23 +6,11 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/06 16:57:15 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/08 21:07:10 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
-
-void	ft_print_current(t_data *head)
-{
-	t_data	*tmp;
-
-	tmp = head;
-	while (tmp)
-	{
-		ft_putendl(tmp->name, 0);
-		tmp = tmp->next;
-	}
-}
 
 void	process_current_dir(char *s, t_flags fl)
 {
@@ -35,7 +23,7 @@ void	process_current_dir(char *s, t_flags fl)
 		ft_skip_starting_dots(&head);
 	head = ft_balanser_sort(&head, fl);
 	if (fl.bits.one == 1)
-		ft_print_current(head);
+		ft_print_simple(&head);
 	//modified versin of ft_without_args(s);
 }
 

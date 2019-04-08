@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/05 22:38:22 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/08 21:13:54 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,21 @@
 t_data	*new_node(struct dirent *dp)
 {
 	t_data	*node;
+	size_t	name_size;
 
 	if (!(node = (t_data *)malloc(sizeof(t_data))))
 	{
 		ft_putendl("doesn't malloced for a new node", 0);
 		return (NULL);
 	}
-	node->name = dp->d_name;
-	node->len = ft_strlen(node->name);
+	name_size = ft_strlen(dp->d_name);
+	if (!(node->name = (char *)malloc(sizeof(char) * (name_size + 1))))
+	{
+		free(node);
+		return (NULL);
+	}
+	ft_strcat(node->name, dp->d_name);
+	node->len = name_size;
 	node->next = NULL;
 	return (node);
 }
@@ -30,14 +37,21 @@ t_data	*new_node(struct dirent *dp)
 t_data	*new_file(char *str)
 {
 	t_data	*node;
+	size_t	name_size;
 
 	if (!(node = (t_data *)malloc(sizeof(t_data))))
 	{
 		ft_putendl("doesn't malloced for a new file", 0);
 		return (NULL);
 	}
-	node->name = str;
-	node->len = ft_strlen(node->name);
+	name_size = ft_strlen(str);
+	if (!(node->name = (char *)malloc(sizeof(char) * (name_size + 1))))
+	{
+		free(node);
+		return (NULL);
+	}
+	ft_strcat(node->name, str);
+	node->len = name_size;
 	node->next = NULL;
 	return (node);
 }
@@ -103,6 +117,7 @@ void	ft_free_list(t_data *head)
 	{
 		tmp = head;
 		head = head->next;
+		free(tmp->name);
 		free(tmp);
 		tmp = NULL;
 	}

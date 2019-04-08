@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/07 18:53:45 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/07 21:11:39 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,7 @@ void	ft_argv(t_data **head, int n, t_flags fl)
 			ft_putchar('\n');
 		}
 		ft_output_dirs(tmp->name, head_dir, n, fl);
-		if (!tmp->next)
-			ft_putchar('\n');
+		ft_putchar('\n');
 		ft_free_list(head_dir);
 		tmp = tmp->next;
 	}

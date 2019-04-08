@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/07 21:26:34 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/08 21:09:16 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ t_data				*ft_current_dir(char *s);
 void				ft_set_mtime(t_data **head);
 void				ft_skip_starting_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
+void				ft_print_simple(t_data **head);
 
 #endif
