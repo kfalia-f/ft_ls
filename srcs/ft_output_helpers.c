@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:24:54 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/09 17:32:24 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/09 18:53:24 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,18 @@ void	ft_output_spaces(char c, size_t len)
 	}
 }
 
-void	ft_skip_dots(t_data **head)
+void	ft_skip_dots(t_data **head, t_flags fl)
 {
-	if ((*((*head)->name) == '.') && (*head)->len == 1)
+	int i;
+
+	i = 0;
+	while ((*(*head)->name) == '.')
+	{
+		if (fl.bits.a == 1 && i == 2)
+			break ;
+		i++;
 		*head = (*head)->next;
-	if (ft_strcmp((*head)->name, "..") == 0 && (*head)->len == 2)
-		*head = (*head)->next;
+	}
 }
 
 void	ft_skip_starting_dots(t_data **head)

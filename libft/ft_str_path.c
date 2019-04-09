@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:22:10 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/09 16:23:23 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/09 20:02:22 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_str_path(char *str1, char *str2)
 	len1 = ft_strlen(str1);
 	len2 = ft_strlen(str2);
 	if (str1[len1 - 1] == '/')
-		return (NULL);
+		return (ft_strjoin(str1, str2));
 	str3 = (char *)malloc(sizeof(char) * (len1 + len2 + 2));
 	i = 0;
 	while (i < len1)

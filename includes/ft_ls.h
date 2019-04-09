@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/08 22:17:02 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/09 18:43:15 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ void				ft_set_mtime(t_data **head);
 void				ft_skip_starting_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
 void				ft_print_simple(t_data **head);
+void				ft_skip_dots(t_data **head, t_flags fl);
 
 #endif
