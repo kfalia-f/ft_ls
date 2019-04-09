@@ -6,32 +6,16 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/08 21:07:10 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/08 21:37:40 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	process_current_dir(char *s, t_flags fl)
+int		main(int ac, char **av)
 {
-	t_data	*head;
-
-	head = ft_current_dir(s);
-	if (fl.bits.t == 1)
-		ft_set_mtime(&head);
-	if (fl.bits.a == 0 && fl.bits.f == 0)
-		ft_skip_starting_dots(&head);
-	head = ft_balanser_sort(&head, fl);
-	if (fl.bits.one == 1)
-		ft_print_simple(&head);
-	//modified versin of ft_without_args(s);
-}
-
-int	main(int ac, char **av)
-{
-	t_flags flags;
-	t_data	*args;
-	int		num_of_flags;
+    t_flags flags;
+    int		num_of_flags;
 	int		flag;
 
 	if (ac == 1)
@@ -39,28 +23,15 @@ int	main(int ac, char **av)
 		ft_without_args(".");
 		return (0);
 	}
-	flags.value = 0;
+    flags.value = 0;
 	num_of_flags = ft_flags(ac, av, &flags);
 	flag = ac - num_of_flags - 1;
-	if (flag == 0)
-		process_current_dir(".", flags);
-//	ft_sort_params(av + num_of_flags + 1, num_of_flags, flags);
-/*	
 	if (flags.bits.f == 0 && flags.bits.t == 0)
-		ft_sort_params(av + num_of_flags + 1);
-	else
-		ft_sort_balancer(num_of_flags, flags, NULL);
+		ft_sort_params(av + num_of_flags + 1, num_of_flags, flags);
 	if (flags.bits.upper_r)
-	{
-		ft_recurcion_flag(av, num_of_flags + 1, flag, flags);
-		return (0);
-	}
+		ft_recursion_flag(av + num_of_flags + 1, flag, flags);
 	if (flags.bits.l)
-	{
 		ft_l_flag(av, num_of_flags + 1, flag, flags);
-		return (0);
-	}
-*/	args = ft_convert_args(av + num_of_flags + 1);
-	ft_argv(&args, ac - num_of_flags - 1, flags);
+	//ft_argv(av + num_of_flags + 1, ac - num_of_flags - 1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/08 22:02:06 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/09 16:20:35 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ int		ft_only_files(t_data *head)
 	tmp = head;
 	while (tmp)
 	{
-		if (stat(tmp->name, &buff) == 0 && S_ISDIR(buff.st_mode))
+		if (*(tmp->name) == '.')
+		{
+			tmp = tmp->next;
+			continue ;
+		}
+		stat(tmp->name, &buff);
+	   	if (S_ISDIR(buff.st_mode))
 			return (0);
 		tmp = tmp->next;
 	}
@@ -36,9 +42,10 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 
 	ft_putendl(path_name, 1);
 	head = ft_readdir(dirp);
-	if (ft_only_files(head) == 1)
+	if (ft_only_files(head))
 	{
 		ft_print(head, fl);
+		ft_putchar('\n');
 		ft_free_list(head);
 		return ;
 	}
