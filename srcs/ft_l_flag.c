@@ -6,13 +6,13 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 17:07:49 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:41:27 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-static void	ft_print_spaces(int n)
+void	ft_print_spaces(int n)
 {
 	while (n-- > 0)
 		ft_putchar(' ');
@@ -55,32 +55,78 @@ void	get_info(char *file_name, t_lflag *st)
 	struct group	*gr;
 
 	stat(file_name, &buff);
-	pwd = getpwuid(buff.st_uid);  
-	st->permissions = get_permission(buff.st_mode); //permissions (r/w/x)
-	ft_putstr("FLAG");
-	printf("%s", st->permissions);
-	ft_print_spaces(2);
-	ft_putnbr(buff.st_nlink);     //num of links for file
-	ft_putchar('\t');
-	ft_putstr(pwd->pw_name);      //owner name
-	ft_print_spaces(1);
+	pwd = getpwuid(buff.st_uid);   //owner name 
 	gr = getgrgid(buff.st_gid);   //group name
-	ft_putstr(gr->gr_name);
-	gr = getgrgid(buff.st_gid);
-	ft_print_spaces(1);
-	ft_putendl(ft_ls_path_to_file(file_name), 0); //filename
+
+	st->links = buff.st_nlink;  //num of links
+	st->file_size = buff.st_size; //file_size
+	st->permissions = get_permission(buff.st_mode); //permissions (r/w/x) + file type
+	st->owner = ft_strcpy(ft_memalloc(ft_strlen(pwd->pw_name)), pwd->pw_name); //owner
+	st->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
+
+}
+
+static int		ft_max_llen(t_lflag *st, int flag)
+{
+	t_lflag	*tmp;
+	int		sz_len;
+	int		sz_max;
+	int		ln_len;
+	int		ln_max;
+
+	tmp = st;
+	sz_max = 0;
+	ln_max = 0;
+	while (tmp)
+	{
+		sz_len = ft_strlen(ft_itoa(tmp->file_size));
+		ln_len = ft_strlen(ft_itoa(tmp->links));
+		if (sz_max < sz_len)
+			sz_max = sz_len;
+		if (ln_max < ln_len)
+			ln_max = ln_len;
+		tmp = tmp->next;
+	}
+	if (flag == 1)
+		return (ln_max);
+	return (sz_max);
+}
+
+void	ft_output_info(t_lflag *st)
+{
+	t_lflag	*tmp;
+	int		max_ln;
+	int		max_sz;
+
+	tmp = st;
+	max_ln = ft_max_llen(tmp, 1);
+	max_sz = ft_max_llen(tmp, 2);
+	while (tmp)
+	{
+		ft_putstr(tmp->permissions);
+		ft_output_spaces(' ', 2 + max_ln - ft_strlen(ft_itoa(tmp->links)));
+		ft_putnbr(tmp->links);
+		ft_output_spaces(' ', 1);
+		ft_putstr(tmp->owner);
+		ft_output_spaces(' ', 2);
+		ft_putstr(tmp->group);
+		ft_output_spaces(' ', 2 + max_sz - ft_strlen(ft_itoa(tmp->file_size)));
+		ft_putnbr(tmp->file_size);
+		ft_output_spaces('\t', 1);
+		ft_putstr(tmp->file_name);
+		ft_putchar('\n');
+		tmp = tmp->next;
+	}
 }
 
 void	ft_l(char *path_name, t_flags flags)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
-	t_data			*head;
-	t_data			*node;
-	t_lflag			*st;
+	t_lflag			*lhead;
+	t_lflag			*lnode;
 
-	head = NULL;
-	st = NULL;
+	lhead = NULL;
 	if (!(dirp = opendir(path_name)))
 		return ;
 	while ((dp = readdir(dirp)) != NULL)
@@ -88,16 +134,17 @@ void	ft_l(char *path_name, t_flags flags)
 		if (*(dp->d_name) == '.')
 			if (flags.bits.a == 0)
 				continue ;
-		node = new_node(dp);
-		push_back(&head, node);
+		lnode = new_l_node(dp);
+		l_push_back(&lhead, lnode);
 	}
-	node = head;
-	while (node != NULL)
+	lnode = lhead;
+	while (lnode != NULL)
 	{
-		get_info(ft_str_path(path_name, node->name), st);
-		node = node->next;
+		get_info(ft_str_path(path_name, lnode->file_name), lnode);
+		lnode = lnode->next;
 	}
-	ft_free_list(head);
+	ft_output_info(lhead);
+	//ft_free_list(lhead);
 }
 
 void	ft_l_flag(char **av, int i, int flag, t_flags flags)

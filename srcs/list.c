@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 15:22:26 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:02:42 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ t_data	*new_node(struct dirent *dp)
 	}
 	ft_strcpy(node->name, dp->d_name);
 	node->len = name_size;
+	node->next = NULL;
+	return (node);
+}
+
+t_lflag	*new_l_node(struct dirent *dp)
+{
+	t_lflag		*node;
+	size_t		name_size;
+
+	if (!(node = (t_lflag *)malloc(sizeof(t_lflag))))
+	{
+		ft_putendl("doesn't malloced for a new node", 0);
+		return (NULL);
+	}
+	name_size = ft_strlen(dp->d_name);
+	if (!(node->file_name = (char *)malloc(sizeof(char) * (name_size + 1))))
+	{
+		free(node);
+		return (NULL);
+	}
+	ft_strcpy(node->file_name, dp->d_name);
 	node->next = NULL;
 	return (node);
 }
@@ -59,6 +80,21 @@ t_data	*new_file(char *str)
 void	push_back(t_data **head, t_data *node)
 {
 	t_data	*tmp;
+
+	if (*head == NULL)
+	{
+		*head = node;
+		return ;
+	}
+	tmp = *head;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = node;
+}
+
+void	l_push_back(t_lflag **head, t_lflag *node)
+{
+	t_lflag	*tmp;
 
 	if (*head == NULL)
 	{

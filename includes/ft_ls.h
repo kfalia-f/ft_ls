@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 16:30:44 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:53:24 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,8 @@ t_data				*ft_convert_args(char **av);
 void				ft_print_simple(t_data **head);
 void				ft_skip_dots(t_data **head, t_flags fl);
 void				ft_output(t_data *head, t_flags fl, int to_free);
+
+void				l_push_back(t_lflag **head, t_lflag *node);
+t_lflag				*new_l_node(struct dirent *dp);
 
 #endif
