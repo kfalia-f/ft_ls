@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/09 20:03:59 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:25:29 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_check_flag(char *str, t_flags *flags)
 	size_t	bits_to_shift;
 
 	i = 1;
-	cmp = "Raflrt1";
+	cmp = "RGaflrt1";
 	while (str[i])
 	{
 		if ((s = ft_strchr(cmp, str[i])) != NULL)

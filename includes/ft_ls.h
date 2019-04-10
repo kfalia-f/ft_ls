@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 17:52:55 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:19:23 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 typedef struct		s_bits
 {
 	unsigned int	upper_r : 1;
+	unsigned int	upper_g : 1;
 	unsigned int	a : 1;
 	unsigned int	f : 1;
 	unsigned int	l : 1;
