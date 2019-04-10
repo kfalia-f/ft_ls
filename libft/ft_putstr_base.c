@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 17:16:22 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/02 15:14:46 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:34:46 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 
 void	ft_putstr_base(char const *s, int out)
 {
-	size_t i;
-
-	i = 0;
-	while (s[i] != '\0')
-		ft_putchar_base(s[i++], out);
+	write(out, s, ft_strlen(s));
 }

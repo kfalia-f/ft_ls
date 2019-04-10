@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 16:53:37 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:10:20 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_pr(char **names, size_t max_len, size_t row, size_t num_of_elems)
 		while (j < num_of_elems)
 		{
 			ft_putstr(names[j]);
-			ft_output_spaces(' ', max_len - ft_strlen(names[j]) + 1);
+			ft_output_spaces(' ', max_len - ft_strlen(names[j]));
 			ft_putchar('\t');
 			j += row;
 		}
@@ -73,11 +73,15 @@ void	ft_print_contents(char **names, size_t max_len)
 		ft_pr(names, max_len, row, num_of_elems);
 }
 
-void	ft_print_simple(t_data **head)
+void	ft_print_simple(t_data **head, t_flags fl)
 {
 	t_data	*tmp;
 
 	tmp = *head;
+	if (fl.bits.a == 0 && fl.bits.f == 0)
+		ft_skip_starting_dots(&tmp);
+	if (tmp == NULL)
+		return ;
 	while (tmp)
 	{
 		ft_putendl(tmp->name, 0);

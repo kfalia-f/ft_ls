@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 14:23:42 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:01:57 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		main(int ac, char **av)
 {
     t_flags flags;
+//	t_data	*args;
     int		num_of_flags;
 	int		flag;
 
@@ -26,12 +27,16 @@ int		main(int ac, char **av)
     flags.value = 0;
 	num_of_flags = ft_flags(ac, av, &flags);
 	flag = ac - num_of_flags - 1;
-	if (flags.bits.f == 0)
-		ft_sort_params(av + num_of_flags + 1, num_of_flags, flags);
+	if (flag == 0 && flags.bits.upper_r == 0)
+	{
+		ft_process_current_dir(".", flags);
+		return (0);
+	}
+	ft_sort_params(av + num_of_flags + 1, num_of_flags, flags);
 	if (flags.bits.upper_r)
 		ft_recursion_flag(av + num_of_flags + 1, flag, flags);
 	if (flags.bits.l)
 		ft_l_flag(av, num_of_flags + 1, flag, flags);
-	//ft_argv(av + num_of_flags + 1, ac - num_of_flags - 1);
+//	ft_argv(av + num_of_flags + 1, ac - num_of_flags - 1);
 	return (0);
 }

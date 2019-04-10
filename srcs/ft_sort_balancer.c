@@ -6,35 +6,31 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 16:53:32 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:00:01 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-t_data	*ft_balanser_sort(t_data **head, t_flags fl)
+void	ft_balanser_sort(t_data **head, t_flags fl)
 {
-	t_data	*tmp;
-
-	tmp = *head;
 	if (fl.bits.f)
-		return (tmp);
+		return ;
 	if (fl.bits.t)
-		ft_lmt_sort(&tmp);
+		ft_lmt_sort(head);
 	else
-		ft_ascii_sort(&tmp);
+		ft_ascii_sort(head);
 	if (fl.bits.r)
-		ft_rev_list(&tmp);
-	return (tmp);
+		ft_rev_list(head);
 }
 
 void	ft_output(t_data *head, t_flags fl, int to_free)
 {
-	t_data	*tmp;
-
-	tmp = head;
-	tmp = ft_balanser_sort(&tmp, fl);
-	ft_print(tmp, fl);
+	ft_balanser_sort(&head, fl);
+	if (fl.bits.one == 0)
+		ft_print(head, fl);
+	else
+		ft_print_simple(&head, fl);
 	if (to_free)
-		ft_free_list(tmp);
+		ft_free_list(head);
 }
