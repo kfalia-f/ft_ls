@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:24:54 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/09 18:53:24 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 14:57:34 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_skip_dots(t_data **head, t_flags fl)
 	i = 0;
 	while ((*(*head)->name) == '.')
 	{
-		if (fl.bits.a == 1 && i == 2)
+		if ((fl.bits.a == 1 || fl.bits.f == 1) && i == 2)
 			break ;
 		i++;
 		*head = (*head)->next;
