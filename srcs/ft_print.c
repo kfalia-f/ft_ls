@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 14:58:15 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:44:01 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_pr(char **names, size_t max_len, size_t row, size_t num_of_elems)
 		while (j < num_of_elems)
 		{
 			ft_putstr(names[j]);
-			ft_output_spaces(' ', max_len - ft_strlen(names[j]) + 1);
+			ft_output_spaces(' ', max_len - ft_strlen(names[j]));
 			ft_putchar('\t');
 			j += row;
 		}
