@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/07 20:51:39 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:21:25 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,15 @@ t_data	*ft_balanser_sort(t_data **head, t_flags fl)
 	if (fl.bits.r)
 		ft_rev_list(&tmp);
 	return (tmp);
+}
+
+void	ft_output(t_data *head, t_flags fl, int to_free)
+{
+	t_data	*tmp;
+
+	tmp = head;
+	tmp = ft_balanser_sort(&tmp, fl);
+	ft_print(tmp, fl);
+	if (to_free)
+		ft_free_list(tmp);
 }
