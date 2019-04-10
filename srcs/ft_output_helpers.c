@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:24:54 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 14:57:34 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:20:15 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,10 @@ void	ft_skip_starting_dots(t_data **head)
 {
 //	t_data	*tmp;
 
-	while ((*(*head)->name) == '.')
+	while (*head)
 	{
-//		tmp = *head;
+		if ((*(*head)->name) != '.')
+			break ;
 		*head = (*head)->next;
-//		free(tmp);
-//		tmp = NULL;
 	}
 }

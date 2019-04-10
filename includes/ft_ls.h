@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/09 18:43:15 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 19:24:13 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <pwd.h>
 # include <grp.h>
 # include <unistd.h>
+# include <time.h>
 
 # include <stdio.h>
 
@@ -55,8 +56,20 @@ typedef struct		s_data
 	long			time;
 }					t_data;
 
+typedef struct		s_lflag
+{
+	struct s_lflag	*next;
+	size_t			file_size;
+	size_t			links;
+	size_t			total;
+	char			*permissions;
+	char			*owner;
+	char			*group;
+	char			*date;
+	char			*file_name;
+}					t_lflag;
+
 char				**ft_lstname_to_str_arr(char **arr, t_data *data);
-void				ft_output(char **arr, size_t row, size_t list_size, size_t max_namlen);
 void				ft_window(t_data *data);
 void				ft_without_args(char *str);
 t_data				*new_node(struct dirent *dp);
@@ -90,5 +103,9 @@ void				ft_skip_starting_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
 void				ft_print_simple(t_data **head);
 void				ft_skip_dots(t_data **head, t_flags fl);
+void				ft_output(t_data *head, t_flags fl, int to_free);
+
+void				l_push_back(t_lflag **head, t_lflag *node);
+t_lflag				*new_l_node(struct dirent *dp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:17:39 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/03/27 15:28:21 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:38:52 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	**ft_memalloc_2d_clean(size_t str_num, size_t str_size)
 	char	**s;
 	size_t	k;
 
+	if (str_num == 0 || str_size == 0)
+		return (NULL);
 	k = -1;
 	if ((s = (char **)malloc(sizeof(char *) * (str_num + 1))) == NULL)
 		return (NULL);
