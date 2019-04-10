@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 16:35:12 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:07:49 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	get_info(char *file_name, t_lflag *st)
 	struct passwd	*pwd;
 	struct group	*gr;
 
-	st = NULL;
 	stat(file_name, &buff);
 	pwd = getpwuid(buff.st_uid);  
 	st->permissions = get_permission(buff.st_mode); //permissions (r/w/x)
@@ -78,8 +77,10 @@ void	ft_l(char *path_name, t_flags flags)
 	struct dirent	*dp;
 	t_data			*head;
 	t_data			*node;
+	t_lflag			*st;
 
 	head = NULL;
+	st = NULL;
 	if (!(dirp = opendir(path_name)))
 		return ;
 	while ((dp = readdir(dirp)) != NULL)
@@ -93,7 +94,7 @@ void	ft_l(char *path_name, t_flags flags)
 	node = head;
 	while (node != NULL)
 	{
-		get_info(ft_str_path(path_name, node->name));
+		get_info(ft_str_path(path_name, node->name), st);
 		node = node->next;
 	}
 	ft_free_list(head);
