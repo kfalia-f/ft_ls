@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 15:21:44 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 16:15:18 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,18 @@ typedef struct		s_data
 	size_t			len;
 	long			time;
 }					t_data;
+
+typedef struct		s_lflag
+{
+	size_t			file_size;
+	size_t			links;
+	size_t			total;
+	char			*permissions;
+	char			*owner;
+	char			*group;
+	char			*date;
+	char			*file_name;
+}					t_lflag;
 
 char				**ft_lstname_to_str_arr(char **arr, t_data *data);
 void				ft_window(t_data *data);

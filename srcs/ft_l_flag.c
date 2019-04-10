@@ -6,35 +6,46 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 15:21:34 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 16:22:19 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	get_file_type(mode_t st_mode)
+static void	ft_print_spaces(int n)
 {
-	if (S_ISLNK(st_mode))
-		ft_putchar('l');
-	else if (S_ISREG(st_mode))
-		ft_putchar('-');
-	else if (S_ISDIR(st_mode))
-		ft_putchar('d');
+	while (n-- > 0)
+		ft_putchar(' ');
 }
 
-void	get_permission(mode_t st_mode)
+char	get_file_type(mode_t st_mode)
 {
-	char	c;
+	if (S_ISLNK(st_mode))
+		return ('l');
+	else if (S_ISREG(st_mode))
+		return ('-');
+	return ('d');
+}
 
-	ft_putchar((c = st_mode & S_IRUSR ? 'r' : '-'));
-	ft_putchar((c = st_mode & S_IWUSR ? 'w' : '-'));
-	ft_putchar((c = st_mode & S_IXUSR ? 'x' : '-'));
-	ft_putchar((c = st_mode & S_IRGRP ? 'r' : '-'));
-	ft_putchar((c = st_mode & S_IWGRP ? 'w' : '-'));
-	ft_putchar((c = st_mode & S_IXGRP ? 'x' : '-'));
-	ft_putchar((c = st_mode & S_IROTH ? 'r' : '-'));
-	ft_putchar((c = st_mode & S_IWOTH ? 'w' : '-'));
-	ft_putchar((c = st_mode & S_IXOTH ? 'x' : '-'));
+char	*get_permission(mode_t st_mode)
+{
+	char	*str;
+	int		i;
+
+	str = ft_memalloc(11);
+	i = 0;
+	str[i++] = get_file_type(st_mode);
+	str[i++] = st_mode & S_IRUSR ? 'r' : '-';
+	str[i++] = st_mode & S_IWUSR ? 'w' : '-';
+	str[i++] = st_mode & S_IXUSR ? 'x' : '-';
+	str[i++] = st_mode & S_IRGRP ? 'r' : '-';
+	str[i++] = st_mode & S_IWGRP ? 'w' : '-';
+	str[i++] = st_mode & S_IXGRP ? 'x' : '-';
+	str[i++] = st_mode & S_IROTH ? 'r' : '-';
+	str[i++] = st_mode & S_IWOTH ? 'w' : '-';
+	str[i++] = st_mode & S_IXOTH ? 'x' : '-';
+	str[i] = '\0';
+	return (str);
 }
 
 void	get_info(char *file_name)
@@ -42,20 +53,24 @@ void	get_info(char *file_name)
 	struct stat		buff;
 	struct passwd	*pwd;
 	struct group	*gr;
+	t_lflag			*st;
 
+	st = NULL;
 	stat(file_name, &buff);
-	pwd = getpwuid(buff.st_uid);
-	get_file_type(buff.st_mode);
-	get_permission(buff.st_mode);
-	ft_putchar(' ');
-	ft_putnbr(buff.st_nlink);
+	pwd = getpwuid(buff.st_uid);  
+	st->permissions = get_permission(buff.st_mode); //permissions (r/w/x)
+	ft_putstr("FLAG");
+	printf("%s", st->permissions);
+	ft_print_spaces(2);
+	ft_putnbr(buff.st_nlink);     //num of links for file
 	ft_putchar('\t');
-	ft_putstr(pwd->pw_name);
-	ft_putchar(' ');
-	gr = getgrgid(buff.st_gid);
+	ft_putstr(pwd->pw_name);      //owner name
+	ft_print_spaces(1);
+	gr = getgrgid(buff.st_gid);   //group name
 	ft_putstr(gr->gr_name);
-	ft_putchar(' ');
-	ft_putendl(ft_ls_path_to_file(file_name), 0);
+	gr = getgrgid(buff.st_gid);
+	ft_print_spaces(1);
+	ft_putendl(ft_ls_path_to_file(file_name), 0); //filename
 }
 
 void	ft_l(char *path_name, t_flags flags)
