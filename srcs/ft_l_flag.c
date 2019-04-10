@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 16:22:19 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 16:35:12 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@ char	*get_permission(mode_t st_mode)
 	return (str);
 }
 
-void	get_info(char *file_name)
+void	get_info(char *file_name, t_lflag *st)
 {
 	struct stat		buff;
 	struct passwd	*pwd;
 	struct group	*gr;
-	t_lflag			*st;
 
 	st = NULL;
 	stat(file_name, &buff);
