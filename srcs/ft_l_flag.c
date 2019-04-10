@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 18:41:27 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 19:51:20 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,32 @@ char	*get_permission(mode_t st_mode)
 	return (str);
 }
 
+char	*ft_date(char *date)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	str = ft_memalloc(13);
+	while (date[i])
+	{
+		if (i < 4)
+		{
+			i++;
+			continue ;
+		}
+		if (i == 16)
+			break ;
+		str[j] = date[i];
+		j++;
+		i++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+
 void	get_info(char *file_name, t_lflag *st)
 {
 	struct stat		buff;
@@ -63,7 +89,7 @@ void	get_info(char *file_name, t_lflag *st)
 	st->permissions = get_permission(buff.st_mode); //permissions (r/w/x) + file type
 	st->owner = ft_strcpy(ft_memalloc(ft_strlen(pwd->pw_name)), pwd->pw_name); //owner
 	st->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
-
+	st->date = ft_date(ctime(&buff.st_mtime));
 }
 
 static int		ft_max_llen(t_lflag *st, int flag)
@@ -112,7 +138,9 @@ void	ft_output_info(t_lflag *st)
 		ft_putstr(tmp->group);
 		ft_output_spaces(' ', 2 + max_sz - ft_strlen(ft_itoa(tmp->file_size)));
 		ft_putnbr(tmp->file_size);
-		ft_output_spaces('\t', 1);
+		ft_output_spaces(' ', 1);
+		ft_putstr(tmp->date);
+		ft_output_spaces(' ', 1);
 		ft_putstr(tmp->file_name);
 		ft_putchar('\n');
 		tmp = tmp->next;
@@ -122,6 +150,7 @@ void	ft_output_info(t_lflag *st)
 void	ft_l(char *path_name, t_flags flags)
 {
 	DIR				*dirp;
+	struct stat		buff;
 	struct dirent	*dp;
 	t_lflag			*lhead;
 	t_lflag			*lnode;
@@ -143,6 +172,8 @@ void	ft_l(char *path_name, t_flags flags)
 		get_info(ft_str_path(path_name, lnode->file_name), lnode);
 		lnode = lnode->next;
 	}
+	stat(path_name, &buff);
+	printf ("total %lld\n", buff.st_blocks);
 	ft_output_info(lhead);
 	//ft_free_list(lhead);
 }

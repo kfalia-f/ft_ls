@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 17:53:24 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 19:24:13 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <pwd.h>
 # include <grp.h>
 # include <unistd.h>
+# include <time.h>
 
 # include <stdio.h>
 

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 18:02:42 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/10 19:30:55 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_lflag	*new_l_node(struct dirent *dp)
 		free(node);
 		return (NULL);
 	}
+	node->date = (char *)malloc(sizeof(char) * 13);
 	ft_strcpy(node->file_name, dp->d_name);
 	node->next = NULL;
 	return (node);
