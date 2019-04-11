@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 19:51:20 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/11 13:31:03 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,51 +92,51 @@ void	get_info(char *file_name, t_lflag *st)
 	st->date = ft_date(ctime(&buff.st_mtime));
 }
 
-static int		ft_max_llen(t_lflag *st, int flag)
+static int		ft_max_llen(t_lflag *st, int flag)  //1 = link; 2 = size; 3 = owner; 4 = group
 {
 	t_lflag	*tmp;
-	int		sz_len;
-	int		sz_max;
-	int		ln_len;
-	int		ln_max;
+	int		len;
+	int		max;
 
 	tmp = st;
-	sz_max = 0;
-	ln_max = 0;
+	max = 0;
 	while (tmp)
 	{
-		sz_len = ft_strlen(ft_itoa(tmp->file_size));
-		ln_len = ft_strlen(ft_itoa(tmp->links));
-		if (sz_max < sz_len)
-			sz_max = sz_len;
-		if (ln_max < ln_len)
-			ln_max = ln_len;
+		if (flag == 1)
+			len = ft_strlen(ft_itoa(tmp->links));
+		else if (flag == 2)
+			len = ft_strlen(ft_itoa(tmp->file_size));
+		else if (flag == 3)
+			len = ft_strlen(tmp->owner);
+		else if (flag == 4)
+			len = ft_strlen(tmp->group);
+		if (max < len)
+			max = len;
 		tmp = tmp->next;
 	}
-	if (flag == 1)
-		return (ln_max);
-	return (sz_max);
+	return (max);
 }
 
 void	ft_output_info(t_lflag *st)
 {
 	t_lflag	*tmp;
-	int		max_ln;
-	int		max_sz;
+	int		arr[4];
 
 	tmp = st;
-	max_ln = ft_max_llen(tmp, 1);
-	max_sz = ft_max_llen(tmp, 2);
+	arr[0] = ft_max_llen(st, 1);
+	arr[1] = ft_max_llen(st, 2);
+	arr[2] = ft_max_llen(st, 3);
+	arr[3] = ft_max_llen(st, 4);
 	while (tmp)
 	{
 		ft_putstr(tmp->permissions);
-		ft_output_spaces(' ', 2 + max_ln - ft_strlen(ft_itoa(tmp->links)));
+		ft_output_spaces(' ', 2 + arr[0] - ft_strlen(ft_itoa(tmp->links)));
 		ft_putnbr(tmp->links);
 		ft_output_spaces(' ', 1);
 		ft_putstr(tmp->owner);
-		ft_output_spaces(' ', 2);
+		ft_output_spaces(' ', 2 + arr[2] - ft_strlen(tmp->owner));
 		ft_putstr(tmp->group);
-		ft_output_spaces(' ', 2 + max_sz - ft_strlen(ft_itoa(tmp->file_size)));
+		ft_output_spaces(' ', 2 + arr[3] - ft_strlen(tmp->group) + arr[1] - ft_strlen(ft_itoa(tmp->file_size)));
 		ft_putnbr(tmp->file_size);
 		ft_output_spaces(' ', 1);
 		ft_putstr(tmp->date);
