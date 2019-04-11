@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/11 16:58:56 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:26:16 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,12 +186,12 @@ void	ft_l(char *path_name, t_flags flags)
 	while ((dp = readdir(dirp)) != NULL)
 	{
 		if (*(dp->d_name) == '.')
-			if (flags.bits.a == 0)
+			if (flags.bits.a == 0 && flags.bits.f == 0)
 				continue ;
 		lnode = new_l_node(dp);
 		l_push_back(&lhead, lnode);
 	}
-	lnode = lhead;
+	lnode = ft_l_ascii_sort(&lhead);
 	while (lnode != NULL)
 	{
 		get_info(ft_str_path(path_name, lnode->file_name), lnode);
