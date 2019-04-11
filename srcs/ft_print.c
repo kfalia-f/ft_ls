@@ -6,7 +6,11 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:08:44 by koparker          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/04/10 18:59:42 by koparker         ###   ########.fr       */
+=======
+/*   Updated: 2019/04/10 22:10:03 by koparker         ###   ########.fr       */
+>>>>>>> rec
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +103,8 @@ void	ft_print(t_data *head, t_flags fl)
 	if (head == NULL)
 		return ;
 	max_len = ft_max_namlen(head);
-	names = ft_memalloc_2d_clean(ft_list_size(head), max_len);
+	if ((names = ft_memalloc_2d_clean(ft_list_size(head), max_len)) == NULL)
+		return ;
 	names = ft_lstname_to_char_arr(names, head);
 	ft_print_contents(names, max_len);
 }

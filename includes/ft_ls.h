@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 18:19:23 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/11 15:13:57 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <pwd.h>
 # include <grp.h>
 # include <unistd.h>
+# include <time.h>
 
 # include <stdio.h>
 
@@ -58,6 +59,7 @@ typedef struct		s_data
 
 typedef struct		s_lflag
 {
+	struct s_lflag	*next;
 	size_t			file_size;
 	size_t			links;
 	size_t			total;
@@ -104,5 +106,8 @@ void				ft_print_simple(t_data **head, t_flags fl);
 void				ft_skip_dots(t_data **head, t_flags fl);
 void				ft_output(t_data *head, t_flags fl, int to_free);
 void				ft_process_current_dir(char *s, t_flags fl);
+
+void				l_push_back(t_lflag **head, t_lflag *node);
+t_lflag				*new_l_node(struct dirent *dp);
 
 #endif
