@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/11 15:12:01 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/11 18:01:41 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_balanser_sort(t_data **head, t_flags fl)
 
 void	ft_output(t_data *head, t_flags fl, int to_free)
 {
+	if (fl.bits.a == 0 && fl.bits.f == 0)
+		ft_skip_starting_dots(&head);
 	ft_balanser_sort(&head, fl);
 	if (fl.bits.one == 0)
 		ft_print(head, fl);

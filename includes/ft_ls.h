@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/11 15:13:57 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:59:34 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void				ft_l_flag(char **av, int i, int flag, t_flags flags);
 char				**ft_lstname_to_char_arr(char **arr, t_data *data);
 t_data				*ft_readdir(DIR *dirp);
 void				ft_print_without_args(t_data *head);
-void				ft_print(t_data *head, t_flags fl);
+void				ft_print(t_data *head);
 
 int					ft_mtimecmp(long a, long b);
 t_data				*ft_lmt_sort(t_data **head);
@@ -102,7 +102,7 @@ t_data				*ft_current_dir(char *s);
 void				ft_set_mtime(t_data **head);
 void				ft_skip_starting_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
-void				ft_print_simple(t_data **head, t_flags fl);
+void				ft_print_simple(t_data **head);
 void				ft_skip_dots(t_data **head, t_flags fl);
 void				ft_output(t_data *head, t_flags fl, int to_free);
 void				ft_process_current_dir(char *s, t_flags fl);
