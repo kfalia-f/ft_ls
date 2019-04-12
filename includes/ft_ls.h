@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/12 18:15:53 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/12 19:30:37 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct		s_lflag
 	size_t			file_size;
 	size_t			links;
 	size_t			total;
+	size_t			maj;
+	size_t			min;
 	char			*permissions;
 	char			*owner;
 	char			*group;

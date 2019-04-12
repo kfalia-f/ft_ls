@@ -6,25 +6,27 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/12 18:23:09 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/12 20:03:57 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	ft_print_spaces(int n)
-{
-	while (n-- > 0)
-		ft_putchar(' ');
-}
-
 char	get_file_type(mode_t st_mode)
 {
-	if (S_ISLNK(st_mode))
-		return ('l');
-	else if (S_ISREG(st_mode))
+	if (S_ISREG(st_mode))
 		return ('-');
-	return ('d');
+	else if (S_ISDIR(st_mode))
+		return ('d');
+	else if (S_ISLNK(st_mode))
+		return ('l');
+	else if (S_ISCHR(st_mode))
+		return ('c');
+	else if (S_ISBLK(st_mode))
+		return ('b');
+	else if (S_ISFIFO(st_mode))
+		return ('p');
+	return ('s');
 }
 
 char	get_acl(char *path)
@@ -115,14 +117,20 @@ void	get_info(char *file_name, t_lflag *st)
 	gr = getgrgid(buff.st_gid);   //group name
 
 	st->links = buff.st_nlink;  //num of links
-	st->file_size = buff.st_size; //file_size
 	st->permissions = get_permission(buff.st_mode, file_name); //permissions (r/w/x) + file type
+	if (*(st->permissions) != 'c' && *(st->permissions) != 'b')
+		st->file_size = buff.st_size; //file_size
+	else
+	{
+		st->maj = major(buff.st_rdev);
+		st->min = minor(buff.st_rdev);
+	}
 	st->owner = ft_strcpy(ft_memalloc(ft_strlen(pwd->pw_name)), pwd->pw_name); //owner
 	st->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
 	st->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime);
 }
 
-static int		ft_max_llen(t_lflag *st, int flag)  //1 = link; 2 = size; 3 = owner; 4 = group
+static int		ft_max_llen(t_lflag *st, int flag)  //1 = link; 2 = size; 3 = owner; 4 = group 5 = maj 6 = min
 {
 	t_lflag	*tmp;
 	int		len;
@@ -140,6 +148,10 @@ static int		ft_max_llen(t_lflag *st, int flag)  //1 = link; 2 = size; 3 = owner;
 			len = ft_strlen(tmp->owner);
 		else if (flag == 4)
 			len = ft_strlen(tmp->group);
+		else if (flag == 5)
+			len = ft_strlen(ft_itoa(tmp->maj));
+		else if (flag == 6)
+			len = ft_strlen(ft_itoa(tmp->min));
 		if (max < len)
 			max = len;
 		tmp = tmp->next;
@@ -150,13 +162,15 @@ static int		ft_max_llen(t_lflag *st, int flag)  //1 = link; 2 = size; 3 = owner;
 void	ft_output_info(t_lflag *st)
 {
 	t_lflag	*tmp;
-	int		arr[4];
+	int		arr[6];
 
 	tmp = st;
 	arr[0] = ft_max_llen(st, 1);
 	arr[1] = ft_max_llen(st, 2);
 	arr[2] = ft_max_llen(st, 3);
 	arr[3] = ft_max_llen(st, 4);
+	arr[4] = ft_max_llen(st, 5);
+	arr[5] = ft_max_llen(st, 6);
 	while (tmp)
 	{
 		ft_putstr(tmp->permissions);
@@ -167,7 +181,16 @@ void	ft_output_info(t_lflag *st)
 		ft_output_spaces(' ', 2 + arr[2] - ft_strlen(tmp->owner));
 		ft_putstr(tmp->group);
 		ft_output_spaces(' ', 2 + arr[3] - ft_strlen(tmp->group) + arr[1] - ft_strlen(ft_itoa(tmp->file_size)));
-		ft_putnbr(tmp->file_size);
+		if (*(tmp->permissions) != 'c' && *(tmp->permissions) != 'b')
+			ft_putnbr(tmp->file_size);
+		else
+		{
+			ft_output_spaces(' ', 1 + arr[4] - ft_strlen(ft_itoa(tmp->maj)));
+			ft_putnbr(tmp->maj);
+			ft_putchar(',');
+			ft_output_spaces(' ', 1 + arr[5] - ft_strlen(ft_itoa(tmp->min)));
+			ft_putnbr(tmp->min);
+		}
 		ft_output_spaces(' ', 1);
 		ft_putstr(tmp->date);
 		ft_output_spaces(' ', 1);
