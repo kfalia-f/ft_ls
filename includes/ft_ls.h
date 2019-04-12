@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/11 17:25:33 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/12 16:12:40 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct		s_lflag
 	char			*group;
 	char			*date;
 	char			*file_name;
+	char			*link;
 }					t_lflag;
 
 char				**ft_lstname_to_str_arr(char **arr, t_data *data);

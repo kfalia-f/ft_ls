@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/11 17:26:16 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/12 16:20:27 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	get_info(char *file_name, t_lflag *st)
 	struct passwd	*pwd;
 	struct group	*gr;
 
-	stat(file_name, &buff);
+	lstat(file_name, &buff);
 	pwd = getpwuid(buff.st_uid);   //owner name 
 	gr = getgrgid(buff.st_gid);   //group name
 
@@ -151,6 +151,8 @@ void	ft_output_info(t_lflag *st)
 		ft_putstr(tmp->date);
 		ft_output_spaces(' ', 1);
 		ft_putstr(tmp->file_name);
+		if (tmp->link)
+			ft_putstr(tmp->link);
 		ft_putchar('\n');
 		tmp = tmp->next;
 	}
@@ -204,8 +206,37 @@ void	ft_l(char *path_name, t_flags flags)
 	//ft_free_list(lhead);
 }
 
+void	ft_arg_link(char *path_name)
+{
+	DIR				*dirp;
+	struct dirent	*dp;
+	t_lflag			*st;
+	char			link[100];
+
+	st = NULL;
+	if (!(dirp = opendir(ft_ls_path_to_file(path_name, 0))))
+		return ;
+	while ((dp = readdir(dirp)))
+	{
+		if (ft_strcmp(dp->d_name, ft_ls_path_to_file(path_name, 1)) == 0)
+			break ;
+		//else
+		//	ft_putendl("Wrong path", 0);
+	}
+	st = new_l_node(dp);
+	get_info(path_name, st);
+	readlink(path_name, link, 100);
+	st->link = (char *)malloc(sizeof(char) * (ft_strlen(link + 5)));
+	st->file_name = ft_strjoin("/", st->file_name);              //mb leak
+	st->link = ft_strjoin(" -> ", link);
+	ft_output_info(st);
+	//free
+}
+
 void	ft_l_flag(char **av, int i, int flag, t_flags flags)
 {
+	struct stat	buff;
+
 	if (flag == 0)
 	{
 		ft_l(".", flags);
@@ -213,6 +244,13 @@ void	ft_l_flag(char **av, int i, int flag, t_flags flags)
 	}
 	while (av[i])
 	{
+		lstat(av[i], &buff);
+		if (S_ISLNK(buff.st_mode))
+		{
+			ft_arg_link(av[i]);
+			i++;
+			continue ;
+		}
 		if (flag > 1)
 			ft_putendl(av[i], 1);
 		ft_l(av[i], flags);
