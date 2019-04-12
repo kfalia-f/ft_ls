@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/12 16:20:27 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/12 18:23:09 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,32 @@ char	get_file_type(mode_t st_mode)
 	return ('d');
 }
 
-char	*get_permission(mode_t st_mode)
+char	get_acl(char *path)
+{
+	acl_t		acl;
+	acl_entry_t	dummy;
+	int			xattr;
+
+	acl = acl_get_link_np(path, ACL_TYPE_EXTENDED);
+	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1)
+	{
+		acl_free(acl);
+		acl = NULL;
+	}
+	xattr = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
+	if (xattr > 0)
+		return ('@');
+	else if (acl != NULL)
+		return ('+');
+	return (' ');
+}
+
+char	*get_permission(mode_t st_mode, char *path)
 {
 	char	*str;
 	int		i;
 
-	str = ft_memalloc(11);
+	str = ft_memalloc(12);
 	i = 0;
 	str[i++] = get_file_type(st_mode);
 	str[i++] = st_mode & S_IRUSR ? 'r' : '-';
@@ -44,6 +64,7 @@ char	*get_permission(mode_t st_mode)
 	str[i++] = st_mode & S_IROTH ? 'r' : '-';
 	str[i++] = st_mode & S_IWOTH ? 'w' : '-';
 	str[i++] = st_mode & S_IXOTH ? 'x' : '-';
+	str[i++] = get_acl(path);
 	str[i] = '\0';
 	return (str);
 }
@@ -95,7 +116,7 @@ void	get_info(char *file_name, t_lflag *st)
 
 	st->links = buff.st_nlink;  //num of links
 	st->file_size = buff.st_size; //file_size
-	st->permissions = get_permission(buff.st_mode); //permissions (r/w/x) + file type
+	st->permissions = get_permission(buff.st_mode, file_name); //permissions (r/w/x) + file type
 	st->owner = ft_strcpy(ft_memalloc(ft_strlen(pwd->pw_name)), pwd->pw_name); //owner
 	st->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
 	st->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime);
@@ -139,7 +160,7 @@ void	ft_output_info(t_lflag *st)
 	while (tmp)
 	{
 		ft_putstr(tmp->permissions);
-		ft_output_spaces(' ', 2 + arr[0] - ft_strlen(ft_itoa(tmp->links)));
+		ft_output_spaces(' ', 1 + arr[0] - ft_strlen(ft_itoa(tmp->links)));
 		ft_putnbr(tmp->links);
 		ft_output_spaces(' ', 1);
 		ft_putstr(tmp->owner);
@@ -211,7 +232,7 @@ void	ft_arg_link(char *path_name)
 	DIR				*dirp;
 	struct dirent	*dp;
 	t_lflag			*st;
-	char			link[100];
+	char			link[4096];
 
 	st = NULL;
 	if (!(dirp = opendir(ft_ls_path_to_file(path_name, 0))))
@@ -225,10 +246,10 @@ void	ft_arg_link(char *path_name)
 	}
 	st = new_l_node(dp);
 	get_info(path_name, st);
-	readlink(path_name, link, 100);
+	readlink(path_name, link, 4096);
 	st->link = (char *)malloc(sizeof(char) * (ft_strlen(link + 5)));
-	st->file_name = ft_strjoin("/", st->file_name);              //mb leak
-	st->link = ft_strjoin(" -> ", link);
+	st->file_name = ft_strjoin(path_name, " ");              //mb leak
+	st->link = ft_strjoin("-> ", link);
 	ft_output_info(st);
 	//free
 }

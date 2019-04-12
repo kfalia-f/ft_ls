@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/12 16:12:40 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/12 18:15:53 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include <grp.h>
 # include <unistd.h>
 # include <time.h>
-
+# include <sys/xattr.h>
+# include <sys/acl.h>
 # include <stdio.h>
 
 typedef struct		s_bits
