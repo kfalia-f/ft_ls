@@ -6,74 +6,103 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 15:03:30 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/06 14:49:18 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/14 00:06:26 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-t_data	*ft_ascii_sort(t_data **head)
+void	split_list(t_data *head, t_data **first_half, t_data **second_half)
 {
-	t_data	**prev;
-	t_data	*curr;
-	t_data	*next;
-	int		done;
+	t_data	*ptr1;
+	t_data	*ptr2;
 
-	done = 0;
-	if (*head == NULL || (*head)->next == NULL)
-		return (NULL);
-	while (!done)
+	ptr1 = head;
+	ptr2 = head->next;
+	while (ptr2)
 	{
-		prev = head;
-		curr = *head;
-		next = (*head)->next;
-		done = 1;
-		while (next)
+		ptr2 = ptr2->next;
+		if (ptr2)
 		{
-			if (ft_strcmp(curr->name, next->name) > 0)
-			{
-				curr->next = next->next;
-				next->next = curr;
-				*prev = next;
-				done = 0;
-			}
-			prev = &curr->next;
-			curr = next;
-			next = next->next;
+			ptr1 = ptr1->next;
+			ptr2 = ptr2->next;
 		}
 	}
-	return (*head);
+	*first_half = head;
+	*second_half = ptr1->next;
+	ptr1->next = NULL;
 }
 
-t_data	*ft_lmt_sort(t_data **head)
+t_data	*merge_ascii(t_data *a, t_data *b)
 {
-	t_data	**prev;
-	t_data	*curr;
-	t_data	*next;
-	int		done;
+	t_data	*res;
 
-	done = 0;
-	if (*head == NULL || (*head)->next == NULL)
-		return (NULL);
-	while (!done)
+	res = NULL;
+	if (!a)
+		return (b);
+	else if (!b)
+		return (a);
+	if (ft_strcmp(a->name, b->name) < 0)
 	{
-		prev = head;
-		curr = *head;
-		next = (*head)->next;
-		done = 1;
-		while (next)
-		{
-			if (curr->time < next->time)
-			{
-				curr->next = next->next;
-				next->next = curr;
-				*prev = next;
-				done = 0;
-			}
-			prev = &curr->next;
-			curr = next;
-			next = next->next;
-		}
+		res = a;
+		res->next = merge_ascii(a->next, b);
 	}
-	return (*head);
+	else
+	{
+		res = b;
+		res->next = merge_ascii(a, b->next);
+	}
+	return (res);
+}
+
+void	ft_ascii_sort(t_data **head)
+{
+	t_data	*tmp;
+	t_data	*first_half;
+	t_data	*second_half;
+
+	tmp = *head;
+	if (!tmp || !(tmp->next))
+		return ;
+	split_list(tmp, &first_half, &second_half);
+	ft_ascii_sort(&first_half);
+	ft_ascii_sort(&second_half);
+	*head = merge_ascii(first_half, second_half);
+}
+
+t_data	*merge_time(t_data *a, t_data *b)
+{
+	t_data	*res;
+
+	res = NULL;
+	if (!a)
+		return (b);
+	else if (!b)
+		return (a);
+	if (a->time >= b->time)
+	{
+		res = a;
+		res->next = merge_time(a->next, b);
+	}
+	else
+	{
+		res = b;
+		res->next = merge_time(a, b->next);
+	}
+	return (res);
+}
+
+void	ft_time_sort(t_data **head)
+{
+	t_data	*tmp;
+	t_data	*first_half;
+	t_data	*second_half;
+
+	tmp = *head;
+	if (!tmp || !(tmp->next))
+		return ;
+	split_list(tmp, &first_half, &second_half);
+	ft_time_sort(&first_half);
+	ft_time_sort(&second_half);
+	*head = merge_time(first_half, second_half);
 }

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/11 17:59:34 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/13 23:41:47 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@
 
 typedef struct		s_bits
 {
-	unsigned int	upper_r : 1;
 	unsigned int	upper_g : 1;
+	unsigned int	upper_r : 1;
+	unsigned int	upper_u : 1;
 	unsigned int	a : 1;
 	unsigned int	f : 1;
 	unsigned int	l : 1;
 	unsigned int	r : 1;
 	unsigned int	t : 1;
+	unsigned int	u : 1;
 	unsigned int	one : 1;
 }					t_bits;
 
@@ -70,19 +72,16 @@ typedef struct		s_lflag
 	char			*file_name;
 }					t_lflag;
 
-char				**ft_lstname_to_str_arr(char **arr, t_data *data);
-void				ft_window(t_data *data);
 void				ft_without_args(char *str);
 t_data				*new_node(struct dirent *dp);
 t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);
+size_t				ft_list_size(t_data *lst);
 void				ft_rev_list(t_data **head);
 void				ft_free_list(t_data *head);
 
-t_data				*ft_ascii_sort(t_data **head);
 size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
-size_t				ft_list_size(t_data *lst);
 int					ft_flags(int ac, char **av, t_flags *flags);
 void				ft_sort_params(char **av, int num_of_flags, t_flags fl);
 void				ft_argv(t_data **head, int n, t_flags fl);
@@ -95,12 +94,13 @@ t_data				*ft_readdir(DIR *dirp);
 void				ft_print_without_args(t_data *head);
 void				ft_print(t_data *head);
 
-int					ft_mtimecmp(long a, long b);
-t_data				*ft_lmt_sort(t_data **head);
+int					ft_timecmp(long a, long b);
+void				ft_time_sort(t_data **head);
+void				ft_ascii_sort(t_data **head);
 void				ft_balanser_sort(t_data **head, t_flags fl);
 t_data				*ft_current_dir(char *s);
-void				ft_set_mtime(t_data **head);
-void				ft_skip_starting_dots(t_data **head);
+void				ft_set_time(t_data **head, t_flags fl);
+void				ft_remove_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
 void				ft_print_simple(t_data **head);
 void				ft_skip_dots(t_data **head, t_flags fl);

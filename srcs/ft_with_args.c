@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 15:23:57 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/13 19:43:46 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	ft_nonexistent_argv_error(char *name)
 	ft_putchar('\n');
 }
 
-void	ft_output_dirs(char *dir_name, t_data *head, int n, t_flags fl)
+void	ft_output_dirs(char *dir_name, t_data *head_dir, int n, t_flags fl)
 {
 	if (n == 1)
-		ft_print(ft_ascii_sort(&head), fl);
+		ft_output(head_dir, fl, 1);
 	else
 	{
 		ft_putendl(dir_name, 1);
-		ft_print(ft_ascii_sort(&head), fl);
+		ft_output(head_dir, fl, 1);
 	}
 }
 
@@ -71,8 +71,7 @@ size_t	ft_process_flags(t_data **head, DIR *dirp, t_flags fl)
 	if (head_file != NULL)
 	{
 		flag = 1;
-		ft_print(head_file, fl);
-		ft_free_list(head_file);
+		ft_output(head_file, fl, 1);
 	}
 	return (flag);
 }
@@ -103,8 +102,8 @@ void	ft_argv(t_data **head, int n, t_flags fl)
 			ft_putchar('\n');
 		}
 		ft_output_dirs(tmp->name, head_dir, n, fl);
-		ft_putchar('\n');
-		ft_free_list(head_dir);
 		tmp = tmp->next;
+		if (tmp)
+			ft_putchar('\n');
 	}
 }

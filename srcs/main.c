@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 18:01:57 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/13 23:42:16 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		main(int ac, char **av)
 {
-    t_flags flags;
-//	t_data	*args;
+	t_data	*args;
+    t_flags fl;
     int		num_of_flags;
 	int		flag;
 
@@ -24,19 +24,42 @@ int		main(int ac, char **av)
 		ft_without_args(".");
 		return (0);
 	}
-    flags.value = 0;
-	num_of_flags = ft_flags(ac, av, &flags);
+    fl.value = 0;
+	num_of_flags = ft_flags(ac, av, &fl);
 	flag = ac - num_of_flags - 1;
-	if (flag == 0 && flags.bits.upper_r == 0)
+/*	while (1)
 	{
-		ft_process_current_dir(".", flags);
+		if (fl.bits.upper_r == 1)
+			ft_putendl("R", 0);
+		if (fl.bits.upper_g == 1)
+			ft_putendl("G", 0);
+		if (fl.bits.a == 1)
+			ft_putendl("a", 0);
+		if (fl.bits.f == 1)
+			ft_putendl("f", 0);
+		if (fl.bits.l == 1)
+			ft_putendl("l", 0);
+		if (fl.bits.r == 1)
+			ft_putendl("r", 0);
+		if (fl.bits.t == 1)
+			ft_putendl("t", 0);
+		if (fl.bits.u == 1)
+			ft_putendl("u", 0);
+		if (fl.bits.one == 1)
+			ft_putendl("1", 0);
+		break ;
+	}*/
+	if (flag == 0 && fl.bits.upper_r == 0)
+	{
+		ft_process_current_dir(".", fl);
 		return (0);
 	}
-	ft_sort_params(av + num_of_flags + 1, num_of_flags, flags);
-	if (flags.bits.upper_r)
-		ft_recursion_flag(av + num_of_flags + 1, flag, flags);
-	if (flags.bits.l)
-		ft_l_flag(av, num_of_flags + 1, flag, flags);
-//	ft_argv(av + num_of_flags + 1, ac - num_of_flags - 1);
+	ft_sort_params(av + num_of_flags + 1, num_of_flags, fl);
+	if (fl.bits.upper_r)
+		ft_recursion_flag(av + num_of_flags + 1, flag, fl);
+	if (fl.bits.l)
+		ft_l_flag(av, num_of_flags + 1, flag, fl);
+	args = ft_convert_args(av + num_of_flags + 1);
+	ft_argv(&args, ac - num_of_flags - 1, fl);
 	return (0);
 }

@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cmp.c                                           :+:      :+:    :+:   */
+/*   ft_del.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 17:23:54 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/12 16:13:52 by koparker         ###   ########.fr       */
+/*   Created: 2019/04/13 19:24:30 by koparker          #+#    #+#             */
+/*   Updated: 2019/04/13 19:41:05 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ls.h>
+#include <libft.h>
 
-int	ft_timecmp(long a, long b)
+void	*ft_del(char ***a, size_t n)
 {
-	if (a >= b)
-		return (0);
-	return (1);
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		free((*a)[i]);
+		(*a)[i] = NULL;
+		i++;
+	}
+	ft_strdel(*a);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 19:30:55 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/13 23:48:37 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_data	*new_node(struct dirent *dp)
 		free(node);
 		return (NULL);
 	}
+	ft_bzero(node->name, name_size);
 	ft_strcpy(node->name, dp->d_name);
 	node->len = name_size;
 	node->next = NULL;
@@ -41,7 +42,7 @@ t_lflag	*new_l_node(struct dirent *dp)
 
 	if (!(node = (t_lflag *)malloc(sizeof(t_lflag))))
 	{
-		ft_putendl("doesn't malloced for a new node", 0);
+		ft_putendl("doesn't malloced for a new l node", 0);
 		return (NULL);
 	}
 	name_size = ft_strlen(dp->d_name);
@@ -72,6 +73,7 @@ t_data	*new_file(char *str)
 		free(node);
 		return (NULL);
 	}
+	ft_bzero(node->name, name_size);
 	ft_strcat(node->name, str);
 	node->len = name_size;
 	node->next = NULL;
@@ -157,5 +159,32 @@ void	ft_free_list(t_data *head)
 		free(tmp->name);
 		free(tmp);
 		tmp = NULL;
+	}
+}
+
+void	ft_remove_dots(t_data **head)
+{
+	t_data	*tmp;
+	t_data	*prev;
+
+	tmp = *head;
+	while (tmp != NULL && (*tmp->name) == '.')
+	{
+		*head = tmp->next;
+		free(tmp);
+		tmp = *head;
+	}
+	while (tmp)
+	{
+		while (tmp != NULL && (*tmp->name) != '.')
+		{
+			prev = tmp;
+			tmp = tmp->next;
+		}
+		if (tmp == NULL)
+			return ;
+		prev->next = tmp->next;
+		free(tmp);
+		tmp = prev->next;
 	}
 }

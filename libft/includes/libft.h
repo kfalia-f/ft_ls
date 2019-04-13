@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:37:14 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/03 20:36:21 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/13 19:27:14 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char				**ft_memalloc_2d_clean(size_t str_num, size_t str_size);
 
 char				*ft_str_path(char *str1, char *str2);
 char				*ft_ls_path_to_file(char *path);
+void				*ft_del(char ***a, size_t n);
 
 int					get_next_line(const int fd, char **line);
 #endif

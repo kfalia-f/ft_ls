@@ -6,27 +6,11 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:17:39 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/10 17:38:52 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/13 19:38:23 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-
-void	*ft_del(char ***a, int n)
-{
-	int i;
-
-	i = 0;
-	while (i < n)
-	{
-		free((*a)[i]);
-		(*a)[i] = NULL;
-		i++;
-	}
-	free(*a);
-	*a = NULL;
-	return (NULL);
-}
 
 char	**ft_memalloc_2d_clean(size_t str_num, size_t str_size)
 {

@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/11 17:59:07 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/13 23:44:01 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,22 +91,29 @@ void	ft_print(t_data *head)
 {
 	char	**names;
 	size_t	max_len;
+	size_t	list_size;
 
+	list_size = ft_list_size(head);
 	max_len = ft_max_namlen(head);
-	if ((names = ft_memalloc_2d_clean(ft_list_size(head), max_len)) == NULL)
+	if ((names = ft_memalloc_2d_clean(list_size, max_len)) == NULL)
 		return ;
 	names = ft_lstname_to_char_arr(names, head);
 	ft_print_contents(names, max_len);
+	ft_del(&names, list_size);
 }
 
 void	ft_print_without_args(t_data *head)
 {
-	char			**names;
-	size_t			max_len;
+	char	**names;
+	size_t	max_len;
+	size_t	list_size;
 
-	ft_skip_starting_dots(&head);
+	ft_remove_dots(&head);
+	list_size = ft_list_size(head);
 	max_len = ft_max_namlen(head);
 	names = ft_memalloc_2d_clean(ft_list_size(head), max_len);
 	names = ft_lstname_to_char_arr(names, head);
 	ft_print_contents(names, max_len);
+	ft_free_list(head);
+	ft_del(&names, list_size);
 }

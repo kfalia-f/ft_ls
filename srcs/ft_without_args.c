@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 20:01:59 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/05 22:00:03 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/13 19:22:08 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ void	ft_without_args(char *str)
 	t_data	*head;
 
 	head = ft_current_dir(str);
-	ft_print_without_args(ft_ascii_sort(&head));
+	ft_ascii_sort(&head);
+	ft_print_without_args(head);
 }

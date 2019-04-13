@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 20:52:16 by koparker          #+#    #+#             */
-/*   Updated: 2019/02/06 16:23:17 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/13 19:39:55 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,6 @@ static char		*ft_strncpy_custom(char *dst, const char *src, size_t len)
 	}
 	dst[i] = '\0';
 	return (dst);
-}
-
-static void		ft_del(char ***res, size_t k)
-{
-	while (k--)
-	{
-		free((*res)[k]);
-		(*res)[k] = NULL;
-	}
-	ft_strdel(*res);
 }
 
 char			**ft_strsplit(char const *s, char c)
