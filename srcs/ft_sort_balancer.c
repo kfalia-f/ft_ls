@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/14 00:06:32 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/14 00:21:07 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	ft_balanser_sort(t_data **head, t_flags fl)
 	{
 		if (fl.bits.upper_u == 1)
 			ft_set_time(head, fl);
-		//else if (fl.bits.u == 1)
-		//	ft_set_time(head, fl);
+		else if (fl.bits.u == 1)
+			ft_set_time(head, fl);
 		else
 			ft_set_time(head, fl);
-		ft_time_sort(head);
 		ft_ascii_sort(head);
+		ft_time_sort(head);
 	}
 	else
 		ft_ascii_sort(head);

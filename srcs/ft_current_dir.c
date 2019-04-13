@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/14 00:06:30 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/14 00:19:09 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_set_time(t_data **head, t_flags fl)
 		stat(tmp->name, &buff);
 		if (fl.bits.upper_u == 1)
 			tmp->time = buff.st_birthtime;
-	//	else if (fl.bits.u == 1)
-	//		tmp->time = buff.st_atime;
+		else if (fl.bits.u == 1)
+			tmp->time = buff.st_atime;
 		else
 			tmp->time = buff.st_mtime;
 		tmp = tmp->next;
