@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/12 20:03:57 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/14 21:16:37 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,14 @@ void	get_info(char *file_name, t_lflag *st)
 	struct passwd	*pwd;
 	struct group	*gr;
 
-	lstat(file_name, &buff);
+	if ((lstat(file_name, &buff)) != 0)
+		ft_putstr("ERROR_STAT");
 	pwd = getpwuid(buff.st_uid);   //owner name 
 	gr = getgrgid(buff.st_gid);   //group name
 
+	st->owner = ft_strcpy(ft_memalloc(ft_strlen(pwd->pw_name)), pwd->pw_name); //owner
+	st->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
+	st->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime);
 	st->links = buff.st_nlink;  //num of links
 	st->permissions = get_permission(buff.st_mode, file_name); //permissions (r/w/x) + file type
 	if (*(st->permissions) != 'c' && *(st->permissions) != 'b')
@@ -125,9 +129,6 @@ void	get_info(char *file_name, t_lflag *st)
 		st->maj = major(buff.st_rdev);
 		st->min = minor(buff.st_rdev);
 	}
-	st->owner = ft_strcpy(ft_memalloc(ft_strlen(pwd->pw_name)), pwd->pw_name); //owner
-	st->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
-	st->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime);
 }
 
 static int		ft_max_llen(t_lflag *st, int flag)  //1 = link; 2 = size; 3 = owner; 4 = group 5 = maj 6 = min
@@ -237,8 +238,9 @@ void	ft_l(char *path_name, t_flags flags)
 		lnode = new_l_node(dp);
 		l_push_back(&lhead, lnode);
 	}
-	lnode = ft_l_ascii_sort(&lhead);
-	while (lnode != NULL)
+	if (lhead->next != NULL)
+		lnode = ft_l_ascii_sort(&lhead);
+	while (lnode)
 	{
 		get_info(ft_str_path(path_name, lnode->file_name), lnode);
 		lnode = lnode->next;
