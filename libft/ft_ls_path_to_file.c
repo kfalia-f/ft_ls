@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 17:53:39 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/14 19:25:18 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:57:30 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*ft_ls_path_to_file(char *path, int	flag)
 			len = i;
 		i++;
 	}
+	if (len == 0 && flag && path[0] != '/')
+		return (path);
 	k = len + 1;
 	len = i - len;
 	file = (char *)malloc(sizeof(char) * (len + 1));
@@ -42,6 +44,8 @@ char	*ft_ls_path_to_file(char *path, int	flag)
 	file[i] = '\0';
 	i = 0;
 	k = ft_strlen(path) - len;
+	if (k == 0 && !flag && path[0] != '/')
+		return ("./");
 	pt = (char *)malloc(sizeof(char) * (k + 2));
 	while (i <= k)
 	{

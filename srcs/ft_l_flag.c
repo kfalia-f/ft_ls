@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/14 21:16:37 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:57:43 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,6 +279,22 @@ void	ft_arg_link(char *path_name)
 	//free
 }
 
+void	ft_file(char *file_name)
+{
+	DIR 			*dirp;
+	struct dirent	*dp;
+	t_lflag			*lhead;
+
+	dirp = opendir(ft_ls_path_to_file(file_name, 0));
+	while ((dp = readdir(dirp)))
+		if (ft_strcmp(dp->d_name, ft_ls_path_to_file(file_name, 1)) == 0)
+			break ;
+	lhead = new_l_node(dp);
+	closedir(dirp);
+	get_info(file_name, lhead);
+	ft_output_info(lhead);
+}
+
 void	ft_l_flag(char **av, int i, int flag, t_flags flags)
 {
 	struct stat	buff;
@@ -293,10 +309,16 @@ void	ft_l_flag(char **av, int i, int flag, t_flags flags)
 		lstat(av[i], &buff);
 		if (S_ISLNK(buff.st_mode))
 		{
-			ft_arg_link(av[i]);
-			i++;
+			ft_arg_link(av[i++]);
 			continue ;
 		}
+		else if (S_ISREG(buff.st_mode))
+		{
+			ft_file(av[i++]);
+			continue ;
+		}
+		if (i != 0)
+			ft_putchar('\n');
 		if (flag > 1)
 			ft_putendl(av[i], 1);
 		ft_l(av[i], flags);
