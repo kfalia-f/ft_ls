@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/15 16:18:11 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/15 17:33:31 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int					ft_timecmp(long a, long b);
 void				ft_time_sort(t_data **head);
 void				ft_ascii_sort(t_data **head);
 void				ft_balanser_sort(t_data **head, t_flags fl);
-t_data				*ft_current_dir(char *s);
+t_data				*ft_current_dir(char *s, t_flags fl);
 void				ft_set_time(t_data **head, t_flags fl);
 void				ft_remove_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
