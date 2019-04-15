@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/15 16:16:53 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/15 20:25:59 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	ft_nonexistent_argv_error(char *name)
 void	ft_output_dirs(char *dir_name, t_data *head_dir, int n, t_flags fl)
 {
 	if (n == 1)
-		ft_output(head_dir, fl, 1, NULL);
+		ft_output(head_dir, fl, 1, dir_name);
 	else
 	{
 		ft_putendl(dir_name, 1);
-		ft_output(head_dir, fl, 1, NULL);
+		ft_output(head_dir, fl, 1, dir_name);
 	}
 }
 
@@ -59,7 +59,7 @@ void	ft_push_file(char *name, DIR *dirp, t_data **head_file)
 	}
 }
 
-size_t	ft_process_flags(t_data **head, DIR *dirp, t_flags fl)
+size_t	ft_process_files(t_data **head, DIR *dirp, t_flags fl)
 {
 	t_data	*head_file;
 	t_data	*tmp;
@@ -76,7 +76,7 @@ size_t	ft_process_flags(t_data **head, DIR *dirp, t_flags fl)
 	if (head_file != NULL)
 	{
 		flag = 1;
-		ft_output(head_file, fl, 1, NULL);
+		ft_output(head_file, fl, 1, (*head)->name);
 	}
 	return (flag);
 }
@@ -90,7 +90,7 @@ void	ft_argv(t_data **head, int n, t_flags fl)
 
 	head_dir = NULL;
 	dirp = NULL;
-	flag = ft_process_flags(head, dirp, fl);
+	flag = ft_process_files(head, dirp, fl);
 	tmp = *head;
 	while (tmp)
 	{

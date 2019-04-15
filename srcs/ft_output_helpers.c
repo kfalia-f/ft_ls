@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:24:54 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/13 23:29:48 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:52:33 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ void	ft_skip_dots(t_data **head, t_flags fl)
 	}
 }
 
-void	ft_skip_starting_dots(t_data **head)
+void	ft_print_list(t_data *head)
 {
-	while (*head)
+	t_data	*tmp;
+
+	tmp = head;
+	while (tmp)
 	{
-		if ((*(*head)->name) != '.')
-			break ;
-		*head = (*head)->next;
+		ft_putendl(tmp->name, 0);
+		tmp = tmp->next;
 	}
 }

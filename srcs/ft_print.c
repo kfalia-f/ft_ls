@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/13 23:44:01 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:35:44 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ void	ft_print_contents(char **names, size_t max_len)
 		ft_pr(names, max_len, row, num_of_elems);
 }
 
-void	ft_print_simple(t_data **head)
+void	ft_print_simple(t_data *head)
 {
 	t_data	*tmp;
 
-	tmp = *head;
+	tmp = head;
 	if (tmp == NULL)
 		return ;
 	while (tmp)
@@ -99,21 +99,5 @@ void	ft_print(t_data *head)
 		return ;
 	names = ft_lstname_to_char_arr(names, head);
 	ft_print_contents(names, max_len);
-	ft_del(&names, list_size);
-}
-
-void	ft_print_without_args(t_data *head)
-{
-	char	**names;
-	size_t	max_len;
-	size_t	list_size;
-
-	ft_remove_dots(&head);
-	list_size = ft_list_size(head);
-	max_len = ft_max_namlen(head);
-	names = ft_memalloc_2d_clean(ft_list_size(head), max_len);
-	names = ft_lstname_to_char_arr(names, head);
-	ft_print_contents(names, max_len);
-	ft_free_list(head);
 	ft_del(&names, list_size);
 }

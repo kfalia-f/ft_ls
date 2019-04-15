@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/15 17:33:31 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/15 20:17:52 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct		s_lflag
 	char			*link;
 }					t_lflag;
 
-void				ft_without_args(char *str);
 t_data				*new_node(struct dirent *dp);
 t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);
@@ -97,18 +96,17 @@ void				ft_l_flag(char **av, int i, int flag, t_flags flags);
 
 char				**ft_lstname_to_char_arr(char **arr, t_data *data);
 t_data				*ft_readdir(DIR *dirp, t_flags fl);
-void				ft_print_without_args(t_data *head);
 void				ft_print(t_data *head);
 
 int					ft_timecmp(long a, long b);
 void				ft_time_sort(t_data **head);
 void				ft_ascii_sort(t_data **head);
-void				ft_balanser_sort(t_data **head, t_flags fl);
+void				ft_balanser_sort(t_data **head, t_flags fl, char *path);
 t_data				*ft_current_dir(char *s, t_flags fl);
-void				ft_set_time(t_data **head, t_flags fl);
+void				ft_set_time(t_data **head, t_flags fl, char *path);
 void				ft_remove_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
-void				ft_print_simple(t_data **head);
+void				ft_print_simple(t_data *head);
 void				ft_skip_dots(t_data **head, t_flags fl);
 void				ft_process_current_dir(char *s, t_flags fl);
 void				ft_output(t_data *head, t_flags fl, int to_free, char *path);
@@ -117,4 +115,6 @@ void				l_push_back(t_lflag **head, t_lflag *node);
 t_lflag				*new_l_node(struct dirent *dp);
 void				ft_l(char *path_name, t_flags fl);
 
+
+void				ft_print_list(t_data *head);
 #endif

@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/04/08 22:16:44 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/04/15 19:30:47 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ FLAGS = -Wall -Wextra -Werror
 SRC = srcs/
 
 SOURCES = $(SRC)main.c \
-		  $(SRC)ft_without_args.c \
 		  $(SRC)ft_sort.c \
 		  $(SRC)list.c \
 		  $(SRC)ft_output_helpers.c \
