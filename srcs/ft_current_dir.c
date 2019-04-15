@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/15 15:59:37 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/15 16:17:15 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void	ft_process_current_dir(char *s, t_flags fl)
 	t_data	*head;
 
 	head = ft_current_dir(s);
-	ft_output(head, fl, 1);
+	ft_output(head, fl, 1, NULL);
 }

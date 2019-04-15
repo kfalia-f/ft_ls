@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/15 15:55:59 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/15 16:18:11 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include <grp.h>
 # include <unistd.h>
 # include <time.h>
-
+# include <sys/xattr.h>
+# include <sys/acl.h>
 # include <stdio.h>
 
 typedef struct		s_bits
@@ -65,11 +66,14 @@ typedef struct		s_lflag
 	size_t			file_size;
 	size_t			links;
 	size_t			total;
+	size_t			maj;
+	size_t			min;
 	char			*permissions;
 	char			*owner;
 	char			*group;
 	char			*date;
 	char			*file_name;
+	char			*link;
 }					t_lflag;
 
 void				ft_without_args(char *str);
@@ -79,6 +83,8 @@ void				push_back(t_data **head, t_data *node);
 size_t				ft_list_size(t_data *lst);
 void				ft_rev_list(t_data **head);
 void				ft_free_list(t_data *head);
+
+t_lflag				*ft_l_ascii_sort(t_lflag **head);
 
 size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
@@ -104,10 +110,11 @@ void				ft_remove_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
 void				ft_print_simple(t_data **head);
 void				ft_skip_dots(t_data **head, t_flags fl);
-void				ft_output(t_data *head, t_flags fl, int to_free);
 void				ft_process_current_dir(char *s, t_flags fl);
+void				ft_output(t_data *head, t_flags fl, int to_free, char *path);
 
 void				l_push_back(t_lflag **head, t_lflag *node);
 t_lflag				*new_l_node(struct dirent *dp);
+void				ft_l(char *path_name, t_flags fl);
 
 #endif
