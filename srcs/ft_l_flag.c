@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/15 18:57:43 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/15 21:05:36 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,25 @@ char	get_acl(char *path)
 char	*get_permission(mode_t st_mode, char *path)
 {
 	char	*str;
-	int		i;
 
 	str = ft_memalloc(12);
-	i = 0;
-	str[i++] = get_file_type(st_mode);
-	str[i++] = st_mode & S_IRUSR ? 'r' : '-';
-	str[i++] = st_mode & S_IWUSR ? 'w' : '-';
-	str[i++] = st_mode & S_IXUSR ? 'x' : '-';
-	str[i++] = st_mode & S_IRGRP ? 'r' : '-';
-	str[i++] = st_mode & S_IWGRP ? 'w' : '-';
-	str[i++] = st_mode & S_IXGRP ? 'x' : '-';
-	str[i++] = st_mode & S_IROTH ? 'r' : '-';
-	str[i++] = st_mode & S_IWOTH ? 'w' : '-';
-	str[i++] = st_mode & S_IXOTH ? 'x' : '-';
-	str[i++] = get_acl(path);
-	str[i] = '\0';
+	str[0] = get_file_type(st_mode);
+	str[1] = st_mode & S_IRUSR ? 'r' : '-';
+	str[2] = st_mode & S_IWUSR ? 'w' : '-';
+	str[3] = st_mode & S_IXUSR ? 'x' : '-';
+	str[4] = st_mode & S_IRGRP ? 'r' : '-';
+	str[5] = st_mode & S_IWGRP ? 'w' : '-';
+	str[6] = st_mode & S_IXGRP ? 'x' : '-';
+	str[7] = st_mode & S_IROTH ? 'r' : '-';
+	str[8] = st_mode & S_IWOTH ? 'w' : '-';
+	str[9] = st_mode & S_IXOTH ? 'x' : '-';
+	str[10] = get_acl(path);
+	if (st_mode & 2048)
+		str[3] = str[3] == 'x' ? 's' : 'S';
+	if (st_mode & 1024)
+		str[6] = str[6] == 'x' ? 's' : 'S';
+	if (st_mode & 512)
+		str[9] = str[9] == 'x' ? 't' : 'T';
 	return (str);
 }
 
@@ -298,31 +301,41 @@ void	ft_file(char *file_name)
 void	ft_l_flag(char **av, int i, int flag, t_flags flags)
 {
 	struct stat	buff;
+	int 			k;
 
+	k = i;
 	if (flag == 0)
 	{
 		ft_l(".", flags);
 		return ;
 	}
+	while (av[k])
+	{
+		lstat(av[k], &buff);
+		if (S_ISLNK(buff.st_mode))
+			ft_arg_link(av[k]);
+		if (S_ISREG(buff.st_mode))
+			ft_file(av[k]);
+		k++;
+	}
+	ft_putchar('\n');
 	while (av[i])
 	{
 		lstat(av[i], &buff);
 		if (S_ISLNK(buff.st_mode))
 		{
-			ft_arg_link(av[i++]);
+			i++;
 			continue ;
 		}
 		else if (S_ISREG(buff.st_mode))
 		{
-			ft_file(av[i++]);
+			i++;
 			continue ;
 		}
-		if (i != 0)
-			ft_putchar('\n');
 		if (flag > 1)
 			ft_putendl(av[i], 1);
 		ft_l(av[i], flags);
-		if (flag - i >= 0)
+		if (i < k)
 			ft_putchar('\n');
 		i++;
 	}
