@@ -6,20 +6,25 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/13 19:43:46 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/15 15:55:25 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-t_data	*ft_readdir(DIR *dirp)
+t_data	*ft_readdir(DIR *dirp, t_flags fl)
 {
 	struct dirent	*dp;
 	t_data			*head;
 
 	head = NULL;
 	while ((dp = readdir(dirp)) != NULL)
+	{
+		if (*(dp->d_name) == '.')
+			if (!fl.bits.a && !fl.bits.f)
+				continue ;
 		push_back(&head, new_node(dp));
+	}
 	return (head);
 }
 
@@ -94,7 +99,7 @@ void	ft_argv(t_data **head, int n, t_flags fl)
 			tmp = tmp->next;
 			continue ;
 		}
-		head_dir = ft_readdir(dirp);
+		head_dir = ft_readdir(dirp, fl);
 		closedir(dirp);
 		if (flag == 1)
 		{
