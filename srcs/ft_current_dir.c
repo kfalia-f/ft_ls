@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/16 15:22:37 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/16 16:10:13 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	ft_set_time(t_data **head, t_flags fl, char *path)
 	tmp = *head;
 	while (tmp)
 	{
-		lstat(ft_str_path(path, tmp->name), &buff);
+		if (path == NULL)
+			stat(tmp->name, &buff);
+		else
+			lstat(ft_str_path(path, tmp->name), &buff);
 		if (fl.bits.upper_u == 1)
 			tmp->time = buff.st_birthtime;
 		else if (fl.bits.u == 1)

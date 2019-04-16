@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:24:54 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/15 19:52:33 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/16 15:35:00 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ void	ft_print_list(t_data *head)
 		ft_putendl(tmp->name, 0);
 		tmp = tmp->next;
 	}
+	ft_putchar('\n');
 }

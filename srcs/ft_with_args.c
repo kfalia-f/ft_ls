@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/16 15:22:39 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:58:25 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ size_t	ft_process_files(t_data **head, t_flags fl)
 	tmp = *head;
 	while (tmp)
 	{
-		if (!(dirp = opendir(tmp->name)))
+		if (!(dirp = opendir(tmp->name)) && errno != 13)
 			push_back(&head_file, new_file(tmp->name));
 		tmp = tmp->next;
 	}
 	if (head_file != NULL)
 	{
 		flag = 1;
-		ft_output(head_file, fl, 1, (*head)->name);
+		ft_output_files(head_file, fl, 1, (*head)->name);
 	}
 	return (flag);
 }
@@ -76,6 +76,8 @@ void	ft_process_dirs(t_data **head, size_t flag, t_flags fl, int n)
 	{
 		if ((dirp = opendir(tmp->name)) == NULL)
 		{
+			if (errno == 13)
+				ft_argv_error(tmp->name);
 			tmp = tmp->next;
 			continue ;
 		}

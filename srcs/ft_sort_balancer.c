@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/16 14:45:22 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:58:28 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_balanser_sort(t_data **head, t_flags fl, char *path)
 			ft_set_time(head, fl, path);
 		else
 			ft_set_time(head, fl, path);
+		//ft_print_list(*head);
 		ft_ascii_sort(head);
 		ft_time_sort(head);
 	}
@@ -36,7 +37,6 @@ void	ft_balanser_sort(t_data **head, t_flags fl, char *path)
 void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 {
 	ft_balanser_sort(&head, fl, path);
-	//ft_print_list(head);
 	if (fl.bits.l)
 		ft_l(path, fl);
 	else if (!fl.bits.one)
@@ -45,4 +45,16 @@ void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 		ft_print_simple(head);
 	if (to_free)
 		ft_free_list(head);
+}
+
+void	ft_output_files(t_data *head, t_flags fl, int to_free, char *path)
+{
+	if (fl.bits.l)
+		ft_l(path, fl);
+	else if (!fl.bits.one)
+		ft_print(head);
+	else
+		ft_print_simple(head);
+	if (to_free)
+		ft_free_list(head);	
 }
