@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/15 20:39:05 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/16 14:45:22 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 	//ft_print_list(head);
 	if (fl.bits.l)
 		ft_l(path, fl);
-	else if (fl.bits.one == 0)
+	else if (!fl.bits.one)
 		ft_print(head);
 	else
 		ft_print_simple(head);

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/13 01:37:56 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/16 15:04:41 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_check_flag(char *str, t_flags *flags)
 	size_t	bits_to_shift;
 
 	i = 1;
-	cmp = "GRUaflrtu1";
+	cmp = "GRUadflrtu1";
 	while (str[i])
 	{
 		if ((s = ft_strchr(cmp, str[i])) != NULL)
@@ -67,4 +67,11 @@ int			ft_flags(int ac, char **av, t_flags *flags)
 		i++;
 	}
 	return (num_of_flags);
+}
+
+void	ft_d_flag(t_data **head, t_flags fl)
+{
+//TODO:
+	(void)head;
+	(void)fl;
 }

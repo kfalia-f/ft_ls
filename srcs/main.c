@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/15 17:23:44 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/16 15:22:42 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		main(int ac, char **av)
     fl.value = 0;
 	num_of_flags = ft_flags(ac, av, &fl);
 	flag = ac - num_of_flags - 1;
+	args = ft_convert_args(av + num_of_flags + 1);
 /*	while (1)
 	{
 		if (fl.bits.upper_r == 1)
@@ -54,7 +55,6 @@ int		main(int ac, char **av)
 		ft_l_flag(av, num_of_flags + 1, flag, fl);
 	if (fl.bits.upper_r)
 		ft_recursion_flag(av + num_of_flags + 1, flag, fl);
-	args = ft_convert_args(av + num_of_flags + 1);
 	ft_argv(&args, ac - num_of_flags - 1, fl);
 	return (0);
 }

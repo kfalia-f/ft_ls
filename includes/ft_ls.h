@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/15 20:17:52 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/16 15:03:51 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_bits
 	unsigned int	upper_r : 1;
 	unsigned int	upper_u : 1;
 	unsigned int	a : 1;
+	unsigned int	d : 1;
 	unsigned int	f : 1;
 	unsigned int	l : 1;
 	unsigned int	r : 1;
@@ -115,6 +116,7 @@ void				l_push_back(t_lflag **head, t_lflag *node);
 t_lflag				*new_l_node(struct dirent *dp);
 void				ft_l(char *path_name, t_flags fl);
 
+void				ft_d_flag(t_data **head, t_flags fl);
 
 void				ft_print_list(t_data *head);
 #endif
