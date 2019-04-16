@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/16 14:56:01 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:28:51 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void				ft_sort_params(char **av, int num_of_flags, t_flags fl);
 void				ft_argv(t_data **head, int n, t_flags fl);
 
 void				ft_recursion_flag(char **av, int flag, t_flags flags);
-void				ft_l_flag(char **av, int i, int flag, t_flags flags);
+void				ft_l_flag(t_data *av, int flag, t_flags flags);
 
 char				**ft_lstname_to_char_arr(char **arr, t_data *data);
 t_data				*ft_readdir(DIR *dirp);
@@ -111,7 +111,7 @@ void				ft_skip_dots(t_data **head, t_flags fl);
 void				ft_output(t_data *head, t_flags fl, int to_free, char *path);
 
 void				l_push_back(t_lflag **head, t_lflag *node);
-t_lflag				*new_l_node(struct dirent *dp);
+void				*new_l_node(t_data **av, char *path);
 void				ft_l(char *path_name, t_flags fl);
 
 #endif
