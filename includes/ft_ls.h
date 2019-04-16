@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/16 17:28:51 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:44:10 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ void				ft_skip_dots(t_data **head, t_flags fl);
 void				ft_output(t_data *head, t_flags fl, int to_free, char *path);
 
 void				l_push_back(t_lflag **head, t_lflag *node);
-void				*new_l_node(t_data **av, char *path);
+void				new_l_node(t_data **av, char *path);
 void				ft_l(char *path_name, t_flags fl);
+t_data				*ft_convert_args(char **av);
+void				ft_nonexistent_argv_error(char *name);
 
 #endif

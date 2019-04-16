@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/16 17:26:57 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:58:23 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ static int		ft_max_llen(t_data *st, int flag)  //1 = link; 2 = size; 3 = owner; 
 	return (max);
 }
 
-void	ft_output_info(t_lflag *st)
+void	ft_output_info(t_data *st)
 {
 	t_data	*tmp;
 	int		arr[6];
@@ -209,14 +209,14 @@ void	ft_output_info(t_lflag *st)
 int		ft_total(char *path_name, t_data *st)
 {
 	struct stat	buff;
-	t_lflag 	*tmp;
+	t_data		*tmp;
 	int			total;
 
 	tmp = st;
 	total = 0;
 	while (tmp)
 	{
-		stat(ft_str_path(path_name, tmp->file_name), &buff);
+		stat(ft_str_path(path_name, tmp->name), &buff);
 		total += buff.st_blocks;
 		tmp = tmp->next;
 	}
@@ -246,9 +246,10 @@ void	ft_l(char *path_name, t_flags flags)
 	while (lnode)
 	{
 		new_l_node(&lnode, path_name);
-		get_info(ft_str_path(path_name, lnode->file_name), lnode);
+		get_info(ft_str_path(path_name, lnode->name), lnode);
 		lnode = lnode->next;
 	}
+	ft_putstr(path_name);     /////////MARK
 	ft_putstr("total ");
 	ft_putnbr(ft_total(path_name, lhead));
 	ft_putchar('\n');
@@ -260,20 +261,20 @@ void	ft_arg_link(t_data *av)
 {
 	char			link[4096];
 
-	new_l_node(av);
-	get_info(av);
+	new_l_node(&av, av->name);
+	get_info(av->name, av);
 	readlink(av->name, link, 4096);
 	av->l_info->link = (char *)malloc(sizeof(char) * (ft_strlen(link + 4)));
-	av->l_info->file_name = ft_strjoin(path_name, " ");              //mb leak
+	av->l_info->file_name = ft_strjoin(av->name, " ");              //mb leak
 	av->l_info->link = ft_strjoin("-> ", link);
-	ft_output_info(av, 1);
+	ft_output_info(av);
 }
 
 void	ft_file(t_data *av)
 {
-	new_l_node(av);
-	get_info(av);
-	ft_output_info(av, 1);
+	new_l_node(&av, av->name);
+	get_info(av->name, av);
+	ft_output_info(av);
 }
 
 void	ft_l_flag(t_data *av, int flag, t_flags flags)
@@ -313,7 +314,7 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 		}
 		if (flag > 1)
 			ft_putendl(av->name, 1);
-		ft_l(av, flags);
+		ft_l(av->name, flags);
 		av = av->next;
 	}
 }

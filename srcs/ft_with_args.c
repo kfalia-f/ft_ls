@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/10 15:23:57 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:51:32 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@ t_data	*ft_readdir(DIR *dirp)
 	while ((dp = readdir(dirp)) != NULL)
 		push_back(&head, new_node(dp));
 	return (head);
-}
-
-void	ft_nonexistent_argv_error(char *name)
-{
-	ft_putstr("ft_ls: ");
-	ft_putstr(name);
-	ft_putstr(": ");
-	ft_putstr(strerror(errno));
-	ft_putchar('\n');
 }
 
 void	ft_output_dirs(char *dir_name, t_data *head, int n, t_flags fl)

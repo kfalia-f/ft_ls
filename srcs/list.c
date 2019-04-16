@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/16 17:27:00 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:44:00 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_data	*new_node(struct dirent *dp)
 	return (node);
 }
 
-void	*new_l_node(t_data **av, char *path)
+void	new_l_node(t_data **av, char *path)
 {
 	size_t	size;
 
@@ -42,12 +42,12 @@ void	*new_l_node(t_data **av, char *path)
 	if (!((*av)->l_info = (t_lflag *)malloc(sizeof(t_lflag))))
 	{
 		ft_putendl("doesn't malloced for a new node", 0);
-		return (NULL);
+		return ;
 	}
 	(*av)->l_info->file_name = ft_memalloc(size + 1);
-	(*av)->l_info->file_name = ft_strcpy(node->l_info->file_name, ft_ls_path_to_file(av->name, 1))
-	(*av)->l_info->date = (char *)malloc(sizeof(char) * 13);
-	(*av)->link = NULL;
+	(*av)->l_info->file_name = ft_strcpy((*av)->l_info->file_name, ft_ls_path_to_file((*av)->name, 1));
+	(*av)->l_info->date = ft_memalloc(13);
+	(*av)->l_info->link = NULL;
 }
 
 t_data	*new_file(char *str)
@@ -75,21 +75,6 @@ t_data	*new_file(char *str)
 void	push_back(t_data **head, t_data *node)
 {
 	t_data	*tmp;
-
-	if (*head == NULL)
-	{
-		*head = node;
-		return ;
-	}
-	tmp = *head;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = node;
-}
-
-void	l_push_back(t_lflag **head, t_lflag *node)
-{
-	t_lflag	*tmp;
 
 	if (*head == NULL)
 	{
