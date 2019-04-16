@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/14 20:47:38 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/16 14:56:01 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,8 @@ typedef union		u_flags
 	struct s_bits	bits;
 }					t_flags;
 
-typedef struct		s_data
-{
-	struct s_data	*next;
-	char			*name;
-	size_t			len;
-	long			time;
-}					t_data;
-
 typedef struct		s_lflag
 {
-	struct s_lflag	*next;
 	size_t			file_size;
 	size_t			links;
 	size_t			total;
@@ -72,6 +63,15 @@ typedef struct		s_lflag
 	char			*file_name;
 	char			*link;
 }					t_lflag;
+
+typedef struct		s_data
+{
+	struct s_data	*next;
+	struct s_lflag	*l_info;
+	char			*name;
+	size_t			len;
+	long			time;
+}					t_data;
 
 char				**ft_lstname_to_str_arr(char **arr, t_data *data);
 void				ft_window(t_data *data);

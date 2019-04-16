@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/12 16:18:31 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:27:00 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,20 @@ t_data	*new_node(struct dirent *dp)
 	return (node);
 }
 
-t_lflag	*new_l_node(struct dirent *dp)
+void	*new_l_node(t_data **av, char *path)
 {
-	t_lflag		*node;
-	size_t		name_size;
+	size_t	size;
 
-	if (!(node = (t_lflag *)malloc(sizeof(t_lflag))))
+	size = ft_strlen(ft_ls_path_to_file(path, 1));
+	if (!((*av)->l_info = (t_lflag *)malloc(sizeof(t_lflag))))
 	{
 		ft_putendl("doesn't malloced for a new node", 0);
 		return (NULL);
 	}
-	name_size = ft_strlen(dp->d_name);
-	if (!(node->file_name = (char *)malloc(sizeof(char) * (name_size + 1))))
-	{
-		free(node);
-		return (NULL);
-	}
-	node->date = (char *)malloc(sizeof(char) * 13);
-	ft_strcpy(node->file_name, dp->d_name);
-	node->link = NULL;
-	node->next = NULL;
-	return (node);
+	(*av)->l_info->file_name = ft_memalloc(size + 1);
+	(*av)->l_info->file_name = ft_strcpy(node->l_info->file_name, ft_ls_path_to_file(av->name, 1))
+	(*av)->l_info->date = (char *)malloc(sizeof(char) * 13);
+	(*av)->link = NULL;
 }
 
 t_data	*new_file(char *str)
