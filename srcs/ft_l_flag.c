@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/16 17:58:23 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:30:38 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,11 +245,10 @@ void	ft_l(char *path_name, t_flags flags)
 		lnode = ft_ascii_sort(&lhead);
 	while (lnode)
 	{
-		new_l_node(&lnode, path_name);
+		new_l_node(&lnode, lnode->name);
 		get_info(ft_str_path(path_name, lnode->name), lnode);
 		lnode = lnode->next;
 	}
-	ft_putstr(path_name);     /////////MARK
 	ft_putstr("total ");
 	ft_putnbr(ft_total(path_name, lhead));
 	ft_putchar('\n');
@@ -282,7 +281,10 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 	struct stat	buff;
 	t_data		*head;
 
-	head = av;
+	if (flag > 1)
+		head = ft_ascii_sort(&av);
+	else
+		head = av;
 	if (flag == 0)
 	{
 		ft_l(".", flags);
@@ -298,16 +300,10 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 		av = av->next;
 	}
 	av = head;
-	ft_putchar('\n');
 	while (av)
 	{
 		lstat(av->name, &buff);
-		if (S_ISLNK(buff.st_mode))
-		{
-			av = av->next;
-			continue ;
-		}
-		else if (S_ISREG(buff.st_mode))
+		if (S_ISLNK(buff.st_mode) || S_ISREG(buff.st_mode))
 		{
 			av = av->next;
 			continue ;
@@ -315,6 +311,8 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 		if (flag > 1)
 			ft_putendl(av->name, 1);
 		ft_l(av->name, flags);
+		if (av->next)
+			ft_putchar('\n');
 		av = av->next;
 	}
 }
