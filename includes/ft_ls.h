@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/17 14:58:49 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:25:03 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,8 @@ typedef union		u_flags
 	struct s_bits	bits;
 }					t_flags;
 
-typedef struct		s_data
-{
-	struct s_data	*next;
-	char			*name;
-	size_t			len;
-	long			time;
-}					t_data;
-
 typedef struct		s_lflag
 {
-	struct s_lflag	*next;
 	size_t			file_size;
 	size_t			links;
 	size_t			total;
@@ -77,6 +68,17 @@ typedef struct		s_lflag
 	char			*link;
 }					t_lflag;
 
+typedef struct		s_data
+{
+	struct s_data	*next;
+	struct s_lflag	*l_info;
+	char			*name;
+	size_t			len;
+	long			time;
+}					t_data;
+
+char				**ft_lstname_to_str_arr(char **arr, t_data *data);
+void				ft_window(t_data *data);
 t_data				*new_node(struct dirent *dp);
 t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);
@@ -93,7 +95,7 @@ void				ft_sort_params(char **av, int num_of_flags, t_flags fl);
 void				ft_argv(t_data **head, int n, t_flags fl);
 
 void				ft_recursion_flag(char **av, int flag, t_flags flags);
-void				ft_l_flag(char **av, int i, int flag, t_flags flags);
+void				ft_l_flag(t_data *av, int flag, t_flags flags);
 
 char				**ft_lstname_to_char_arr(char **arr, t_data *data);
 t_data				*ft_readdir(DIR *dirp, t_flags fl);
@@ -114,8 +116,10 @@ void				ft_output(t_data *head, t_flags fl, int to_free, char *path);
 void				ft_output_files(t_data *head, t_flags fl, int to_free, char *path);
 
 void				l_push_back(t_lflag **head, t_lflag *node);
-t_lflag				*new_l_node(struct dirent *dp);
+void				new_l_node(t_data **av, char *path);
 void				ft_l(char *path_name, t_flags fl);
+t_data				*ft_convert_args(char **av);
+void				ft_nonexistent_argv_error(char *name);
 
 void				ft_d_flag(t_data *head, t_flags fl);
 
