@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/17 17:25:03 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:46:19 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void				l_push_back(t_lflag **head, t_lflag *node);
 void				new_l_node(t_data **av, char *path);
 void				ft_l(char *path_name, t_flags fl);
 t_data				*ft_convert_args(char **av);
-void				ft_nonexistent_argv_error(char *name);
 
 void				ft_d_flag(t_data *head, t_flags fl);
 

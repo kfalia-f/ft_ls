@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/17 17:19:53 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/17 18:02:17 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ int		main(int ac, char **av)
 		ft_process_current_dir(".", fl);
 		return (0);
 	}
+	ft_balanser_sort(&args, fl, NULL);
 	if (fl.bits.d)
 	{
 		ft_argv(&args, ac - num_of_flags - 1, fl);
 		return (0);
 	}
-	ft_balanser_sort(&args, fl, NULL);
 	if (fl.bits.l && fl.bits.upper_r == 0)
-		ft_l_flag(av, num_of_flags + 1, flag, fl);
+		ft_l_flag(args, flag, fl);
 	if (fl.bits.upper_r)
 		ft_recursion_flag(av + num_of_flags + 1, flag, fl);
 	else

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/17 17:22:29 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:44:14 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,6 @@ void	new_l_node(t_data **av, char *path)
 	size = ft_strlen(ft_ls_path_to_file(path, 1));
 	if (!((*av)->l_info = (t_lflag *)malloc(sizeof(t_lflag))))
 	{
-		ft_putendl("doesn't malloced for a new l node", 0);
-		return (NULL);
-	}
-	name_size = ft_strlen(dp->d_name);
-	if (!(node->file_name = (char *)malloc(sizeof(char) * (name_size + 1))))
-	{
-		free(node);
 		ft_putendl("doesn't malloced for a new l node", 0);
 		return ;
 	}

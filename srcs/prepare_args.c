@@ -6,14 +6,28 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:37:03 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/17 17:21:09 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:55:06 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void    ft_nonexistent_argv_error(char *name)
+void    ft_argv_error(char *name)
 {
+	char	*tmp;
+
+	tmp = NULL;
+	if (errno == 13)
+	{
+		ft_putchar('\n');
+		ft_putendl(name, 1);
+		if ((tmp = ft_strchr(name, '/')) != NULL)
+		{
+			while (*tmp == '/')
+				tmp++;
+			name = tmp;
+		}
+	}
 	ft_putstr("ft_ls: ");
 	ft_putstr(name);
 	ft_putstr(": ");
@@ -33,8 +47,8 @@ t_data	*ft_convert_args(char **av)
 	{	
 		if ((dirp = opendir(av[i])) == NULL)
 		{
-			if (errno != 20)
-				ft_nonexistent_argv_error(av[i]);
+			if (errno != 20 && errno != 13)
+				ft_argv_error(av[i]);
 			else
 				push_back(&head, new_file(av[i]));
 		}

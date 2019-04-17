@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/17 17:23:44 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:45:08 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ void	ft_l(char *path_name, t_flags flags)
 		push_back(&lhead, lnode);
 	}
 	if (lhead->next != NULL)
-		lnode = ft_ascii_sort(&lhead);
+		ft_ascii_sort(&lhead);
 	while (lnode)
 	{
 		new_l_node(&lnode, lnode->name);
@@ -282,7 +282,7 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 	t_data		*head;
 
 	if (flag > 1)
-		head = ft_ascii_sort(&av);
+		ft_ascii_sort(&av);
 	else
 		head = av;
 	if (flag == 0)
