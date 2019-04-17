@@ -1,4 +1,9 @@
 check permissions when try to open a file (ft_with_args has prototype almost for that). + -R, -l.
 
 
+-d with -l
 
+-l with current dir, but without specifying '.'
+
+
+AFTER MERGE. To implement -g flag I need -l flag.
