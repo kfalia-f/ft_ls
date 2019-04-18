@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/17 17:45:08 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/18 14:40:21 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	get_info(char *path, t_data *st)
 	st->l_info->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
 	st->l_info->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime);
 	st->l_info->links = buff.st_nlink;  //num of links
-	st->l_info->permissions = get_permission(buff.st_mode, st->name); //permissions (r/w/x) + file type
+	st->l_info->permissions = get_permission(buff.st_mode, path); //permissions (r/w/x) + file type
 	if (*(st->l_info->permissions) != 'c' && *(st->l_info->permissions) != 'b')
 		st->l_info->file_size = buff.st_size; //file_size
 	else
@@ -132,6 +132,8 @@ void	get_info(char *path, t_data *st)
 		st->l_info->maj = major(buff.st_rdev);
 		st->l_info->min = minor(buff.st_rdev);
 	}
+	if (S_ISLNK(buff.st_mode))
+		ft_link(st, path, 0);
 }
 
 static int		ft_max_llen(t_data *st, int flag)  //1 = link; 2 = size; 3 = owner; 4 = group 5 = maj 6 = min
@@ -243,6 +245,7 @@ void	ft_l(char *path_name, t_flags flags)
 	}
 	if (lhead->next != NULL)
 		ft_ascii_sort(&lhead);
+	lnode = lhead;
 	while (lnode)
 	{
 		new_l_node(&lnode, lnode->name);
@@ -254,19 +257,6 @@ void	ft_l(char *path_name, t_flags flags)
 	ft_putchar('\n');
 	ft_output_info(lhead);
 	//ft_free_list(lhead);
-}
-
-void	ft_arg_link(t_data *av)
-{
-	char			link[4096];
-
-	new_l_node(&av, av->name);
-	get_info(av->name, av);
-	readlink(av->name, link, 4096);
-	av->l_info->link = (char *)malloc(sizeof(char) * (ft_strlen(link + 4)));
-	av->l_info->file_name = ft_strjoin(av->name, " ");              //mb leak
-	av->l_info->link = ft_strjoin("-> ", link);
-	ft_output_info(av);
 }
 
 void	ft_file(t_data *av)
@@ -294,7 +284,7 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 	{
 		lstat(av->name, &buff);
 		if (S_ISLNK(buff.st_mode))
-			ft_arg_link(av);
+			ft_link(av, av->name, 1);
 		if (S_ISREG(buff.st_mode))
 			ft_file(av);
 		av = av->next;
