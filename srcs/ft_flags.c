@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/18 15:35:59 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/18 15:44:04 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_wrong_flag(char c)
 {
 	ft_putstr("ft_ls: illegal option -- ");
 	ft_putchar(c);
-	ft_putendl("\nusage: ./ft_ls [-Rafltr1] [file ...]", 0);
+	ft_putendl("\nusage: ./ft_ls [-GRUadfglrtu1] [file ...]", 0);
 	exit(EXIT_FAILURE);
 }
 
@@ -28,7 +28,7 @@ static void	ft_check_flag(char *str, t_flags *flags)
 	size_t	bits_to_shift;
 
 	i = 1;
-	cmp = "GRUadflrtu1";
+	cmp = "GRUadfglrtu1";
 	while (str[i])
 	{
 		if ((s = ft_strchr(cmp, str[i])) != NULL)

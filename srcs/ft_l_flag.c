@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/18 15:36:21 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/18 15:43:18 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*ft_date(char *date, size_t tm)
 	return (str);
 }
 
-void	get_info(char *path, t_data *st)
+void	get_info(char *path, t_data *st, t_flags fl)
 {
 	struct stat		buff;
 	struct passwd	*pwd;
@@ -133,7 +133,7 @@ void	get_info(char *path, t_data *st)
 		st->l_info->min = minor(buff.st_rdev);
 	}
 	if (S_ISLNK(buff.st_mode))
-		ft_link(st, path, 0);
+		ft_link(st, path, 0, fl);
 }
 
 static int		ft_max_llen(t_data *st, int flag)  //1 = link; 2 = size; 3 = owner; 4 = group 5 = maj 6 = min
@@ -165,7 +165,7 @@ static int		ft_max_llen(t_data *st, int flag)  //1 = link; 2 = size; 3 = owner; 
 	return (max);
 }
 
-void	ft_output_info(t_data *st)
+void	ft_output_info(t_data *st, t_flags fl)
 {
 	t_data	*tmp;
 	int		arr[6];
@@ -183,8 +183,11 @@ void	ft_output_info(t_data *st)
 		ft_output_spaces(' ', 1 + arr[0] - ft_strlen(ft_itoa(tmp->l_info->links)));
 		ft_putnbr(tmp->l_info->links);
 		ft_output_spaces(' ', 1);
-		ft_putstr(tmp->l_info->owner);
-		ft_output_spaces(' ', 2 + arr[2] - ft_strlen(tmp->l_info->owner));
+		if (!fl.bits.g)
+		{
+			ft_putstr(tmp->l_info->owner);
+			ft_output_spaces(' ', 2 + arr[2] - ft_strlen(tmp->l_info->owner));
+		}
 		ft_putstr(tmp->l_info->group);
 		ft_output_spaces(' ', 2 + arr[3] - ft_strlen(tmp->l_info->group) + arr[1] - ft_strlen(ft_itoa(tmp->l_info->file_size)));
 		if (*(tmp->l_info->permissions) != 'c' && *(tmp->l_info->permissions) != 'b')
@@ -249,7 +252,7 @@ void	ft_l(char *path_name, t_flags flags)
 	while (lnode)
 	{
 		new_l_node(&lnode, lnode->name);
-		get_info(ft_str_path(path_name, lnode->name), lnode);
+		get_info(ft_str_path(path_name, lnode->name), lnode, flags);
 		lnode = lnode->next;
 	}
 	if (lhead)
@@ -257,16 +260,16 @@ void	ft_l(char *path_name, t_flags flags)
 		ft_putstr("total ");
 		ft_putnbr(ft_total(path_name, lhead));
 		ft_putchar('\n');
-	}	
-	ft_output_info(lhead);
+	}
+	ft_output_info(lhead, flags);
 	//ft_free_list(lhead);
 }
 
-void	ft_file(t_data *av)
+void	ft_file(t_data *av, t_flags fl)
 {
 	new_l_node(&av, av->name);
-	get_info(av->name, av);
-	ft_output_info(av);
+	get_info(av->name, av, fl);
+	ft_output_info(av, fl);
 }
 
 void	ft_l_flag(t_data *av, int flag, t_flags flags)
@@ -287,9 +290,9 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 	{
 		lstat(av->name, &buff);
 		if (S_ISLNK(buff.st_mode))
-			ft_link(av, av->name, 1);
+			ft_link(av, av->name, 1, flags);
 		if (S_ISREG(buff.st_mode))
-			ft_file(av);
+			ft_file(av, flags);
 		av = av->next;
 	}
 	av = head;
