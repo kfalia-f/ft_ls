@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/16 16:10:13 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/18 15:36:09 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,26 @@ void	ft_set_time(t_data **head, t_flags fl, char *path)
 	}
 }
 
+void	ft_process_current_l(t_data **head)
+{
+	t_data	*tmp;
+
+	tmp = *head;
+
+}
+
 void	ft_process_current_dir(char *s, t_flags fl)
 {
 	t_data	*head;
 
+	head = ft_current_dir(s, fl);
 	if (fl.bits.d == 1)
 	{
-		ft_putendl(s, 0);
+		if (fl.bits.l == 1)
+			ft_process_current_l(&head);
+		else
+			ft_putendl(s, 0);
 		return ;
 	}
-	head = ft_current_dir(s, fl);
 	ft_output(head, fl, 1, NULL);
 }
