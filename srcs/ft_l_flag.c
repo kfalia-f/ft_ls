@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/18 14:40:21 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/18 14:57:34 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ void	ft_l(char *path_name, t_flags flags)
 		push_back(&lhead, lnode);
 	}
 	if (lhead->next != NULL)
-		ft_ascii_sort(&lhead);
+		ft_balanser_sort(&lhead, flags, path_name);
 	lnode = lhead;
 	while (lnode)
 	{
