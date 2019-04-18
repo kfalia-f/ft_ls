@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/18 15:43:18 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/18 18:21:24 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,13 +279,7 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 
 	if (flag > 1)
 		ft_ascii_sort(&av);
-	else
-		head = av;
-	if (flag == 0)
-	{
-		ft_l(".", flags);
-		return ;
-	}
+	head = av;
 	while (av)
 	{
 		lstat(av->name, &buff);

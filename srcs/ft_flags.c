@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/18 15:44:04 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/18 18:23:42 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,34 @@ int			ft_flags(int ac, char **av, t_flags *flags)
 			break ;
 		i++;
 	}
+	if (flags->bits.g)
+		flags->bits.l = 1;
 	return (num_of_flags);
+}
+
+void	ft_symple_l(t_data *head, t_flags fl)
+{
+	t_data	*tmp;
+
+	ft_balanser_sort(&head, fl, NULL);
+	tmp = head;
+	while (head)
+	{
+		new_l_node(&head, head->name);
+		get_info(head->name, head, fl);
+		head = head->next;
+	}
+	head = tmp;
+	ft_output_info(head, fl);
 }
 
 void	ft_d_flag(t_data *head, t_flags fl)
 {
-	if (fl.bits.one == 0)
+	if (fl.bits.l)
+		ft_symple_l(head, fl);
+	else if (fl.bits.one == 0)
 		ft_print(head);
 	else
 		ft_print_simple(head);
 	ft_free_list(head);
-}
-
-void	ft_simple_l(t_data *head)
-{
-	
 }
