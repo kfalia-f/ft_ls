@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/18 14:41:34 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/18 15:25:41 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct		s_bits
 	unsigned int	a : 1;
 	unsigned int	d : 1;
 	unsigned int	f : 1;
+	unsigned int	g : 1;
 	unsigned int	l : 1;
 	unsigned int	r : 1;
 	unsigned int	t : 1;
@@ -120,9 +121,9 @@ void				new_l_node(t_data **av, char *path);
 void				ft_l(char *path_name, t_flags fl);
 t_data				*ft_convert_args(char **av);
 
-void				ft_link(t_data *av, char *path, int flag);
-void				get_info(char *path, t_data *st);
-void				ft_output_info(t_data *st);
+void				ft_link(t_data *av, char *path, int flag, t_flags fl);
+void				get_info(char *path, t_data *st, t_flags fl);
+void				ft_output_info(t_data *st, t_flags fl);
 
 void				ft_d_flag(t_data *head, t_flags fl);
 
