@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/17 17:56:41 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/18 17:39:41 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ void	ft_argv(t_data **head, int n, t_flags fl)
 
 	if (fl.bits.d)
 	{
-		ft_d_flag(*head, fl);
+		if (fl.bits.l)
+			ft_simple_l(*head, fl);
+		else
+			ft_d_flag(*head, fl);
 		return ;
 	}
 	flag = ft_process_files(head, fl);

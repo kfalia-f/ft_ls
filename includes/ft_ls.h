@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/18 15:25:41 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/18 16:37:03 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,14 @@ void				ft_l(char *path_name, t_flags fl);
 t_data				*ft_convert_args(char **av);
 
 void				ft_link(t_data *av, char *path, int flag, t_flags fl);
+void				ft_file(t_data *av, t_flags fl);
 void				get_info(char *path, t_data *st, t_flags fl);
 void				ft_output_info(t_data *st, t_flags fl);
 
 void				ft_d_flag(t_data *head, t_flags fl);
 
 void				ft_argv_error(char *s);
+void				ft_simple_l(t_data *head, t_flags fl);
 
 void				ft_print_list(t_data *head);
 #endif

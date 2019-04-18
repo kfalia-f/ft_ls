@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/18 15:44:04 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/18 17:39:07 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,19 @@ void	ft_d_flag(t_data *head, t_flags fl)
 	ft_free_list(head);
 }
 
-void	ft_simple_l(t_data *head)
+void	ft_simple_l(t_data *head, t_flags fl)
 {
-	
+	struct stat	buff;
+	t_data		*tmp;
+
+	tmp = head;
+	while (tmp)
+	{
+		lstat(tmp->name, &buff);
+		if (S_ISLNK(buff.st_mode))
+			ft_link(tmp, tmp->name, 1, fl);
+		else
+			ft_file(tmp, fl);
+		tmp = tmp->next;
+	}
 }
