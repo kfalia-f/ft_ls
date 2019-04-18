@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/18 14:57:34 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/18 15:10:45 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ void	ft_l(char *path_name, t_flags flags)
 		lnode = new_node(dp);
 		push_back(&lhead, lnode);
 	}
-	if (lhead->next != NULL)
+	if (lhead)
 		ft_balanser_sort(&lhead, flags, path_name);
 	lnode = lhead;
 	while (lnode)
@@ -252,9 +252,12 @@ void	ft_l(char *path_name, t_flags flags)
 		get_info(ft_str_path(path_name, lnode->name), lnode);
 		lnode = lnode->next;
 	}
-	ft_putstr("total ");
-	ft_putnbr(ft_total(path_name, lhead));
-	ft_putchar('\n');
+	if (lhead)
+	{
+		ft_putstr("total ");
+		ft_putnbr(ft_total(path_name, lhead));
+		ft_putchar('\n');
+	}	
 	ft_output_info(lhead);
 	//ft_free_list(lhead);
 }
