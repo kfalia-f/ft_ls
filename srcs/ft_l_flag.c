@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/19 15:33:10 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:11:36 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	get_info(char *path, t_data *st, t_flags fl)
 
 	st->l_info->owner = ft_strcpy(ft_memalloc(ft_strlen(pwd->pw_name)), pwd->pw_name); //owner
 	st->l_info->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
-	time_balanser_get_info(st, fl, buff);
+	time_balanser_get_info(st, fl, buff); //date & time
 	st->l_info->links = buff.st_nlink;  //num of links
 	st->l_info->permissions = get_permission(buff.st_mode, path); //permissions (r/w/x) + file type
 	if (*(st->l_info->permissions) != 'c' && *(st->l_info->permissions) != 'b')

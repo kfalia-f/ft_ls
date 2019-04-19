@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/19 15:33:08 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:05:57 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_balanser_sort(t_data **head, t_flags fl, char *path)
 {
 	if (fl.bits.f)
 		return ;
-	if (fl.bits.t && !fl.bits.l)
+	if ((fl.bits.t && !fl.bits.l) || (fl.bits.t && !path))
 	{
 		if (fl.bits.upper_u)
 			ft_set_time(head, fl, path);
@@ -24,9 +24,9 @@ void	ft_balanser_sort(t_data **head, t_flags fl, char *path)
 			ft_set_time(head, fl, path);
 		else
 			ft_set_time(head, fl, path);
-		//ft_print_list(*head);
 		ft_ascii_sort(head);
 		ft_time_sort(head);
+	//	ft_print_list(*head);
 	}
 	else if (fl.bits.t && fl.bits.l)
 	{
@@ -42,7 +42,7 @@ void	ft_balanser_sort(t_data **head, t_flags fl, char *path)
 void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 {
 	ft_balanser_sort(&head, fl, path);
-	if (fl.bits.l)
+	if (fl.bits.l && !fl.bits.one)
 		ft_l(path, fl);
 	else if (!fl.bits.one)
 		ft_print(head);
@@ -54,7 +54,8 @@ void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 
 void	ft_output_files(t_data *head, t_flags fl, int to_free, char *path)
 {
-	if (fl.bits.l)
+	// no need for balanser here, prints files at the top. (already sorted as args)
+	if (fl.bits.l && !fl.bits.one)
 		ft_l(path, fl);
 	else if (!fl.bits.one)
 		ft_print(head);
