@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/19 13:47:36 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/19 15:33:10 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,25 @@ char	*ft_date(char *date, size_t tm)
 	return (str);
 }
 
+void	time_balanser_get_info(t_data *st, t_flags fl, struct stat buff)
+{
+	if (fl.bits.upper_u)
+	{
+		st->l_info->date = ft_date(ctime(&buff.st_birthtime), buff.st_birthtime);
+		st->time = buff.st_birthtime;
+	}
+	else if (fl.bits.u)
+	{
+		st->l_info->date = ft_date(ctime(&buff.st_atime), buff.st_atime);
+		st->time = buff.st_atime;
+	}
+	else
+	{
+		st->l_info->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime);
+		st->time = buff.st_mtime;
+	}
+}
+
 void	get_info(char *path, t_data *st, t_flags fl)
 {
 	struct stat		buff;
@@ -122,7 +141,7 @@ void	get_info(char *path, t_data *st, t_flags fl)
 
 	st->l_info->owner = ft_strcpy(ft_memalloc(ft_strlen(pwd->pw_name)), pwd->pw_name); //owner
 	st->l_info->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
-	st->l_info->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime);
+	time_balanser_get_info(st, fl, buff);
 	st->l_info->links = buff.st_nlink;  //num of links
 	st->l_info->permissions = get_permission(buff.st_mode, path); //permissions (r/w/x) + file type
 	if (*(st->l_info->permissions) != 'c' && *(st->l_info->permissions) != 'b')
@@ -246,15 +265,16 @@ void	ft_l(char *path_name, t_flags flags)
 		lnode = new_node(dp);
 		push_back(&lhead, lnode);
 	}
-	if (lhead)
-		ft_balanser_sort(&lhead, flags, path_name);
-	lnode = lhead;
+/*	if (lhead)
+	//	ft_balanser_sort(&lhead, flags, path_name);
+*/	lnode = lhead;
 	while (lnode)
 	{
 		new_l_node(&lnode, lnode->name);
 		get_info(ft_str_path(path_name, lnode->name), lnode, flags);
 		lnode = lnode->next;
 	}
+	ft_balanser_sort(&lhead, flags, NULL);
 	if (lhead)
 	{
 		ft_putstr("total ");
@@ -278,7 +298,7 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 	t_data		*head;
 
 	if (flag > 1)
-		ft_ascii_sort(&av);
+		ft_balanser_sort(&av, flags, NULL);
 	head = av;
 	while (av)
 	{
