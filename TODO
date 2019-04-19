@@ -6,5 +6,3 @@ check permissions when try to open a file (ft_with_args has prototype almost for
 -l with current dir, but without specifying '.'
 
 AFTER MERGE. To implement -g flag I need -l flag.
-
-если заканчивается путь на '/', то название папки при -ld не выводится. А должно
