@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/19 14:41:15 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/20 19:18:01 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void				ft_simple_l(t_data *head, t_flags fl);
 
 void				ft_link(t_data *av, char *path, int flag, t_flags fl);
 void				get_info(char *path, t_data *st, t_flags fl);
-void				ft_output_info(t_data *st, t_flags fl);
+void				ft_output_info(t_data *st, t_flags fl, int flag);
 
 void				ft_d_flag(t_data *head, t_flags fl);
 void				ft_balanser_sort(t_data **head, t_flags fl, char *path);

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/20 17:37:15 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/20 19:37:38 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void	ft_l(char *path_name, t_flags flags)
 		ft_putnbr(ft_total(path_name, lhead));
 		ft_putchar('\n');
 	}
-	ft_output_info(lhead, flags);
+	ft_output_info(lhead, flags, 0);
 	//ft_free_list(lhead);
 }
 
@@ -218,24 +218,34 @@ void	ft_file(t_data *av, t_flags fl)
 {
 	new_l_node(&av, av->name);
 	get_info(av->name, av, fl);
-	ft_output_info(av, fl);
+	ft_output_info(av, fl, -1);
 }
 
 void	ft_l_flag(t_data *av, int flag, t_flags flags)
 {
 	struct stat	buff;
 	t_data		*head;
+	int			i;
 
+	i = 0;
 	if (flag > 1)
 		ft_balanser_sort(&av, flags, NULL);
 	head = av;
 	while (av)
 	{
 		lstat(av->name, &buff);
-		if (S_ISLNK(buff.st_mode))
+		if (S_ISLNK(buff.st_mode) && (i += 1))
+		{
 			ft_link(av, av->name, 1, flags);
-		if (S_ISREG(buff.st_mode))
+			av = av->next;
+			continue ;
+		}
+		if (S_ISREG(buff.st_mode) && (i += 1))
+		{
 			ft_file(av, flags);
+			av = av->next;
+			continue ;
+		}
 		av = av->next;
 	}
 	av = head;
