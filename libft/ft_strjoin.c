@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 19:30:57 by koparker          #+#    #+#             */
-/*   Updated: 2019/02/06 16:20:00 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/20 20:05:33 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 			res[i] = s2[i - len1];
 		i++;
 	}
+	res[i] = '\0';
 	return (res);
 }

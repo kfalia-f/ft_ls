@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/20 19:37:38 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/20 20:23:20 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,9 +194,9 @@ void	ft_l(char *path_name, t_flags flags)
 		lnode = new_node(dp);
 		push_back(&lhead, lnode);
 	}
-/*	if (lhead)
+	/*	if (lhead)
 	//	ft_balanser_sort(&lhead, flags, path_name);
-*/	lnode = lhead;
+	*/	lnode = lhead;
 	while (lnode)
 	{
 		new_l_node(&lnode, lnode->name);
@@ -221,34 +221,42 @@ void	ft_file(t_data *av, t_flags fl)
 	ft_output_info(av, fl, -1);
 }
 
-void	ft_l_flag(t_data *av, int flag, t_flags flags)
+int		ft_forl(t_data *head, t_flags fl)
 {
 	struct stat	buff;
-	t_data		*head;
+	t_data		*av;
 	int			i;
 
 	i = 0;
-	if (flag > 1)
-		ft_balanser_sort(&av, flags, NULL);
-	head = av;
+	av = head;
 	while (av)
 	{
 		lstat(av->name, &buff);
 		if (S_ISLNK(buff.st_mode) && (i += 1))
 		{
-			ft_link(av, av->name, 1, flags);
+			ft_link(av, av->name, 1, fl);
 			av = av->next;
 			continue ;
 		}
 		if (S_ISREG(buff.st_mode) && (i += 1))
 		{
-			ft_file(av, flags);
+			ft_file(av, fl);
 			av = av->next;
 			continue ;
 		}
 		av = av->next;
 	}
-	av = head;
+	return (i);
+}
+
+void	ft_l_flag(t_data *av, int flag, t_flags flags)
+{
+	struct stat	buff;
+	int			i;
+
+	if (flag > 1)
+		ft_balanser_sort(&av, flags, NULL);
+	i = ft_forl(av, flags);
 	while (av)
 	{
 		lstat(av->name, &buff);
@@ -257,10 +265,12 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 			av = av->next;
 			continue ;
 		}
-		if (flag > 1)
+		if (i > 0)
+			ft_putendl(av->name, 2);
+		else if (flag > 1)
 			ft_putendl(av->name, 1);
 		ft_l(av->name, flags);
-		if (av->next)
+		if (flag - i > 0 && av->next)
 			ft_putchar('\n');
 		av = av->next;
 	}
