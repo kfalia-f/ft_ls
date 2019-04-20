@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/19 17:11:36 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/20 17:37:15 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,11 @@ void	get_info(char *path, t_data *st, t_flags fl)
 	st->l_info->links = buff.st_nlink;  //num of links
 	st->l_info->permissions = get_permission(buff.st_mode, path); //permissions (r/w/x) + file type
 	if (*(st->l_info->permissions) != 'c' && *(st->l_info->permissions) != 'b')
+	{
 		st->l_info->file_size = buff.st_size; //file_size
+		st->l_info->maj = 0;
+		st->l_info->min = 0;
+	}
 	else
 	{
 		st->l_info->maj = major(buff.st_rdev);
@@ -153,81 +157,6 @@ void	get_info(char *path, t_data *st, t_flags fl)
 	}
 	if (S_ISLNK(buff.st_mode))
 		ft_link(st, path, 0, fl);
-}
-
-static int		ft_max_llen(t_data *st, int flag)  //1 = link; 2 = size; 3 = owner; 4 = group 5 = maj 6 = min
-{
-	t_data	*tmp;
-	int		len;
-	int		max;
-
-	tmp = st;
-	max = 0;
-	while (tmp)
-	{
-		if (flag == 1)
-			len = ft_strlen(ft_itoa(tmp->l_info->links));
-		else if (flag == 2)
-			len = ft_strlen(ft_itoa(tmp->l_info->file_size));
-		else if (flag == 3)
-			len = ft_strlen(tmp->l_info->owner);
-		else if (flag == 4)
-			len = ft_strlen(tmp->l_info->group);
-		else if (flag == 5)
-			len = ft_strlen(ft_itoa(tmp->l_info->maj));
-		else if (flag == 6)
-			len = ft_strlen(ft_itoa(tmp->l_info->min));
-		if (max < len)
-			max = len;
-		tmp = tmp->next;
-	}
-	return (max);
-}
-
-void	ft_output_info(t_data *st, t_flags fl)
-{
-	t_data	*tmp;
-	int		arr[6];
-
-	tmp = st;
-	arr[0] = ft_max_llen(st, 1);
-	arr[1] = ft_max_llen(st, 2);
-	arr[2] = ft_max_llen(st, 3);
-	arr[3] = ft_max_llen(st, 4);
-	arr[4] = ft_max_llen(st, 5);
-	arr[5] = ft_max_llen(st, 6);
-	while (tmp)
-	{
-		ft_putstr(tmp->l_info->permissions);
-		ft_output_spaces(' ', 1 + arr[0] - ft_strlen(ft_itoa(tmp->l_info->links)));
-		ft_putnbr(tmp->l_info->links);
-		ft_output_spaces(' ', 1);
-		if (!fl.bits.g)
-		{
-			ft_putstr(tmp->l_info->owner);
-			ft_output_spaces(' ', 2 + arr[2] - ft_strlen(tmp->l_info->owner));
-		}
-		ft_putstr(tmp->l_info->group);
-		ft_output_spaces(' ', 2 + arr[3] - ft_strlen(tmp->l_info->group) + arr[1] - ft_strlen(ft_itoa(tmp->l_info->file_size)));
-		if (*(tmp->l_info->permissions) != 'c' && *(tmp->l_info->permissions) != 'b')
-			ft_putnbr(tmp->l_info->file_size);
-		else
-		{
-			ft_output_spaces(' ', 1 + arr[4] - ft_strlen(ft_itoa(tmp->l_info->maj)));
-			ft_putnbr(tmp->l_info->maj);
-			ft_putchar(',');
-			ft_output_spaces(' ', 1 + arr[5] - ft_strlen(ft_itoa(tmp->l_info->min)));
-			ft_putnbr(tmp->l_info->min);
-		}
-		ft_output_spaces(' ', 1);
-		ft_putstr(tmp->l_info->date);
-		ft_output_spaces(' ', 1);
-		ft_putstr(tmp->l_info->file_name);
-		if (tmp->l_info->link)
-			ft_putstr(tmp->l_info->link);
-		ft_putchar('\n');
-		tmp = tmp->next;
-	}
 }
 
 int		ft_total(char *path_name, t_data *st)
