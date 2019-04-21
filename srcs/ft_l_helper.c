@@ -6,29 +6,83 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/21 17:43:13 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:14:27 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void    ft_link(t_data *av, char *path, int flag, t_flags fl)
+int     ft_total(char *path_name, t_data *st)
 {
-	char            link[4096];
+	struct stat buff;
+	t_data      *tmp;
+	int         total;
 
-	ft_bzero(link, 4096);
-	if (flag)
+	tmp = st;
+	total = 0;
+	while (tmp)
 	{
-		new_l_node(&av, av->name, fl);
-		get_info(av->name, av, fl);
+		stat(ft_str_path(path_name, tmp->name), &buff);
+		total += buff.st_blocks;
+		tmp = tmp->next;
+	}
+	return (total);
+}
+
+void    time_balanser_get_info(t_data *st, t_flags fl, struct stat buff)
+{
+	if (fl.bits.upper_u)
+	{
+		st->l_info->date = ft_date(ctime(&buff.st_birthtime), buff.st_birthtime);
+		st->time = buff.st_birthtime;
+	}
+	else if (fl.bits.u)
+	{
+		st->l_info->date = ft_date(ctime(&buff.st_atime), buff.st_atime);
+		st->time = buff.st_atime;
 	}
 	else
 	{
-		readlink(path, link, 4096);
-		av->l_info->link = (char *)malloc(sizeof(char) * (ft_strlen(link + 4)));
-		av->l_info->file_name = ft_strjoin(av->name, " ");              //mb leak
-		av->l_info->link = ft_strjoin("-> ", link);
+		st->l_info->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime);
+		st->time = buff.st_mtime;
 	}
-	if (flag)
-		ft_output_info(av, fl, -1);
+}
+
+void    ft_l(char *path_name, t_flags flags)
+{
+	DIR             *dirp;
+	struct dirent   *dp;
+	t_data          *lhead;
+	t_data          *lnode;
+
+	lhead = NULL;
+	if (!(dirp = opendir(path_name)))
+		return ;
+	while ((dp = readdir(dirp)) != NULL)
+	{
+		if (*(dp->d_name) == '.')
+			if (flags.bits.a == 0 && flags.bits.f == 0)
+				continue ;
+		lnode = new_node(dp);
+		push_back(&lhead, lnode);
+	}
+	/*  if (lhead)
+	 *      //  ft_balanser_sort(&lhead, flags, path_name);
+	 *          */  lnode = lhead;
+	while (lnode)
+	{
+		new_l_node(&lnode, lnode->name, flags);
+		get_info(ft_str_path(path_name, lnode->name), lnode, flags);
+		lnode = lnode->next;
+	}
+	ft_balanser_sort(&lhead, flags, NULL);
+	if (lhead)
+	{
+		ft_putstr("total ");
+		ft_putnbr(ft_total(path_name, lhead));
+		ft_putchar('\n');
+	}
+	ft_output_info(lhead, flags, 0);
+	//ft_free_list(lhead);
+	//}
 }
