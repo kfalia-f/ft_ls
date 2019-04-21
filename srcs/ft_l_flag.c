@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/20 20:23:20 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/21 16:17:03 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,7 @@ void	ft_l_flag(t_data *av, int flag, t_flags flags)
 		else if (flag > 1)
 			ft_putendl(av->name, 1);
 		ft_l(av->name, flags);
-		if (flag - i > 0 && av->next)
+		if (!i && av->next)
 			ft_putchar('\n');
 		av = av->next;
 	}

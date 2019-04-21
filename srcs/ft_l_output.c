@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 16:19:19 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/20 19:37:24 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:39:43 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ int		ft_corb(t_data *st, int flag)
 
 void	ft_size(t_data *tmp, int a[6], int flag)
 {
-	if (flag)
+	flag = 0;
+	if (*(tmp->l_info->permissions) == 'c' || *(tmp->l_info->permissions) == 'b')
 	{
-		ft_output_spaces(' ', 3 + a[4] - ft_len(tmp->l_info->maj));
+		ft_output_spaces(' ', 1 + a[4] - ft_len(tmp->l_info->maj));
 		if (*(tmp->l_info->permissions) == 'c' || *(tmp->l_info->permissions) == 'b')
 		{
 			ft_putnbr(tmp->l_info->maj);
@@ -61,7 +62,7 @@ void	ft_size(t_data *tmp, int a[6], int flag)
 	}
 	else
 	{
-		ft_output_spaces(' ', a[1] - ft_len(tmp->l_info->file_size));
+		ft_output_spaces(' ', 2 + a[4] + a[5]);
 		ft_putnbr(tmp->l_info->file_size);
 	}
 }
