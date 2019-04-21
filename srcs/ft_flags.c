@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/20 19:18:54 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/21 17:48:48 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,12 @@ int			ft_flags(int ac, char **av, t_flags *flags)
 void	ft_simple_l(t_data *head, t_flags fl)
 {
 	t_data	*tmp;
-	char	*path;
 
 	tmp = head;
 	while (head)
 	{
-		path = ft_str_path(head->name, "/");
-		new_l_node(&head, path);
-		get_info(path, head, fl);
+		new_l_node(&head, head->name, fl);
+		get_info(head->name, head, fl);
 		head = head->next;
 	}
 	head = tmp;

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/21 16:17:03 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/21 17:54:34 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void	ft_l(char *path_name, t_flags flags)
 	*/	lnode = lhead;
 	while (lnode)
 	{
-		new_l_node(&lnode, lnode->name);
+		new_l_node(&lnode, lnode->name, flags);
 		get_info(ft_str_path(path_name, lnode->name), lnode, flags);
 		lnode = lnode->next;
 	}
@@ -216,8 +216,10 @@ void	ft_l(char *path_name, t_flags flags)
 
 void	ft_file(t_data *av, t_flags fl)
 {
-	new_l_node(&av, av->name);
+	new_l_node(&av, av->name, fl);
 	get_info(av->name, av, fl);
+	free(av->l_info->file_name);
+	av->l_info->file_name = ft_strjoin("", av->name);
 	ft_output_info(av, fl, -1);
 }
 

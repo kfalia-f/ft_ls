@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/21 16:17:00 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/21 17:43:13 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    ft_link(t_data *av, char *path, int flag, t_flags fl)
 	ft_bzero(link, 4096);
 	if (flag)
 	{
-		new_l_node(&av, av->name);
+		new_l_node(&av, av->name, fl);
 		get_info(av->name, av, fl);
 	}
 	else
