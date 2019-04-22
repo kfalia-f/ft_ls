@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/21 18:14:11 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/22 14:44:22 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ t_data				*ft_convert_args(char **av);
 void				ft_simple_l(t_data *head, t_flags fl);
 
 void				time_balanser_get_info(t_data *st, t_flags fl, struct stat buff);
-void				*ft_date(char *data, size_t tm);
+char				*ft_date(char *data, size_t tm);
 void				ft_link(t_data *av, char *path, int flag, t_flags fl);
 void				get_info(char *path, t_data *st, t_flags fl);
 void				ft_output_info(t_data *st, t_flags fl, int flag);
