@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/21 18:08:51 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/22 17:03:05 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,30 @@ int		ft_forl(t_data *head, t_flags fl)
 {
 	struct stat	buff;
 	t_data		*av;
+	t_data		*new;
 	int			i;
 
 	i = 0;
 	av = head;
+	new = NULL;
 	while (av)
 	{
 		lstat(av->name, &buff);
-		if (S_ISLNK(buff.st_mode) && (i += 1))
+		if (S_ISLNK(buff.st_mode) || S_ISREG(buff.st_mode))
 		{
-			ft_link(av, av->name, 1, fl);
-			av = av->next;
-			continue ;
-		}
-		if (S_ISREG(buff.st_mode) && (i += 1))
-		{
-			ft_file(av, fl);
-			av = av->next;
-			continue ;
+			push_back(&new, new_file(av->name));
+			i++;
 		}
 		av = av->next;
 	}
+	av = new;
+	while (new)
+	{
+		new_l_node(&new, new->name, fl);
+		get_info(new->name, new, fl);
+		new = new->next;
+	}
+	ft_output_info(av, fl, 0);
 	return (i);
 }
 
