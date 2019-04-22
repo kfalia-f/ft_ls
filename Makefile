@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/04/21 18:12:15 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/04/22 17:39:34 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SOURCES = $(SRC)main.c \
 		  $(SRC)prepare_args.c \
 		  $(SRC)ft_l_helper.c \
 		  $(SRC)ft_l_get_info.c \
-		  $(SRC)ft_l_output.c
+		  $(SRC)ft_l_output.c \
+		  $(SRC)G_flag.c
 
 LIBFT_FOLDER = libft
 

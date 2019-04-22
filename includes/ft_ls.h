@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/21 18:14:11 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/22 21:21:39 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 
 # define TRUE_LS 1
 # define TAB 8
+# define RESET "\x1B[0m"
+# define EXE_COLOR   "\x1B[31m"
+# define DIR_COLOR   "\x1B[34m"
+# define SIMLNK_BASE_COLOR   "\x1B[35m"
+# define BLOCK_COLOR "\x1B[34m\x1B[46m"
+# define CHAR_COLOR  "\x1B[34m\x1B[43m"
+# define EXE_SETUID_FILE_COLOR  "\x1B[30m\x1B[41m"
+# define EXE_SETGID_FILE_COLOR  "\x1B[30m\x1B[46m"
+# define STICKY_BIT_COLOR  "\x1B[30m\x1B[43m"
+# define NO_STICKY_BIT_COLOR  "\x1B[30m\x1B[42m"
 
 # include <dirent.h>
 # include <libft.h>
@@ -123,7 +133,7 @@ t_data				*ft_convert_args(char **av);
 void				ft_simple_l(t_data *head, t_flags fl);
 
 void				time_balanser_get_info(t_data *st, t_flags fl, struct stat buff);
-void				*ft_date(char *data, size_t tm);
+char				*ft_date(char *date, size_t tm);
 void				ft_link(t_data *av, char *path, int flag, t_flags fl);
 void				get_info(char *path, t_data *st, t_flags fl);
 void				ft_output_info(t_data *st, t_flags fl, int flag);
@@ -132,6 +142,7 @@ void				ft_d_flag(t_data *head, t_flags fl);
 void				ft_balanser_sort(t_data **head, t_flags fl, char *path);
 
 void				ft_argv_error(char *s);
+void				ft_colorized_output_l(t_data *st);
 
 void				ft_print_list(t_data *head);
 #endif

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 16:19:19 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/21 16:22:27 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/22 21:39:49 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,10 @@ void	ft_output_info(t_data *st, t_flags fl, int flag)
 		ft_output_spaces(' ', 1);
 		ft_putstr(tmp->l_info->date);
 		ft_output_spaces(' ', 1);
-		ft_putstr(tmp->l_info->file_name);
+		if (fl.bits.upper_g)
+			ft_colorized_output_l(tmp);
+		else
+			ft_putstr(tmp->l_info->file_name);
 		if (tmp->l_info->link)
 			ft_putstr(tmp->l_info->link);
 		ft_putchar('\n');
