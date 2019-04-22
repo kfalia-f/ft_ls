@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/21 18:16:38 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/22 19:50:24 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int     ft_total(char *path_name, t_data *st)
 	total = 0;
 	while (tmp)
 	{
-		stat(ft_str_path(path_name, tmp->name), &buff);
+		lstat(ft_str_path(path_name, tmp->name), &buff);
 		total += buff.st_blocks;
 		tmp = tmp->next;
 	}
