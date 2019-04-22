@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/15 16:12:50 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:12:15 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 		}
 		tmp = tmp->next;
 	}
-	ft_free_list(head);
+	ft_free_list(&head, 0);
 }
 
 void	ft_recursion_flag(char **av, int flag, t_flags fl)

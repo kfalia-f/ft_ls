@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/22 16:50:56 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:41:07 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	new_l_node(t_data **av, char *path, t_flags fl)
 	}
 	(*av)->l_info->file_name = ft_memalloc(size + 1);
 	(*av)->l_info->file_name = ft_strcpy((*av)->l_info->file_name, pt);
-	(*av)->l_info->date = ft_memalloc(13);
 	(*av)->l_info->link = NULL;
 }
 
@@ -130,17 +129,41 @@ void	ft_rev_list(t_data **head)
 	*head = prev;
 }
 
-void	ft_free_list(t_data *head)
+void 	ft_free_l_info(t_data **node)
+{
+	free((*node)->l_info->permissions);
+	(*node)->l_info->permissions = NULL;
+	free((*node)->l_info->owner);
+	(*node)->l_info->owner = NULL;
+	free((*node)->l_info->group);
+	(*node)->l_info->group = NULL;
+	free((*node)->l_info->date);
+	(*node)->l_info->date = NULL;
+	free((*node)->l_info->file_name);
+	(*node)->l_info->file_name = NULL;
+	if ((*node)->l_info->link)
+	{
+		free((*node)->l_info->link);
+		(*node)->l_info->link = NULL;
+	}
+	free((*node)->l_info);
+	(*node)->l_info = NULL;
+}
+
+void	ft_free_list(t_data **head, int flag)
 {
 	t_data	*tmp;
 
-	if (head == NULL)
+	if (*head == NULL)
 		return ;
-	while (head != NULL)
+	while (*head)
 	{
-		tmp = head;
-		head = head->next;
+		tmp = *head;
+		*head = (*head)->next;
 		free(tmp->name);
+		tmp->name = NULL;
+		if (flag)
+			ft_free_l_info(&tmp);
 		free(tmp);
 		tmp = NULL;
 	}

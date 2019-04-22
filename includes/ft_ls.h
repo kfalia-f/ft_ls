@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/22 14:44:22 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:10:08 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);
 size_t				ft_list_size(t_data *lst);
 void				ft_rev_list(t_data **head);
-void				ft_free_list(t_data *head);
+void				ft_free_list(t_data **head, int flag);
 
 t_lflag				*ft_l_ascii_sort(t_lflag **head);
 

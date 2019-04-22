@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/22 17:03:05 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:24:52 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ void    ft_link(t_data *av, char *path, int flag, t_flags fl)
 	}
 	if (flag)
 		ft_output_info(av, fl, -1);
-}
-
-void	ft_file(t_data *av, t_flags fl)
-{
-	new_l_node(&av, av->name, fl);
-	get_info(av->name, av, fl);
-	free(av->l_info->file_name);
-	av->l_info->file_name = ft_strjoin("", av->name);
-	ft_output_info(av, fl, -1);
 }
 
 int		ft_forl(t_data *head, t_flags fl)
@@ -70,6 +61,8 @@ int		ft_forl(t_data *head, t_flags fl)
 		new = new->next;
 	}
 	ft_output_info(av, fl, 0);
+	if (i > 0)
+		ft_free_list(&av, 1);
 	return (i);
 }
 

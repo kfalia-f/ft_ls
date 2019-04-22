@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/19 18:05:57 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:11:57 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 	else
 		ft_print_simple(head);
 	if (to_free)
-		ft_free_list(head);
+		ft_free_list(&head, 0);
 }
 
 void	ft_output_files(t_data *head, t_flags fl, int to_free, char *path)
@@ -62,5 +62,5 @@ void	ft_output_files(t_data *head, t_flags fl, int to_free, char *path)
 	else
 		ft_print_simple(head);
 	if (to_free)
-		ft_free_list(head);	
+		ft_free_list(&head, 0);	
 }

@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/04/21 18:12:15 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/04/22 20:37:22 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,12 +44,12 @@ OBJECTS = $(SOURCES:.c=.o)
 HEADERS = -I includes -I $(LIBFT_FOLDER)/includes
 
 %.o: %.c $(INCLUDES)
-	@gcc -g $(FLAGS) $(HEADERS) -c $< -o $@
+	@gcc $(FLAGS) $(HEADERS) -c $< -o $@
 
 $(NAME): $(OBJECTS)
 	@make -C $(LIBFT_FOLDER)
 	@make -C $(LIBFT_FOLDER) clean
-	@gcc $(FLAGS) -o $(NAME) $(HEADERS) $(OBJECTS) $(LIBFT)
+	@gcc -g $(FLAGS) -o $(NAME) $(HEADERS) $(OBJECTS) $(LIBFT)
 
 all: $(NAME)
 
