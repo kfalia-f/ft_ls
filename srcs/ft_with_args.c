@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/19 13:58:43 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/23 17:17:49 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_data	*ft_readdir(DIR *dirp, t_flags fl)
 
 void	ft_output_dirs(char *dir_name, t_data *head_dir, int n, t_flags fl)
 {
+	if (fl.bits.upper_g)
+		ft_set_permissions(&head_dir);
 	if (n == 1)
 		ft_output(head_dir, fl, 1, dir_name);
 	else
@@ -59,6 +61,8 @@ size_t	ft_process_files(t_data **head, t_flags fl)
 	if (head_file != NULL)
 	{
 		flag = 1;
+		if (fl.bits.upper_g)
+			ft_set_permissions(&head_file);
 		ft_output_files(head_file, fl, 1, (*head)->name);
 	}
 	return (flag);

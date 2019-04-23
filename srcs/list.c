@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/21 17:54:35 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/23 15:54:25 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	new_l_node(t_data **av, char *path, t_flags fl)
 		return ;
 	}
 	(*av)->l_info->file_name = ft_memalloc(size + 1);
-	(*av)->l_info->file_name = ft_strcpy((*av)->l_info->file_name, pt);
+	(*av)->l_info->file_name = ft_strcpy((*av)->l_info->file_name, pt);// why not just 'strdup' for file_name? No need for 'size' then...
 	(*av)->l_info->date = ft_memalloc(13);
 	(*av)->l_info->link = NULL;
 }

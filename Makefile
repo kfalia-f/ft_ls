@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/04/22 17:39:34 by koparker         ###   ########.fr        #
+#    Updated: 2019/04/23 17:24:31 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SOURCES = $(SRC)main.c \
 		  $(SRC)ft_sort_balancer.c \
 		  $(SRC)ft_recursion_flag.c \
 		  $(SRC)ft_l_flag.c \
-		  $(SRC)ft_print.c \
+		  $(SRC)print.c \
+		  $(SRC)print_colorized.c \
 		  $(SRC)ft_lstname_to_char_arr.c \
 		  $(SRC)ft_cmp.c \
 		  $(SRC)ft_current_dir.c \

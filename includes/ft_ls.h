@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/23 15:05:29 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/23 17:26:11 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct		s_data
 	struct s_data	*next;
 	struct s_lflag	*l_info;
 	char			*name;
+	char			*perm;
 	size_t			len;
 	long			time;
 }					t_data;
@@ -110,7 +111,9 @@ void				ft_l_flag(t_data *av, int flag, t_flags flags);
 
 char				**ft_lstname_to_char_arr(char **arr, t_data *data);
 t_data				*ft_readdir(DIR *dirp, t_flags fl);
-void				ft_print(t_data *head);
+void				ft_print(t_data *head, t_flags fl);
+void				ft_print_first_upper_g(char **names, size_t row, t_data *head, t_flags fl);
+void				ft_pr_upper_g(char **names, size_t row, t_data *head, t_flags fl);
 
 int					ft_timecmp(long a, long b);
 void				ft_time_sort(t_data **head);
@@ -120,7 +123,7 @@ t_data				*ft_current_dir(char *s, t_flags fl);
 void				ft_set_time(t_data **head, t_flags fl, char *path);
 void				ft_remove_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
-void				ft_print_simple(t_data *head);
+void				ft_print_simple(t_data *head, t_flags fl);
 void				ft_skip_dots(t_data **head, t_flags fl);
 void				ft_process_current_dir(char *s, t_flags fl);
 void				ft_output(t_data *head, t_flags fl, int to_free, char *path);
@@ -143,6 +146,9 @@ void				ft_balanser_sort(t_data **head, t_flags fl, char *path);
 
 void				ft_argv_error(char *s);
 void				ft_colorized_output_l(t_data *st);
+void				ft_colorized_output(t_data *st);
+char				*get_permission(mode_t st_mode, char *path);
+void				ft_set_permissions(t_data **head);
 
 void				ft_print_list(t_data *head);
 #endif
