@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/22 20:41:07 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:55:50 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_data	*new_node(struct dirent *dp)
 void	new_l_node(t_data **av, char *path, t_flags fl)
 {
 	size_t	size;
-	char	*pt;
+	char	*pt;   //LEAK
 
 	if (!fl.bits.d)
 		pt = ft_ls_path_to_file(path, 1);
@@ -50,8 +50,7 @@ void	new_l_node(t_data **av, char *path, t_flags fl)
 		ft_putendl("doesn't malloced for a new l node", 0);
 		return ;
 	}
-	(*av)->l_info->file_name = ft_memalloc(size + 1);
-	(*av)->l_info->file_name = ft_strcpy((*av)->l_info->file_name, pt);
+	(*av)->l_info->file_name = ft_strdup(pt);
 	(*av)->l_info->link = NULL;
 }
 
