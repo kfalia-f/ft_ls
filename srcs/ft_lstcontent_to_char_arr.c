@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_del.c                                           :+:      :+:    :+:   */
+/*   ft_lstcontent_to_char_arr.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/13 19:24:30 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 15:15:36 by koparker         ###   ########.fr       */
+/*   Created: 2019/04/02 17:33:28 by koparker          #+#    #+#             */
+/*   Updated: 2019/04/24 14:23:48 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <ft_ls.h>
 
-void	*ft_del(char ***a, size_t n)
+char	**ft_lstcontent_to_char_arr(char **arr, t_data *data, size_t flag)
 {
-	size_t	i;
+	t_data	*tmp;
+	int		i;
 
 	i = 0;
-	while (i < n)
+	tmp = data;
+	while (tmp != NULL)
 	{
-		free((*a)[i]);
-		(*a)[i] = NULL;
+		if (flag == 0)
+			arr[i] = ft_strcpy(arr[i], tmp->name);
+		else
+			arr[i] = ft_strcpy(arr[i], tmp->perm);
 		i++;
+		tmp = tmp->next;
 	}
-	ft_strdel(*a);
-	return (NULL);
+	return (arr);
 }

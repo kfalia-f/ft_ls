@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 17:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/23 17:15:19 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/24 15:59:21 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_pr(char **names, size_t max_len, size_t row, size_t num_of_elems)
 	}
 }
 
-void	ft_print_contents(char **names, size_t max_len, t_data *head, t_flags fl)
+void	ft_print_contents(char **names, char **perms, size_t max_len, t_flags fl)
 {
 	struct winsize	w;
 	size_t			row;
@@ -62,47 +62,63 @@ void	ft_print_contents(char **names, size_t max_len, t_data *head, t_flags fl)
 
 	ioctl(0, TIOCGWINSZ, &w);
 	len = max_len;
-	while ((len + 1) % 8 != 0)
-		len++;
-	(col = (size_t)w.ws_col / (len + 1)) == 0 ? (col++) : col;
 	num_of_elems = ft_2d_strlen(names);
-	((row = num_of_elems / col) && (num_of_elems % col == 0)) ? row : (row++);
 	if (fl.bits.upper_g)
 	{
-		if (col == 1)
-			ft_print_first_upper_g(names, row, head, fl);
-		else
-			ft_pr_upper_g(names, row, head, fl);
+		(col = (size_t)w.ws_col / (len + 1)) == 0 ? (col++) : col;
+		((row = num_of_elems / col) && (num_of_elems % col == 0)) ? row : (row++);
+		col == 1 ? ft_print_first_upper_g(names, perms, row)
+			: ft_pr_upper_g(names, perms, row, max_len);
 	}
 	else
 	{
-		if (col == 1)
-			ft_print_first(names, w, row);
-		else
-			ft_pr(names, max_len, row, num_of_elems);
+		while ((len + 1) % 8 != 0)
+			len++;
+		(col = (size_t)w.ws_col / (len + 1)) == 0 ? (col++) : col;
+		((row = num_of_elems / col) && (num_of_elems % col == 0)) ? row : (row++);
+		(col == 1) ? ft_print_first(names, w, row)
+			: ft_pr(names, max_len, row, num_of_elems);
 	}
 }
 
 void	ft_print_simple(t_data *head, t_flags fl)
 {
 	t_data	*tmp;
+	char	**perms;
+	size_t	i;
+	size_t	list_size;
 
+	i = 0;
 	tmp = head;
 	if (tmp == NULL)
 		return ;
+	if (fl.bits.upper_g)
+	{
+		list_size = ft_list_size(head);
+		if ((perms = ft_memalloc_2d_clean(list_size, ft_max_namlen(head))) == NULL)
+			return ;
+		perms = ft_lstcontent_to_char_arr(perms, head, 1);
+	}
 	while (tmp)
 	{
 		if (fl.bits.upper_g)
-			ft_colorized_output(head);
+		{
+			ft_colorized_output(perms[i], tmp->name);
+			i++;
+			continue ;
+		}
 		else
 			ft_putendl(tmp->name, 0);
 		tmp = tmp->next;
 	}
+	if (fl.bits.upper_g)
+		ft_del(&perms, list_size);
 }
 
 void	ft_print(t_data *head, t_flags fl)
 {
 	char	**names;
+	char	**perms;
 	size_t	max_len;
 	size_t	list_size;
 
@@ -110,7 +126,16 @@ void	ft_print(t_data *head, t_flags fl)
 	max_len = ft_max_namlen(head);
 	if ((names = ft_memalloc_2d_clean(list_size, max_len)) == NULL)
 		return ;
-	names = ft_lstname_to_char_arr(names, head);
-	ft_print_contents(names, max_len, head, fl);
+	names = ft_lstcontent_to_char_arr(names, head, 0);
+	perms = NULL;
+	if (fl.bits.upper_g)
+	{
+		if ((perms = ft_memalloc_2d_clean(list_size, max_len)) == NULL)
+			return ;
+		perms = ft_lstcontent_to_char_arr(perms, head, 1);
+	}
+	ft_print_contents(names, perms, max_len, fl);
 	ft_del(&names, list_size);
+	if (fl.bits.upper_g)
+		ft_del(&perms, list_size);
 }

@@ -6,7 +6,7 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/04/23 17:24:31 by koparker         ###   ########.fr        #
+#    Updated: 2019/04/24 14:51:27 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,14 @@ SOURCES = $(SRC)main.c \
 		  $(SRC)ft_l_flag.c \
 		  $(SRC)print.c \
 		  $(SRC)print_colorized.c \
-		  $(SRC)ft_lstname_to_char_arr.c \
+		  $(SRC)ft_lstcontent_to_char_arr.c \
 		  $(SRC)ft_cmp.c \
 		  $(SRC)ft_current_dir.c \
 		  $(SRC)prepare_args.c \
 		  $(SRC)ft_l_helper.c \
 		  $(SRC)ft_l_get_info.c \
 		  $(SRC)ft_l_output.c \
+		  $(SRC)G_flag_l.c \
 		  $(SRC)G_flag.c
 
 LIBFT_FOLDER = libft

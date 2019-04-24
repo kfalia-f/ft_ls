@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/23 17:26:11 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/24 15:20:33 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ typedef struct		s_data
 	long			time;
 }					t_data;
 
-char				**ft_lstname_to_str_arr(char **arr, t_data *data);
-void				ft_window(t_data *data);
+char				**ft_lstcontent_to_char_arr(char **arr, t_data *data, size_t flag);
 t_data				*new_node(struct dirent *dp);
 t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);
@@ -109,11 +108,10 @@ void				ft_argv(t_data **head, int n, t_flags fl);
 void				ft_recursion_flag(char **av, int flag, t_flags flags);
 void				ft_l_flag(t_data *av, int flag, t_flags flags);
 
-char				**ft_lstname_to_char_arr(char **arr, t_data *data);
 t_data				*ft_readdir(DIR *dirp, t_flags fl);
 void				ft_print(t_data *head, t_flags fl);
-void				ft_print_first_upper_g(char **names, size_t row, t_data *head, t_flags fl);
-void				ft_pr_upper_g(char **names, size_t row, t_data *head, t_flags fl);
+void				ft_print_first_upper_g(char **names, char **perms, size_t row);
+void				ft_pr_upper_g(char **names, char **perms, size_t row, size_t max_len);
 
 int					ft_timecmp(long a, long b);
 void				ft_time_sort(t_data **head);
@@ -146,9 +144,9 @@ void				ft_balanser_sort(t_data **head, t_flags fl, char *path);
 
 void				ft_argv_error(char *s);
 void				ft_colorized_output_l(t_data *st);
-void				ft_colorized_output(t_data *st);
+void				ft_colorized_output(char *perm, char *name);
 char				*get_permission(mode_t st_mode, char *path);
-void				ft_set_permissions(t_data **head);
+void				ft_set_permissions(t_data **head, char *path);
 
 void				ft_print_list(t_data *head);
 #endif
