@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 19:10:20 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/24 19:21:51 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	new_l_node(t_data **av, char *path, t_flags fl)
 	char	*pt;   //LEAK
 
 	if (!fl.bits.d)
-		pt = ft_ls_path_to_file(path, 1);
+		pt = (*av)->name;
 	else
 		pt = path;
 	if (!((*av)->l_info = (t_lflag *)malloc(sizeof(t_lflag))))
