@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:37:03 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/17 17:55:06 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:48:10 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_data	*ft_convert_args(char **av)
 		}
 		else
 			push_back(&head, new_file(av[i]));
+		closedir(dirp);
 		i++;
 	}
 	return (head);

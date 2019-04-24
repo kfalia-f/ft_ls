@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/22 21:42:47 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/24 19:11:28 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ int     ft_total(char *path_name, t_data *st)
 	struct stat buff;
 	t_data      *tmp;
 	int         total;
+	char		*pt;
 
 	tmp = st;
 	total = 0;
 	while (tmp)
 	{
-		stat(ft_str_path(path_name, tmp->name), &buff);
+		pt = ft_str_path(path_name, tmp->name);
+		lstat(pt, &buff);
+		free(pt);
 		total += buff.st_blocks;
 		tmp = tmp->next;
 	}
@@ -54,6 +57,7 @@ void    ft_l(char *path_name, t_flags flags)
 	struct dirent   *dp;
 	t_data          *lhead;
 	t_data          *lnode;
+	char			*pt;
 
 	lhead = NULL;
 	if (!(dirp = opendir(path_name)))
@@ -70,7 +74,9 @@ void    ft_l(char *path_name, t_flags flags)
 	while (lnode)
 	{
 		new_l_node(&lnode, lnode->name, flags);
-		get_info(ft_str_path(path_name, lnode->name), lnode, flags);
+		pt = ft_str_path(path_name, lnode->name);
+		get_info(pt, lnode, flags);
+		free(pt);
 		lnode = lnode->next;
 	}
 	ft_balanser_sort(&lhead, flags, NULL);
@@ -81,5 +87,6 @@ void    ft_l(char *path_name, t_flags flags)
 		ft_putchar('\n');
 	}
 	ft_output_info(lhead, flags, 0);
-	ft_free_list(lhead);
+	closedir(dirp);
+	ft_free_list(&lhead, 1);
 }

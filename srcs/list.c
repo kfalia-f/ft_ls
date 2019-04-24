@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/23 15:54:25 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/24 19:10:20 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,18 @@ t_data	*new_node(struct dirent *dp)
 
 void	new_l_node(t_data **av, char *path, t_flags fl)
 {
-	size_t	size;
-	char	*pt;
+	char	*pt;   //LEAK
 
 	if (!fl.bits.d)
 		pt = ft_ls_path_to_file(path, 1);
 	else
 		pt = path;
-	size = ft_strlen(pt);
 	if (!((*av)->l_info = (t_lflag *)malloc(sizeof(t_lflag))))
 	{
 		ft_putendl("doesn't malloced for a new l node", 0);
 		return ;
 	}
-	(*av)->l_info->file_name = ft_memalloc(size + 1);
-	(*av)->l_info->file_name = ft_strcpy((*av)->l_info->file_name, pt);// why not just 'strdup' for file_name? No need for 'size' then...
-	(*av)->l_info->date = ft_memalloc(13);
+	(*av)->l_info->file_name = ft_strdup(pt);
 	(*av)->l_info->link = NULL;
 }
 
@@ -130,17 +126,41 @@ void	ft_rev_list(t_data **head)
 	*head = prev;
 }
 
-void	ft_free_list(t_data *head)
+void 	ft_free_l_info(t_data **node)
+{
+	free((*node)->l_info->permissions);
+	(*node)->l_info->permissions = NULL;
+	free((*node)->l_info->owner);
+	(*node)->l_info->owner = NULL;
+	free((*node)->l_info->group);
+	(*node)->l_info->group = NULL;
+	free((*node)->l_info->date);
+	(*node)->l_info->date = NULL;
+	free((*node)->l_info->file_name);
+	(*node)->l_info->file_name = NULL;
+	if ((*node)->l_info->link)
+	{
+		free((*node)->l_info->link);
+		(*node)->l_info->link = NULL;
+	}
+	free((*node)->l_info);
+	(*node)->l_info = NULL;
+}
+
+void	ft_free_list(t_data **head, int flag)
 {
 	t_data	*tmp;
 
-	if (head == NULL)
+	if (*head == NULL)
 		return ;
-	while (head != NULL)
+	while (*head)
 	{
-		tmp = head;
-		head = head->next;
+		tmp = *head;
+		*head = (*head)->next;
 		free(tmp->name);
+		tmp->name = NULL;
+		if (flag)
+			ft_free_l_info(&tmp);
 		free(tmp);
 		tmp = NULL;
 	}
