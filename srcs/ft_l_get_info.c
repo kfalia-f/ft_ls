@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:03:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 19:11:41 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/24 19:40:25 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@ char    get_acl(char *path)
 		acl = NULL;
 	}
 	xattr = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
-	if (xattr > 0)
-		return ('@');
-	else if (acl != NULL)
+	if (acl != NULL)
+	{
+		acl_free(acl);
+		acl = NULL;
 		return ('+');
+	}
+	else if (xattr > 0)
+		return ('@');
 	return (' ');
 }
 

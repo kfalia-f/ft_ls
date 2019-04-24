@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 19:21:51 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/24 20:07:03 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,21 @@
 t_data	*new_node(struct dirent *dp)
 {
 	t_data	*node;
-	size_t	name_size;
 
 	if (!(node = (t_data *)malloc(sizeof(t_data))))
 	{
 		ft_putendl("doesn't malloced for a new node", 0);
 		return (NULL);
 	}
-	name_size = ft_strlen(dp->d_name);
-	if (!(node->name = (char *)malloc(sizeof(char) * (name_size + 1))))
-	{
-		free(node);
-		return (NULL);
-	}
-	ft_bzero(node->name, name_size);
-	ft_strcpy(node->name, dp->d_name);
-	node->len = name_size;
+	node->name = ft_strdup(dp->d_name);
+	node->len = ft_strlen(dp->d_name);
 	node->next = NULL;
 	return (node);
 }
 
 void	new_l_node(t_data **av, char *path, t_flags fl)
 {
-	char	*pt;   //LEAK
+	char	*pt;
 
 	if (!fl.bits.d)
 		pt = (*av)->name;
@@ -172,7 +164,7 @@ void	ft_remove_dots(t_data **head)
 	t_data	*prev;
 
 	tmp = *head;
-	while (tmp != NULL && (*tmp->name) == '.')
+	while (tmp != NULL && (!ft_strcmp(tmp->name, ".") || !ft_strcmp(tmp->name, "..")))
 	{
 		*head = tmp->next;
 		free(tmp);
@@ -180,7 +172,7 @@ void	ft_remove_dots(t_data **head)
 	}
 	while (tmp)
 	{
-		while (tmp != NULL && (*tmp->name) != '.')
+		while (tmp != NULL && (!ft_strcmp(tmp->name, ".") || !ft_strcmp(tmp->name, "..")))
 		{
 			prev = tmp;
 			tmp = tmp->next;

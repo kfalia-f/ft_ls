@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 19:24:19 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/24 20:24:56 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int		main(int ac, char **av)
 		ft_recursion_flag(av + num_of_flags + 1, flag, fl);
 	else
 		ft_argv(&args, ac - num_of_flags - 1, fl);
+	ft_free_list(&args, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 19:14:55 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/24 20:27:35 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 		ft_print(head, fl);
 	else
 		ft_print_simple(head, fl);
-	if (to_free)
+	if (to_free == 1)
 		ft_free_list(&head, 0);
 }
 
