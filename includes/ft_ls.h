@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 15:20:33 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:24:59 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct		s_data
 	long			time;
 }					t_data;
 
-char				**ft_lstcontent_to_char_arr(char **arr, t_data *data, size_t flag);
+void				ft_lstcontent_to_char_arr(char **arr, t_data *data, size_t flag);
 t_data				*new_node(struct dirent *dp);
 t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);

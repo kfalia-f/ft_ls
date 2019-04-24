@@ -6,13 +6,13 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:33:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 14:23:48 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:44:48 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-char	**ft_lstcontent_to_char_arr(char **arr, t_data *data, size_t flag)
+void	ft_lstcontent_to_char_arr(char **arr, t_data *data, size_t flag)
 {
 	t_data	*tmp;
 	int		i;
@@ -28,5 +28,4 @@ char	**ft_lstcontent_to_char_arr(char **arr, t_data *data, size_t flag)
 		i++;
 		tmp = tmp->next;
 	}
-	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 17:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 15:59:21 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:55:15 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_print_simple(t_data *head, t_flags fl)
 		list_size = ft_list_size(head);
 		if ((perms = ft_memalloc_2d_clean(list_size, ft_max_namlen(head))) == NULL)
 			return ;
-		perms = ft_lstcontent_to_char_arr(perms, head, 1);
+		ft_lstcontent_to_char_arr(perms, head, 1);
 	}
 	while (tmp)
 	{
@@ -126,13 +126,13 @@ void	ft_print(t_data *head, t_flags fl)
 	max_len = ft_max_namlen(head);
 	if ((names = ft_memalloc_2d_clean(list_size, max_len)) == NULL)
 		return ;
-	names = ft_lstcontent_to_char_arr(names, head, 0);
+	ft_lstcontent_to_char_arr(names, head, 0);
 	perms = NULL;
 	if (fl.bits.upper_g)
 	{
 		if ((perms = ft_memalloc_2d_clean(list_size, max_len)) == NULL)
 			return ;
-		perms = ft_lstcontent_to_char_arr(perms, head, 1);
+		ft_lstcontent_to_char_arr(perms, head, 1);
 	}
 	ft_print_contents(names, perms, max_len, fl);
 	ft_del(&names, list_size);

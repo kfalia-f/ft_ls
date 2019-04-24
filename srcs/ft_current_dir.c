@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/19 18:05:54 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:55:05 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,23 @@ void	ft_set_time(t_data **head, t_flags fl, char *path)
 	}
 }
 
+/*void	ft_output_upper_g_one(char *s)
+{
+	t_data	*node;
+	t_data	*tmp;
+
+	node = new_file(s);
+	ft_set_permissions(&node, NULL);
+	tmp = node;
+	while (tmp)
+	{
+		ft_colorized_output(tmp->perm, tmp->name);
+		ft_putchar('\n');
+		tmp = tmp->next;
+	}
+	ft_free_list(node);
+}*/
+
 void	ft_process_current_dir(char *s, t_flags fl)
 {
 	t_data	*head;
@@ -55,7 +72,15 @@ void	ft_process_current_dir(char *s, t_flags fl)
 		if (fl.bits.l && !fl.bits.one)
 			ft_simple_l(new_file("."), fl);
 		else
-			ft_putendl(s, 0);
+		{
+			if (!fl.bits.upper_g)
+				ft_putendl(s, 0);
+			else
+			{
+			//	ft_output_upper_g_one(s);
+				ft_putendl(ft_strjoin(DIR_COLOR, s), 0);
+			}
+		}
 		return ;
 	}
 	if (fl.bits.l && !fl.bits.one)
