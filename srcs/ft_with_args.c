@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/25 13:12:41 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/25 15:23:30 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ t_data	*ft_readdir(DIR *dirp, t_flags fl)
 	head = NULL;
 	while ((dp = readdir(dirp)) != NULL)
 	{
-		if (*(dp->d_name) == '.')
+		/*if (*(dp->d_name) == '.')
 			if (!fl.bits.a && !fl.bits.f)
-				continue ;
+				continue ;*/
 		push_back(&head, new_node(dp));
 	}
+	if (!fl.bits.a && !fl.bits.f)
+		ft_remove_dots(&head);
 	return (head);
 }
 

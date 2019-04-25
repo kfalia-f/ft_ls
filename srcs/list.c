@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/25 13:51:57 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/25 15:18:35 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_data	*new_node(struct dirent *dp)
 	node->len = ft_strlen(dp->d_name);
 	node->perm = NULL;
 	node->next = NULL;
+	node->l_info = NULL;
 	return (node);
 }
 
@@ -177,15 +178,16 @@ void	ft_remove_dots(t_data **head)
 	t_data	*prev;
 
 	tmp = *head;
-	while (tmp != NULL && (!ft_strcmp(tmp->name, ".") || !ft_strcmp(tmp->name, "..")))
+	while (tmp != NULL && *(tmp->name) == '.')
 	{
 		*head = tmp->next;
+		ft_strdel(&(tmp->name));
 		free(tmp);
 		tmp = *head;
 	}
 	while (tmp)
 	{
-		while (tmp != NULL && (!ft_strcmp(tmp->name, ".") || !ft_strcmp(tmp->name, "..")))
+		while (tmp != NULL && *(tmp->name) != '.')
 		{
 			prev = tmp;
 			tmp = tmp->next;
@@ -193,6 +195,7 @@ void	ft_remove_dots(t_data **head)
 		if (tmp == NULL)
 			return ;
 		prev->next = tmp->next;
+		ft_strdel(&(tmp->name));
 		free(tmp);
 		tmp = prev->next;
 	}
