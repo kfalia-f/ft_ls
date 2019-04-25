@@ -54,10 +54,11 @@ size_t	ft_process_files(t_data **head, t_flags fl)
 	tmp = *head;
 	while (tmp)
 	{
-		if (!(dirp = opendir(tmp->name)) && errno != 13)
+		if ((dirp = opendir(tmp->name)) == NULL && errno != 13)
 			push_back(&head_file, new_file(tmp->name));
 		tmp = tmp->next;
-		closedir(dirp);
+		if (dirp != NULL)
+            closedir(dirp);
 	}
 	if (head_file != NULL)
 	{
