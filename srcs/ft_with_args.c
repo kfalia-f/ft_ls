@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 16:55:43 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/25 13:12:41 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ size_t	ft_process_files(t_data **head, t_flags fl)
 		if (!(dirp = opendir(tmp->name)) && errno != 13)
 			push_back(&head_file, new_file(tmp->name));
 		tmp = tmp->next;
+		closedir(dirp);
 	}
 	if (head_file != NULL)
 	{
