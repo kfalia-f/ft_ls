@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 17:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 18:30:01 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/25 13:33:22 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,10 @@ void	ft_print_simple(t_data *head, t_flags fl)
 		tmp = tmp->next;
 	}
 	if (fl.bits.upper_g)
+	{
 		ft_del(&perms, list_size);
+		ft_free_perm(&head);
+	}
 }
 
 void	ft_print(t_data *head, t_flags fl)
@@ -139,5 +142,8 @@ void	ft_print(t_data *head, t_flags fl)
 	ft_print_contents(names, perms, max_len, fl);
 	ft_del(&names, list_size);
 	if (fl.bits.upper_g)
+	{
 		ft_del(&perms, list_size);
+		ft_free_perm(&head);
+	}
 }

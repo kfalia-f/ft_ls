@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 18:30:04 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/25 13:55:44 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ void	ft_set_time(t_data **head, t_flags fl, char *path)
 void	ft_process_current_dir(char *s, t_flags fl)
 {
 	t_data	*head;
+	char	*tmp;
 
+	tmp = NULL;
 	if (fl.bits.d)
 	{
 		if (fl.bits.l && !fl.bits.one)
@@ -78,7 +80,10 @@ void	ft_process_current_dir(char *s, t_flags fl)
 			else
 			{
 			//	ft_output_upper_g_one(s);
-				ft_putendl(ft_strjoin(DIR_COLOR, s), 0);
+				tmp = ft_strjoin(DIR_COLOR, s);
+				ft_putendl(tmp, 0);
+				ft_putstr(RESET);
+				ft_strdel(&tmp);
 			}
 		}
 		return ;

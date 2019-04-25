@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/25 13:04:23 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/25 13:51:57 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_data	*new_node(struct dirent *dp)
 	}
 	node->name = ft_strdup(dp->d_name);
 	node->len = ft_strlen(dp->d_name);
+	node->perm = NULL;
 	node->next = NULL;
 	return (node);
 }
@@ -47,22 +48,15 @@ void	new_l_node(t_data **av, char *path, t_flags fl)
 t_data	*new_file(char *str)
 {
 	t_data	*node;
-	size_t	name_size;
 
 	if (!(node = (t_data *)malloc(sizeof(t_data))))
 	{
 		ft_putendl("doesn't malloced for a new file", 0);
 		return (NULL);
 	}
-	name_size = ft_strlen(str);
-	if (!(node->name = (char *)malloc(sizeof(char) * (name_size + 1))))
-	{
-		free(node);
-		return (NULL);
-	}
-	ft_bzero(node->name, name_size);
-	ft_strcat(node->name, str);
-	node->len = name_size;
+	node->name = ft_strdup(str);
+	node->len = ft_strlen(str);
+	node->perm = NULL;
 	node->next = NULL;
 	return (node);
 }
@@ -139,10 +133,29 @@ void 	ft_free_l_info(t_data **node)
 	(*node)->l_info = NULL;
 }
 
-void	ft_free_list(t_data **head, int flag)
+void	ft_free_perm(t_data **head)
 {
 	t_data	*tmp;
 
+	tmp = NULL;
+	if (*head == NULL)
+		return ;
+	while (*head)
+	{
+		tmp = *head;
+		*head = (*head)->next;
+		free(tmp->perm);
+		tmp->perm = NULL;
+		free(tmp);
+		tmp = NULL;
+	}
+}
+
+void	ft_free_list(t_data **head, size_t flag_l)
+{
+	t_data	*tmp;
+
+	tmp = NULL;
 	if (*head == NULL)
 		return ;
 	while (*head)
@@ -151,7 +164,7 @@ void	ft_free_list(t_data **head, int flag)
 		*head = (*head)->next;
 		free(tmp->name);
 		tmp->name = NULL;
-		if (flag)
+		if (flag_l)
 			ft_free_l_info(&tmp);
 		free(tmp);
 		tmp = NULL;
