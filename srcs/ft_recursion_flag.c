@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_recursion_flag.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/25 17:46:07 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/26 15:52:30 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_only_files(t_data *head, char *path_name)
 		path = ft_str_path(path_name, tmp->name);
 		stat(path, &buff);
 		free(path);
-	   	if (S_ISDIR(buff.st_mode))
+		if (S_ISDIR(buff.st_mode))
 			return (0);
 		if (tmp)
 			tmp = tmp->next;
@@ -37,12 +37,29 @@ int		ft_only_files(t_data *head, char *path_name)
 	return (1);
 }
 
-void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
+void	ft_rec(t_data *tmp, char *pt, t_flags fl)
 {
 	DIR				*dirp2;
+	char			*path;
+
+	while (tmp)
+	{
+		path = ft_str_path(pt, tmp->name);
+		if ((dirp2 = opendir(path)))
+		{
+			ft_putendl(path, 2);
+			ft_recurs(path, dirp2, fl);
+			closedir(dirp2);
+		}
+		tmp = tmp->next;
+		free(path);
+	}
+}
+
+void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
+{
 	t_data			*head;
 	t_data			*tmp;
-	char			*path;
 	char			*pt;
 
 	head = ft_readdir(dirp, fl);
@@ -59,18 +76,7 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	if (tmp)
 		ft_output(tmp, fl, 0, pt);
 	ft_skip_dots(&tmp, fl);
-	while (tmp)
-	{
-		path = ft_str_path(pt, tmp->name);
-		if ((dirp2 = opendir(path)))
-		{
-			ft_putendl(path, 2);
-			ft_recurs(path, dirp2, fl);
-			closedir(dirp2);
-		}
-		tmp = tmp->next;
-		free(path);
-	}
+	ft_rec(tmp, pt, fl);
 	ft_free_list(&head, 0);
 	free(pt);
 }

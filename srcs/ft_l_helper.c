@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_l_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 19:11:28 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:21:10 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-int     ft_total(char *path_name, t_data *st)
+int		ft_total(char *path_name, t_data *st)
 {
 	struct stat buff;
-	t_data      *tmp;
-	int         total;
+	t_data		*tmp;
+	int			total;
 	char		*pt;
 
 	tmp = st;
@@ -32,31 +32,32 @@ int     ft_total(char *path_name, t_data *st)
 	return (total);
 }
 
-void    time_balanser_get_info(t_data *st, t_flags fl, struct stat buff)
+void	time_balanser_get_info(t_data *st, t_flags fl, struct stat buff)
 {
 	if (fl.bits.upper_u)
 	{
-		st->l_info->date = ft_date(ctime(&buff.st_birthtime), buff.st_birthtime);
+		st->l_info->date = ft_date(ctime(&buff.st_birthtime)
+			, buff.st_birthtime, 0, 0);
 		st->time = buff.st_birthtime;
 	}
 	else if (fl.bits.u)
 	{
-		st->l_info->date = ft_date(ctime(&buff.st_atime), buff.st_atime);
+		st->l_info->date = ft_date(ctime(&buff.st_atime), buff.st_atime, 0, 0);
 		st->time = buff.st_atime;
 	}
 	else
 	{
-		st->l_info->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime);
+		st->l_info->date = ft_date(ctime(&buff.st_mtime), buff.st_mtime, 0, 0);
 		st->time = buff.st_mtime;
 	}
 }
 
-void    ft_l(char *path_name, t_flags flags)
+void	ft_l(char *path_name, t_flags flags)
 {
-	DIR             *dirp;
-	struct dirent   *dp;
-	t_data          *lhead;
-	t_data          *lnode;
+	DIR				*dirp;
+	struct dirent	*dp;
+	t_data			*lhead;
+	t_data			*lnode;
 	char			*pt;
 
 	lhead = NULL;

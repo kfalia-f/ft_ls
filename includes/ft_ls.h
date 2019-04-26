@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/25 17:01:52 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:27:42 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ t_data				*ft_convert_args(char **av);
 void				ft_simple_l(t_data *head, t_flags fl);
 
 void				time_balanser_get_info(t_data *st, t_flags fl, struct stat buff);
-char				*ft_date(char *data, size_t tm);
+char				*ft_date(char *data, size_t tm, int i, int j);
 void				ft_link(t_data *av, char *path, int flag, t_flags fl);
 void				get_info(char *path, t_data *st, t_flags fl);
 void				ft_output_info(t_data *st, t_flags fl, int flag);
@@ -148,6 +148,8 @@ void				ft_colorized_output_l(t_data *st);
 void				ft_colorized_output(char *perm, char *name);
 char				*get_permission(mode_t st_mode, char *path);
 void				ft_set_permissions(t_data **head, char *path);
+
+void				ft_recurs(char *path_name, DIR *dirp, t_flags fl);
 
 void				ft_print_list(t_data *head);
 #endif

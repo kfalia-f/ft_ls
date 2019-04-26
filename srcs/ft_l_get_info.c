@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_l_get_info.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:03:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 19:40:25 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:13:41 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-char    get_file_type(mode_t st_mode)
+char	get_file_type(mode_t st_mode)
 {
 	if (S_ISREG(st_mode))
 		return ('-');
@@ -29,11 +29,11 @@ char    get_file_type(mode_t st_mode)
 	return ('s');
 }
 
-char    get_acl(char *path)
+char	get_acl(char *path)
 {
-	acl_t       acl;
-	acl_entry_t dummy;
-	int         xattr;
+	acl_t		acl;
+	acl_entry_t	dummy;
+	int			xattr;
 
 	acl = acl_get_link_np(path, ACL_TYPE_EXTENDED);
 	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1)
@@ -53,9 +53,9 @@ char    get_acl(char *path)
 	return (' ');
 }
 
-char    *get_permission(mode_t st_mode, char *path)
+char	*get_permission(mode_t st_mode, char *path)
 {
-	char    *str;
+	char	*str;
 
 	str = ft_memalloc(12);
 	str[0] = get_file_type(st_mode);
@@ -78,15 +78,11 @@ char    *get_permission(mode_t st_mode, char *path)
 	return (str);
 }
 
-char    *ft_date(char *date, size_t tm)
+char	*ft_date(char *date, size_t tm, int i, int j)
 {
-	char    *str;
-	int     i;
-	int     j;
-	int     flag;
+	char	*str;
+	int		flag;
 
-	i = 0;
-	j = 0;
 	flag = 0;
 	if (time(NULL) - tm > 15552000)
 		flag = 1;
@@ -105,33 +101,29 @@ char    *ft_date(char *date, size_t tm)
 		}
 		if (i == 16)
 			break ;
-		str[j] = date[i];
-		j++;
-		i++;
+		str[j++] = date[i++];
 	}
 	str[j] = '\0';
 	return (str);
 }
 
-void    get_info(char *path, t_data *st, t_flags fl)
+void	get_info(char *path, t_data *st, t_flags fl)
 {
-	struct stat     buff;
-	struct passwd   *pwd;
-	struct group    *gr;
+	struct stat		buff;
+	struct passwd	*pwd;
+	struct group	*gr;
 
-	if ((lstat(path, &buff)) != 0)
-		ft_putstr("ERROR_STAT");
-	pwd = getpwuid(buff.st_uid);   //owner name
-	gr = getgrgid(buff.st_gid);   //group name
-
-    st->l_info->owner = ft_strdup(pwd->pw_name); // owner changed to 'strdup'
-	st->l_info->group = ft_strdup(gr->gr_name); // group changed to 'strdup'
-    time_balanser_get_info(st, fl, buff); //date & time
-	st->l_info->links = buff.st_nlink;  //num of links
-	st->l_info->permissions = get_permission(buff.st_mode, path); //permissions (r/w/x) + file type
+	lstat(path, &buff);
+	pwd = getpwuid(buff.st_uid);
+	gr = getgrgid(buff.st_gid);
+	st->l_info->owner = ft_strdup(pwd->pw_name);
+	st->l_info->group = ft_strdup(gr->gr_name);
+	time_balanser_get_info(st, fl, buff);
+	st->l_info->links = buff.st_nlink;
+	st->l_info->permissions = get_permission(buff.st_mode, path);
 	if (*(st->l_info->permissions) != 'c' && *(st->l_info->permissions) != 'b')
 	{
-		st->l_info->file_size = buff.st_size; //file_size
+		st->l_info->file_size = buff.st_size;
 		st->l_info->maj = 0;
 		st->l_info->min = 0;
 	}
