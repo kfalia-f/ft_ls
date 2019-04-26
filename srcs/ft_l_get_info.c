@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:03:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 19:40:25 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/26 15:59:14 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char    *get_permission(mode_t st_mode, char *path)
 {
 	char    *str;
 
-	str = ft_memalloc(12);
+	str = ft_memalloc(PERM_SIZE);
 	str[0] = get_file_type(st_mode);
 	str[1] = st_mode & S_IRUSR ? 'r' : '-';
 	str[2] = st_mode & S_IWUSR ? 'w' : '-';

@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 17:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/26 15:45:28 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:35:39 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,31 +90,32 @@ void	ft_print_simple(t_data *head, t_flags fl)
 
 	i = 0;
 	tmp = head;
-	if (tmp == NULL)
+	if (head == NULL)
 		return ;
 	if (fl.bits.upper_g)
 	{
 		list_size = ft_list_size(head);
-		if ((perms = ft_memalloc_2d_clean(list_size, ft_max_namlen(head))) == NULL)
+		if ((perms = ft_memalloc_2d_clean(list_size, PERM_SIZE)) == NULL)
 			return ;
+		if (!head->perm)
+			ft_set_permissions(&head, NULL);
 		ft_lstcontent_to_char_arr(perms, head, 1);
-	}
-	while (tmp)
-	{
-		if (fl.bits.upper_g)
+		while (tmp)
 		{
-			ft_colorized_output(perms[i], tmp->name);
-			i++;
-			continue ;
+			ft_colorized_output(perms[i++], tmp->name);
+			ft_putchar('\n');
+			tmp = tmp->next;
 		}
-		else
-			ft_putendl(tmp->name, 0);
-		tmp = tmp->next;
-	}
-	if (fl.bits.upper_g)
-	{
 		ft_del(&perms, list_size);
 		ft_free_perm(&head);
+	}
+	else
+	{
+		while (tmp)
+		{
+			ft_putendl(tmp->name, 0);
+			tmp = tmp->next;
+		}
 	}
 }
 
@@ -133,7 +134,7 @@ void	ft_print(t_data *head, t_flags fl)
 	perms = NULL;
 	if (fl.bits.upper_g)
 	{
-		if ((perms = ft_memalloc_2d_clean(list_size, max_len)) == NULL)
+		if ((perms = ft_memalloc_2d_clean(list_size, PERM_SIZE)) == NULL)
 			return ;
 		if (!head->perm)
 			ft_set_permissions(&head, NULL);
