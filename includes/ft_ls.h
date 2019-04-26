@@ -6,25 +6,25 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/26 16:27:42 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/26 17:00:51 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# define TRUE_LS 1
-# define TAB 8
-# define RESET "\x1B[0m"
-# define EXE_COLOR   "\x1B[31m"
-# define DIR_COLOR   "\x1B[34m"
-# define SIMLNK_BASE_COLOR   "\x1B[35m"
-# define BLOCK_COLOR "\x1B[34m\x1B[46m"
-# define CHAR_COLOR  "\x1B[34m\x1B[43m"
-# define EXE_SETUID_COLOR  "\x1B[30m\x1B[41m"
-# define EXE_SETGID_COLOR  "\x1B[30m\x1B[46m"
-# define STICKY_BIT_COLOR  "\x1B[30m\x1B[42m"
-# define NO_STICKY_BIT_COLOR  "\x1B[30m\x1B[43m"
+# define TAB	8
+# define RESET	"\x1B[0m"
+# define EXE_COLOR	"\x1B[31m"
+# define DIR_COLOR	"\x1B[34m"
+# define SIMLNK_BASE_COLOR	"\x1B[35m"
+# define BLOCK_COLOR	"\x1B[34m\x1B[46m"
+# define CHAR_COLOR	"\x1B[34m\x1B[43m"
+# define EXE_SETUID_COLOR	"\x1B[30m\x1B[41m"
+# define EXE_SETGID_COLOR	"\x1B[30m\x1B[46m"
+# define STICKY_BIT_COLOR	"\x1B[30m\x1B[42m"
+# define NO_STICKY_BIT_COLOR	"\x1B[30m\x1B[43m"
+# define PERM_SIZE	12
 
 # include <dirent.h>
 # include <libft.h>
