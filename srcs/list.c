@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/23 15:54:25 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:09:01 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,34 @@
 t_data	*new_node(struct dirent *dp)
 {
 	t_data	*node;
-	size_t	name_size;
 
 	if (!(node = (t_data *)malloc(sizeof(t_data))))
 	{
 		ft_putendl("doesn't malloced for a new node", 0);
 		return (NULL);
 	}
-	name_size = ft_strlen(dp->d_name);
-	if (!(node->name = (char *)malloc(sizeof(char) * (name_size + 1))))
-	{
-		free(node);
-		return (NULL);
-	}
-	ft_bzero(node->name, name_size);
-	ft_strcpy(node->name, dp->d_name);
-	node->len = name_size;
+	node->name = ft_strdup(dp->d_name);
+	node->len = ft_strlen(dp->d_name);
+	node->perm = NULL;
+	node->l_info = NULL;
 	node->next = NULL;
 	return (node);
 }
 
 void	new_l_node(t_data **av, char *path, t_flags fl)
 {
-	size_t	size;
 	char	*pt;
 
 	if (!fl.bits.d)
 		pt = ft_ls_path_to_file(path, 1);
 	else
 		pt = path;
-	size = ft_strlen(pt);
 	if (!((*av)->l_info = (t_lflag *)malloc(sizeof(t_lflag))))
 	{
 		ft_putendl("doesn't malloced for a new l node", 0);
 		return ;
 	}
-	(*av)->l_info->file_name = ft_memalloc(size + 1);
-	(*av)->l_info->file_name = ft_strcpy((*av)->l_info->file_name, pt);// why not just 'strdup' for file_name? No need for 'size' then...
+	(*av)->l_info->file_name = ft_strdup(pt);
 	(*av)->l_info->date = ft_memalloc(13);
 	(*av)->l_info->link = NULL;
 }
@@ -59,22 +50,16 @@ void	new_l_node(t_data **av, char *path, t_flags fl)
 t_data	*new_file(char *str)
 {
 	t_data	*node;
-	size_t	name_size;
 
 	if (!(node = (t_data *)malloc(sizeof(t_data))))
 	{
 		ft_putendl("doesn't malloced for a new file", 0);
 		return (NULL);
 	}
-	name_size = ft_strlen(str);
-	if (!(node->name = (char *)malloc(sizeof(char) * (name_size + 1))))
-	{
-		free(node);
-		return (NULL);
-	}
-	ft_bzero(node->name, name_size);
-	ft_strcat(node->name, str);
-	node->len = name_size;
+	node->name = ft_strdup(str);
+	node->len = ft_strlen(str);
+	node->perm = NULL;
+	node->l_info = NULL;
 	node->next = NULL;
 	return (node);
 }
