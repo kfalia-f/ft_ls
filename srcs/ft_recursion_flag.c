@@ -6,7 +6,11 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/04/26 13:59:50 by koparker         ###   ########.fr       */
+=======
+/*   Updated: 2019/04/22 20:12:15 by kfalia-f         ###   ########.fr       */
+>>>>>>> origin/ololo
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +32,7 @@ int		ft_only_files(t_data *head, char *path_name)
 		}
 		path = ft_str_path(path_name, tmp->name);
 		stat(path, &buff);
+		free(path); //
 	   	if (S_ISDIR(buff.st_mode))
 			return (0);
 		if (tmp)
@@ -42,22 +47,24 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	t_data			*head;
 	t_data			*tmp;
 	char			*path;
+	char			*pt;
 
 	head = ft_readdir(dirp, fl);
 	ft_balanser_sort(&head, fl, NULL);
-	path_name = ft_strjoin(path_name, "/");
-	if (ft_only_files(head, path_name))
+	pt = ft_strjoin(path_name, "/");
+	if (ft_only_files(head, pt))
 	{
-		ft_output(head, fl, 1, path_name);
+		ft_output(head, fl, 1, pt);
+		free(pt);//
 		return ;
 	}
 	tmp = head;
 	if (tmp)
-		ft_output(tmp, fl, 0, path_name);
+		ft_output(tmp, fl, 0, pt);//
 	ft_skip_dots(&tmp, fl);
 	while (tmp)
 	{
-		path = ft_str_path(path_name, tmp->name);
+		path = ft_str_path(pt, tmp->name);
 		if ((dirp2 = opendir(path)))
 		{
 			ft_putendl(path, 2);
@@ -65,8 +72,10 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 			closedir(dirp2);
 		}
 		tmp = tmp->next;
+		free(path);
 	}
-	ft_free_list(head);
+	ft_free_list(&head, 0);
+	free(pt);
 }
 
 void	ft_recursion_flag(char **av, int flag, t_flags fl)

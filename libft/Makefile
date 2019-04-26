@@ -6,11 +6,11 @@
 #    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 17:39:07 by koparker          #+#    #+#              #
-#    Updated: 2019/04/22 20:39:50 by koparker         ###   ########.fr        #
+#    Updated: 2019/04/26 14:39:23 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-WFLAGS = -Wall -Wextra -Werror
+WFLAGS = -g -Wall -Wextra -Werror
 
 NAME = libft.a
 

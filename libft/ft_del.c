@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 19:24:30 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 15:15:36 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:39:03 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	*ft_del(char ***a, size_t n)
 		(*a)[i] = NULL;
 		i++;
 	}
-	ft_strdel(*a);
+	free(*a);
+	*a = NULL;
 	return (NULL);
 }

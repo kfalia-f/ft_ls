@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:03:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/22 21:42:26 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:38:14 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@ char    get_acl(char *path)
 		acl = NULL;
 	}
 	xattr = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
-	if (xattr > 0)
-		return ('@');
-	else if (acl != NULL)
+	if (acl != NULL)
+	{
+		acl_free(acl);
+		acl = NULL;
 		return ('+');
+	}
+	else if (xattr > 0)
+		return ('@');
 	return (' ');
 }
 
@@ -120,8 +124,8 @@ void    get_info(char *path, t_data *st, t_flags fl)
 	pwd = getpwuid(buff.st_uid);   //owner name
 	gr = getgrgid(buff.st_gid);   //group name
 
-	st->l_info->owner = ft_strcpy(ft_memalloc(ft_strlen(pwd->pw_name)), pwd->pw_name); //owner
-	st->l_info->group = ft_strcpy(ft_memalloc(ft_strlen(gr->gr_name)), gr->gr_name);  //group
+	st->l_info->owner = ft_strdup(pwd->pw_name); //owner
+	st->l_info->group = ft_strdup(gr->gr_name);  //group
 	time_balanser_get_info(st, fl, buff); //date & time
 	st->l_info->links = buff.st_nlink;  //num of links
 	st->l_info->permissions = get_permission(buff.st_mode, path); //permissions (r/w/x) + file type

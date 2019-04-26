@@ -6,7 +6,11 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/04/26 14:09:01 by koparker         ###   ########.fr       */
+=======
+/*   Updated: 2019/04/24 16:55:50 by kfalia-f         ###   ########.fr       */
+>>>>>>> origin/ololo
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +38,7 @@ void	new_l_node(t_data **av, char *path, t_flags fl)
 	char	*pt;
 
 	if (!fl.bits.d)
-		pt = ft_ls_path_to_file(path, 1);
+		pt = (*av)->name;
 	else
 		pt = path;
 	if (!((*av)->l_info = (t_lflag *)malloc(sizeof(t_lflag))))
@@ -43,7 +47,6 @@ void	new_l_node(t_data **av, char *path, t_flags fl)
 		return ;
 	}
 	(*av)->l_info->file_name = ft_strdup(pt);
-	(*av)->l_info->date = ft_memalloc(13);
 	(*av)->l_info->link = NULL;
 }
 
@@ -115,17 +118,60 @@ void	ft_rev_list(t_data **head)
 	*head = prev;
 }
 
-void	ft_free_list(t_data *head)
+void 	ft_free_l_info(t_data **node)
+{
+	free((*node)->l_info->permissions);
+	(*node)->l_info->permissions = NULL;
+	free((*node)->l_info->owner);
+	(*node)->l_info->owner = NULL;
+	free((*node)->l_info->group);
+	(*node)->l_info->group = NULL;
+	free((*node)->l_info->date);
+	(*node)->l_info->date = NULL;
+	free((*node)->l_info->file_name);
+	(*node)->l_info->file_name = NULL;
+	if ((*node)->l_info->link)
+	{
+		free((*node)->l_info->link);
+		(*node)->l_info->link = NULL;
+	}
+	free((*node)->l_info);
+	(*node)->l_info = NULL;
+}
+
+void	ft_free_list(t_data **head, int flag_l)
 {
 	t_data	*tmp;
 
-	if (head == NULL)
+	tmp = NULL;
+	if (*head == NULL)
 		return ;
-	while (head != NULL)
+	while (*head)
 	{
-		tmp = head;
-		head = head->next;
+		tmp = *head;
+		*head = (*head)->next;
 		free(tmp->name);
+		tmp->name = NULL;
+		if (flag_l)
+			ft_free_l_info(&tmp);
+		free(tmp);
+		tmp = NULL;
+	}
+}
+
+void	ft_free_perm(t_data **head)
+{
+	t_data	*tmp;
+
+	tmp = NULL;
+	if (*head == NULL)
+		return ;
+	while (*head)
+	{
+		tmp = *head;
+		*head = (*head)->next;
+		free(tmp->perm);
+		tmp->perm = NULL;
 		free(tmp);
 		tmp = NULL;
 	}

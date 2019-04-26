@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 18:28:56 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/26 14:41:12 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,16 @@ t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);
 size_t				ft_list_size(t_data *lst);
 void				ft_rev_list(t_data **head);
-void				ft_free_list(t_data *head);
+void				ft_free_list(t_data **head, int flag);
+void				ft_free_perm(t_data **head);
 
-t_lflag				*ft_l_ascii_sort(t_lflag **head);
 
 size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
 int					ft_flags(int ac, char **av, t_flags *flags);
+
 void				ft_sort_params(char **av, int num_of_flags, t_flags fl);
+
 void				ft_argv(t_data **head, int n, t_flags fl);
 
 void				ft_recursion_flag(char **av, int flag, t_flags flags);
@@ -127,10 +129,8 @@ void				ft_process_current_dir(char *s, t_flags fl);
 void				ft_output(t_data *head, t_flags fl, int to_free, char *path);
 void				ft_output_files(t_data *head, t_flags fl, int to_free, char *path);
 
-void				l_push_back(t_lflag **head, t_lflag *node);
 void				new_l_node(t_data **av, char *path, t_flags fl);
 void				ft_l(char *path_name, t_flags fl);
-t_data				*ft_convert_args(char **av);
 void				ft_simple_l(t_data *head, t_flags fl);
 
 void				time_balanser_get_info(t_data *st, t_flags fl, struct stat buff);
