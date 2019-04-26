@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/26 15:49:44 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/26 18:36:49 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void	ft_free_perm(t_data **head)
 	tmp = NULL;
 	if (*head == NULL)
 		return ;
+	tmp = *head;
 	while (tmp)
 	{
 		free(tmp->perm);
