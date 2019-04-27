@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_output_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:24:54 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 20:12:02 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 17:03:11 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ size_t	ft_max_namlen(t_data *data)
 		tmp = tmp->next;
 	}
 	return (max);
+}
+
+void	ft_sps(char *str, size_t len)
+{
+	ft_putstr(str);
+	ft_output_spaces(' ', len);
 }
 
 void	ft_output_spaces(char c, size_t len)

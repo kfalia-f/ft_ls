@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 16:04:04 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:50:19 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,44 @@ void	ft_l(char *path_name, t_flags fl)
 	ft_free_list(&lhead, 1);
 }
 
-void		ft_arr(t_data *st, int a[6])
+int			ft_len(size_t n)
 {
-	a[0] = ft_max_llen(st, 0);
-	a[1] = ft_max_llen(st, 1);
-	a[2] = ft_max_llen(st, 2);
-	a[3] = ft_max_llen(st, 3);
-	a[4] = ft_max_llen(st, 4);
-	a[5] = ft_max_llen(st, 5);
+	int size;
+
+	size = 1;
+	while (n / 10 != 0)
+	{
+		n /= 10;
+		size++;
+	}
+	return (size);
+}
+
+int			ft_max_llen(t_data *st, int flag)
+{
+	t_data	*tmp;
+	int		len;
+	int		max;
+
+	tmp = st;
+	max = 0;
+	while (tmp)
+	{
+		if (flag == 0)
+			len = ft_len(tmp->l_info->links);
+		else if (flag == 1)
+			len = ft_len(tmp->l_info->file_size);
+		else if (flag == 2)
+			len = ft_strlen(tmp->l_info->owner);
+		else if (flag == 3)
+			len = ft_strlen(tmp->l_info->group);
+		else if (flag == 4)
+			len = ft_len(tmp->l_info->maj);
+		else if (flag == 5)
+			len = ft_len(tmp->l_info->min);
+		if (max < len)
+			max = len;
+		tmp = tmp->next;
+	}
+	return (max);
 }

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 15:18:22 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 17:34:47 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	head = tmp;
 	if (tmp)
 		ft_output(tmp, fl, 0, pt);
-	//ft_skip_dots(&tmp, fl);
 	if (!fl.bits.a && !fl.bits.f)
 		ft_remove_dots(&tmp);
 	ft_rec(tmp, pt, fl);
@@ -88,32 +87,40 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	free(pt);
 }
 
-void	ft_recursion_flag(char **av, int flag, t_flags fl)
+void	ft_dot(t_flags fl)
+{
+	DIR		*dirp;
+
+	dirp = opendir(".");
+	ft_recurs(".", dirp, fl);
+	closedir(dirp);
+}
+
+void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
 {
 	DIR			*dirp;
+	t_data		*head;
 	int			i;
 
 	if (fl.bits.d)
 		return ;
 	i = 0;
-	if (flag == 0)
+	head = av;
+	if (head == NULL)
 	{
-		dirp = opendir(".");
-		ft_recurs(".", dirp, fl);
-		closedir(dirp);
+		ft_dot(fl);
 		return ;
 	}
-	while (av[i])
+	ft_balanser_sort(&head, fl, head->name);
+	while (head)
 	{
-		if ((dirp = opendir(av[i])))
-		{
-			if (flag + i == flag && flag > 1)
-				ft_putendl(av[i], 1);
-			else if (flag > 1)
-				ft_putendl(av[i], 2);
-			ft_recurs(av[i], dirp, fl);
-			closedir(dirp);
-		}
-		i++;
+		dirp = opendir(head->name);
+		if (i == 0 && flag > 1 && (i += 1))
+			ft_putendl(head->name, 1);
+		else if (flag > 1)
+			ft_putendl(head->name, 2);
+		ft_recurs(head->name, dirp, fl);
+		closedir(dirp);
+		head = head->next;
 	}
 }
