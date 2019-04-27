@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_balanser.c                                 :+:      :+:    :+:   */
+/*   ft_sort_balancer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/26 20:21:19 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/27 18:05:22 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 			else if (!fl.bits.one)
 				ft_print(head, fl);
 			else
-		        ft_print_simple(head, fl);
+				ft_print_simple(head, fl);
 			ft_free_list(&head, 0);
 			return ;
 		}
@@ -76,5 +76,5 @@ void	ft_output_files(t_data *head, t_flags fl, int to_free, char *path)
 	else
 		ft_print_simple(head, fl);
 	if (to_free)
-		ft_free_list(&head, 0);	
+		ft_free_list(&head, 0);
 }
