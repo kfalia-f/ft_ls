@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/26 15:52:30 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/26 19:14:00 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	ft_recursion_flag(char **av, int flag, t_flags fl)
 	DIR			*dirp;
 	int			i;
 
+	if (fl.bits.d)
+		return ;
 	i = 0;
 	if (flag == 0)
 	{
