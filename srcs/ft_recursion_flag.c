@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 17:34:47 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 18:01:20 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,32 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	free(pt);
 }
 
-void	ft_dot(t_flags fl)
+int		ft_dot(t_data *head, t_flags fl)
 {
-	DIR		*dirp;
+	DIR			*dirp;
+	struct stat	buff;
+	t_data		*tmp;
+	t_data		*new;
 
-	dirp = opendir(".");
-	ft_recurs(".", dirp, fl);
-	closedir(dirp);
+	tmp = head;
+	if (tmp == NULL)
+	{
+		dirp = opendir(".");
+		ft_recurs(".", dirp, fl);
+		closedir(dirp);
+		return (-1);
+	}
+	new = NULL;
+	while (tmp)
+	{
+		stat(tmp->name, &buff);
+		if (S_ISREG(buff.st_mode))
+			push_back(&new, new_file(tmp->name));
+		tmp = tmp->next;
+	}
+	if (new)
+		ft_print(new, fl);
+	return (ft_list_size(new));
 }
 
 void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
@@ -104,23 +123,22 @@ void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
 
 	if (fl.bits.d)
 		return ;
-	i = 0;
 	head = av;
-	if (head == NULL)
-	{
-		ft_dot(fl);
-		return ;
-	}
 	ft_balanser_sort(&head, fl, head->name);
+	i = ft_dot(head, fl);
+	if (i == -1)
+		return ;
 	while (head)
 	{
-		dirp = opendir(head->name);
-		if (i == 0 && flag > 1 && (i += 1))
-			ft_putendl(head->name, 1);
-		else if (flag > 1)
-			ft_putendl(head->name, 2);
-		ft_recurs(head->name, dirp, fl);
-		closedir(dirp);
+		if ((dirp = opendir(head->name)))
+		{
+			if (i == 0 && flag > 1 && (i += 1))
+				ft_putendl(head->name, 1);
+			else if (flag > 1)
+				ft_putendl(head->name, 2);
+			ft_recurs(head->name, dirp, fl);
+			closedir(dirp);
+		}
 		head = head->next;
 	}
 }
