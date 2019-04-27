@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/26 15:38:13 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/26 19:39:02 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		main(int ac, char **av)
     fl.value = 0;
 	num_of_flags = ft_flags(ac, av, &fl);
 	flag = ac - num_of_flags - 1;
+	if (fl.bits.d)
+		fl.bits.upper_r = 0;
 	if (!flag && !fl.bits.upper_r)
 	{
 		ft_process_current_dir(".", fl);
@@ -29,40 +31,6 @@ int		main(int ac, char **av)
 	}
 	if (!fl.bits.upper_r)
 		args = ft_convert_args(av + num_of_flags + 1);
-/*	while (1)
-	{
-		if (fl.bits.upper_r == 1)
-			ft_putendl("R", 0);
-		if (fl.bits.upper_g == 1)
-			ft_putendl("G", 0);
-		if (fl.bits.a == 1)
-			ft_putendl("a", 0);
-		if (fl.bits.f == 1)
-			ft_putendl("f", 0);
-		if (fl.bits.l == 1)
-			ft_putendl("l", 0);
-		if (fl.bits.r == 1)
-			ft_putendl("r", 0);
-		if (fl.bits.t == 1)
-			ft_putendl("t", 0);
-		if (fl.bits.u == 1)
-			ft_putendl("u", 0);
-		if (fl.bits.one == 1)
-			ft_putendl("1", 0);
-		break ;
-	}*/
-	/*if (flag == 0 && fl.bits.upper_r == 0)
-	{
-		ft_process_current_dir(".", fl);
-		return (0);
-	}
-	ft_balanser_sort(&args, fl, NULL);
-	if (fl.bits.d)
-	{
-		ft_argv(&args, ac - num_of_flags - 1, fl);
-		return (0);
-	}
-	*/
 	if (fl.bits.l && !fl.bits.upper_r && !fl.bits.d)
 		ft_l_flag(args, flag, fl);
 	else if (fl.bits.upper_r)
@@ -70,7 +38,8 @@ int		main(int ac, char **av)
 	else
 	{
 		ft_argv(&args, ac - num_of_flags - 1, fl);
-		ft_free_list(&args, 0);
+		if (!fl.bits.d)
+			ft_free_list(&args, 0);
 	}
 	return (0);
 }

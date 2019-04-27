@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/26 19:14:00 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:18:22 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	ft_rec(t_data *tmp, char *pt, t_flags fl)
 
 	while (tmp)
 	{
+		if (!ft_strcmp(tmp->name, ".") || !ft_strcmp(tmp->name, ".."))
+		{
+			tmp = tmp->next;
+			continue ;
+		}
 		path = ft_str_path(pt, tmp->name);
 		if ((dirp2 = opendir(path)))
 		{
@@ -63,7 +68,7 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	char			*pt;
 
 	head = ft_readdir(dirp, fl);
-	ft_balanser_sort(&head, fl, NULL);
+	ft_balanser_sort(&head, fl, path_name);
 	tmp = head;
 	pt = ft_strjoin(path_name, "/");
 	if (ft_only_files(head, pt))
@@ -75,7 +80,9 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	head = tmp;
 	if (tmp)
 		ft_output(tmp, fl, 0, pt);
-	ft_skip_dots(&tmp, fl);
+	//ft_skip_dots(&tmp, fl);
+	if (!fl.bits.a && !fl.bits.f)
+		ft_remove_dots(&tmp);
 	ft_rec(tmp, pt, fl);
 	ft_free_list(&head, 0);
 	free(pt);

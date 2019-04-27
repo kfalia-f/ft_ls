@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:48:00 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/26 18:21:23 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/26 19:41:29 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void    ft_set_permissions(t_data **head, char *path)
 		lstat(path_name, &buff);
 		tmp->perm = get_permission(buff.st_mode, path_name);
 		tmp = tmp->next;
+		if (path)
+			free(path_name);
 	}
 }
 
