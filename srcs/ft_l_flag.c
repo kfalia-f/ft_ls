@@ -6,31 +6,21 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:24:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/26 16:03:48 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:51:56 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	ft_link(t_data *av, char *path, int flag, t_flags fl)
+void	ft_link(t_data *av, char *path)
 {
 	char	link[4096];
 
 	ft_bzero(link, 4096);
-	if (flag == 1)
-	{
-		new_l_node(&av, av->name, fl);
-		get_info(av->name, av, fl);
-	}
-	else
-	{
-		readlink(path, link, 4096);
-		free(av->l_info->file_name);
-		av->l_info->file_name = ft_strjoin(av->name, " ");
-		av->l_info->link = ft_strjoin("-> ", link);
-	}
-	if (flag == 1)
-		ft_output_info(av, fl, -1);
+	readlink(path, link, 4096);
+	free(av->l_info->file_name);
+	av->l_info->file_name = ft_strjoin(av->name, " ");
+	av->l_info->link = ft_strjoin("-> ", link);
 }
 
 t_data	*ft_new(t_data *av)
@@ -65,7 +55,7 @@ int		ft_forl(t_data *head, t_flags fl)
 		get_info(new->name, new, fl);
 		new = new->next;
 	}
-	ft_output_info(av, fl, 0);
+	ft_output_info(av, fl);
 	if (i > 0)
 		ft_free_list(&av, 1);
 	return (i);

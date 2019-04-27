@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 15:25:12 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:48:34 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		ft_simple_l(t_data *head, t_flags fl)
 		head = head->next;
 	}
 	head = tmp;
-	ft_output_info(head, fl, 0);
+	ft_output_info(head, fl);
 	ft_free_list(&tmp, 1);
 }
 

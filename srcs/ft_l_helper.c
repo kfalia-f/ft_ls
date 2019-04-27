@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 15:37:48 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:04:04 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,17 @@ void	ft_l(char *path_name, t_flags fl)
 	ft_balanser_sort(&lhead, fl, NULL);
 	if (lhead)
 		ft_total(path_name, lhead);
-	ft_output_info(lhead, fl, 0);
+	ft_output_info(lhead, fl);
 	closedir(dirp);
 	ft_free_list(&lhead, 1);
+}
+
+void		ft_arr(t_data *st, int a[6])
+{
+	a[0] = ft_max_llen(st, 0);
+	a[1] = ft_max_llen(st, 1);
+	a[2] = ft_max_llen(st, 2);
+	a[3] = ft_max_llen(st, 3);
+	a[4] = ft_max_llen(st, 4);
+	a[5] = ft_max_llen(st, 5);
 }

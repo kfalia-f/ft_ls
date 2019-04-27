@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:03:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/26 17:00:36 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:52:53 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ void	get_info(char *path, t_data *st, t_flags fl)
 	st->l_info->group = ft_strdup(gr->gr_name);
 	time_balanser_get_info(st, fl, buff);
 	st->l_info->links = buff.st_nlink;
-	st->l_info->permissions = get_permission(buff.st_mode, path);
-	if (*(st->l_info->permissions) != 'c' && *(st->l_info->permissions) != 'b')
+	st->l_info->perm = get_permission(buff.st_mode, path);
+	if (*(st->l_info->perm) != 'c' && *(st->l_info->perm) != 'b')
 	{
 		st->l_info->file_size = buff.st_size;
 		st->l_info->maj = 0;
@@ -133,5 +133,5 @@ void	get_info(char *path, t_data *st, t_flags fl)
 		st->l_info->min = minor(buff.st_rdev);
 	}
 	if (S_ISLNK(buff.st_mode))
-		ft_link(st, path, 0, fl);
+		ft_link(st, path);
 }

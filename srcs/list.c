@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/26 19:37:47 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:48:13 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ void	ft_rev_list(t_data **head)
 
 void 	ft_free_l_info(t_data **node)
 {
-	free((*node)->l_info->permissions);
-	(*node)->l_info->permissions = NULL;
+	free((*node)->l_info->perm);
+	(*node)->l_info->perm = NULL;
 	free((*node)->l_info->owner);
 	(*node)->l_info->owner = NULL;
 	free((*node)->l_info->group);

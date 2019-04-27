@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_l_output.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 16:19:19 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 19:10:58 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:07:13 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-int		ft_len(size_t n)
+int			ft_len(size_t n)
 {
 	int size;
 
@@ -25,28 +25,27 @@ int		ft_len(size_t n)
 	return (size);
 }
 
-int		ft_corb(t_data *st, int flag)
+int			ft_corb(t_data *st)
 {
 	t_data *tmp;
 
 	tmp = st;
-	if (flag == -1)
-		return (0);
 	while (tmp)
 	{
-		if (*(tmp->l_info->permissions) == 'c' || *(tmp->l_info->permissions) == 'b')
+		if (*(tmp->l_info->perm) == 'c' ||
+				*(tmp->l_info->perm) == 'b')
 			return (1);
 		tmp = tmp->next;
 	}
 	return (0);
 }
 
-void	ft_size(t_data *tmp, int a[6], int flag)
+void		ft_size(t_data *tmp, int a[6], int flag)
 {
-	if (*(tmp->l_info->permissions) == 'c' || *(tmp->l_info->permissions) == 'b')
+	if (*(tmp->l_info->perm) == 'c' || *(tmp->l_info->perm) == 'b')
 	{
 		ft_output_spaces(' ', 1 + a[4] - ft_len(tmp->l_info->maj));
-		if (*(tmp->l_info->permissions) == 'c' || *(tmp->l_info->permissions) == 'b')
+		if (*(tmp->l_info->perm) == 'c' || *(tmp->l_info->perm) == 'b')
 		{
 			ft_putnbr(tmp->l_info->maj);
 			ft_putchar(',');
@@ -69,11 +68,11 @@ void	ft_size(t_data *tmp, int a[6], int flag)
 	}
 }
 
-static int      ft_max_llen(t_data *st, int flag, int f)  //0 = link; 1 = size; 2 = owner; 3 = group 4 = maj 5 = min
+int			ft_max_llen(t_data *st, int flag)
 {
-	t_data  *tmp;
-	int     len;
-	int     max;
+	t_data	*tmp;
+	int		len;
+	int		max;
 
 	tmp = st;
 	max = 0;
@@ -93,28 +92,21 @@ static int      ft_max_llen(t_data *st, int flag, int f)  //0 = link; 1 = size; 
 			len = ft_len(tmp->l_info->min);
 		if (max < len)
 			max = len;
-		if (f == -1)
-			return (max);
 		tmp = tmp->next;
 	}
 	return (max);
 }
 
-void	ft_output_info(t_data *st, t_flags fl, int flag)
+void		ft_output_info(t_data *st, t_flags fl)
 {
 	t_data		*tmp;
 	int			a[6];
 
 	tmp = st;
-	a[0] = ft_max_llen(st, 0, flag);
-	a[1] = ft_max_llen(st, 1, flag);
-	a[2] = ft_max_llen(st, 2, flag);
-	a[3] = ft_max_llen(st, 3, flag);
-	a[4] = ft_max_llen(st, 4, flag);
-	a[5] = ft_max_llen(st, 5, flag);
+	ft_arr(st, a);
 	while (tmp)
 	{
-		ft_putstr(tmp->l_info->permissions);
+		ft_putstr(tmp->l_info->perm);
 		ft_output_spaces(' ', 1 + a[0] - ft_len(tmp->l_info->links));
 		ft_putnbr(tmp->l_info->links);
 		ft_output_spaces(' ', 1);
@@ -125,7 +117,7 @@ void	ft_output_info(t_data *st, t_flags fl, int flag)
 		}
 		ft_putstr(tmp->l_info->group);
 		ft_output_spaces(' ', 2 + a[3] - ft_strlen(tmp->l_info->group));
-		ft_size(tmp, a, ft_corb(st, flag));
+		ft_size(tmp, a, ft_corb(st));
 		ft_output_spaces(' ', 1);
 		ft_putstr(tmp->l_info->date);
 		ft_output_spaces(' ', 1);
@@ -136,8 +128,6 @@ void	ft_output_info(t_data *st, t_flags fl, int flag)
 		if (tmp->l_info->link)
 			ft_putstr(tmp->l_info->link);
 		ft_putchar('\n');
-		if (flag == -1)
-			return ;
 		tmp = tmp->next;
 	}
 }

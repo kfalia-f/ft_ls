@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:11:20 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/26 18:55:06 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:51:26 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_sticky_file_l(t_data *st)
 	char	*name;
 	char	*tmp;
 
-	perm = st->l_info->permissions;
+	perm = st->l_info->perm;
 	name = st->l_info->file_name;
 	tmp = NULL;
 	if (*perm == '-')
@@ -45,7 +45,7 @@ size_t	ft_sticky_dir_l(t_data *st)
 	char	*name;
 	char	*tmp;
 
-	perm = st->l_info->permissions;
+	perm = st->l_info->perm;
 	name = st->l_info->file_name;
 	tmp = NULL;
 	if (ft_strnchr(perm, 'w', 8) && *perm == 'd')
@@ -67,7 +67,7 @@ void	ft_colorized_output_l(t_data *st)
 	char	*name;
 	char	*tmp;
 
-	perm = st->l_info->permissions;
+	perm = st->l_info->perm;
 	name = st->l_info->file_name;
 	tmp = NULL;
 	if (ft_sticky_file_l(st))

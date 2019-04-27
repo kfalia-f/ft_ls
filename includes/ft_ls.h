@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/26 17:00:51 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:05:06 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct		s_lflag
 	size_t			total;
 	size_t			maj;
 	size_t			min;
-	char			*permissions;
+	char			*perm;
 	char			*owner;
 	char			*group;
 	char			*date;
@@ -136,9 +136,11 @@ void				ft_simple_l(t_data *head, t_flags fl);
 
 void				time_balanser_get_info(t_data *st, t_flags fl, struct stat buff);
 char				*ft_date(char *data, size_t tm, int i, int j);
-void				ft_link(t_data *av, char *path, int flag, t_flags fl);
+void				ft_link(t_data *av, char *path);
 void				get_info(char *path, t_data *st, t_flags fl);
-void				ft_output_info(t_data *st, t_flags fl, int flag);
+void				ft_output_info(t_data *st, t_flags fl);
+void				ft_arr(t_data *st, int a[6]);
+int					ft_max_llen(t_data *st, int flag);
 
 void				ft_d_flag(t_data *head, t_flags fl);
 void				ft_balanser_sort(t_data **head, t_flags fl, char *path);
