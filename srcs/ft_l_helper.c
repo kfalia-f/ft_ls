@@ -6,13 +6,13 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/26 16:21:10 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:37:48 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-int		ft_total(char *path_name, t_data *st)
+void	ft_total(char *path_name, t_data *st)
 {
 	struct stat buff;
 	t_data		*tmp;
@@ -21,6 +21,7 @@ int		ft_total(char *path_name, t_data *st)
 
 	tmp = st;
 	total = 0;
+	ft_putstr("total ");
 	while (tmp)
 	{
 		pt = ft_str_path(path_name, tmp->name);
@@ -29,7 +30,8 @@ int		ft_total(char *path_name, t_data *st)
 		total += buff.st_blocks;
 		tmp = tmp->next;
 	}
-	return (total);
+	ft_putnbr(total);
+	ft_putchar('\n');
 }
 
 void	time_balanser_get_info(t_data *st, t_flags fl, struct stat buff)
@@ -52,42 +54,29 @@ void	time_balanser_get_info(t_data *st, t_flags fl, struct stat buff)
 	}
 }
 
-void	ft_l(char *path_name, t_flags flags)
+void	ft_l(char *path_name, t_flags fl)
 {
 	DIR				*dirp;
-	struct dirent	*dp;
 	t_data			*lhead;
 	t_data			*lnode;
 	char			*pt;
 
-	lhead = NULL;
 	if (!(dirp = opendir(path_name)))
 		return ;
-	while ((dp = readdir(dirp)) != NULL)
-	{
-		if (*(dp->d_name) == '.')
-			if (flags.bits.a == 0 && flags.bits.f == 0)
-				continue ;
-		lnode = new_node(dp);
-		push_back(&lhead, lnode);
-	}
+	lhead = ft_readdir(dirp, fl);
 	lnode = lhead;
 	while (lnode)
 	{
-		new_l_node(&lnode, lnode->name, flags);
+		new_l_node(&lnode, lnode->name, fl);
 		pt = ft_str_path(path_name, lnode->name);
-		get_info(pt, lnode, flags);
+		get_info(pt, lnode, fl);
 		free(pt);
 		lnode = lnode->next;
 	}
-	ft_balanser_sort(&lhead, flags, NULL);
+	ft_balanser_sort(&lhead, fl, NULL);
 	if (lhead)
-	{
-		ft_putstr("total ");
-		ft_putnbr(ft_total(path_name, lhead));
-		ft_putchar('\n');
-	}
-	ft_output_info(lhead, flags, 0);
+		ft_total(path_name, lhead);
+	ft_output_info(lhead, fl, 0);
 	closedir(dirp);
 	ft_free_list(&lhead, 1);
 }

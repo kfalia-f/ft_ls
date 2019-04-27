@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_flags.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 15:18:36 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:25:12 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int			ft_flags(int ac, char **av, t_flags *flags)
 	int	i;
 	int	num_of_flags;
 
-	i = 1;
+	i = 0;
 	num_of_flags = 0;
-	while (i < ac)
+	while (++i < ac)
 	{
 		if (av[i][0] == '-' && av[i][1] == '-')
 		{
@@ -64,14 +64,13 @@ int			ft_flags(int ac, char **av, t_flags *flags)
 		}
 		else
 			break ;
-		i++;
 	}
 	if (flags->bits.g)
 		flags->bits.l = 1;
 	return (num_of_flags);
 }
 
-void	ft_simple_l(t_data *head, t_flags fl)
+void		ft_simple_l(t_data *head, t_flags fl)
 {
 	t_data	*tmp;
 
@@ -87,7 +86,7 @@ void	ft_simple_l(t_data *head, t_flags fl)
 	ft_free_list(&tmp, 1);
 }
 
-void	ft_d_flag(t_data *head, t_flags fl)
+void		ft_d_flag(t_data *head, t_flags fl)
 {
 	ft_balanser_sort(&head, fl, NULL);
 	if (fl.bits.l && !fl.bits.one)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_with_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/25 17:41:34 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:26:44 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ size_t	ft_process_files(t_data **head, t_flags fl)
 			push_back(&head_file, new_file(tmp->name));
 		tmp = tmp->next;
 		if (dirp != NULL)
-            closedir(dirp);
+			closedir(dirp);
 	}
 	if (head_file != NULL)
 	{
