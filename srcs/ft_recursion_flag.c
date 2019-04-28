@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 18:01:20 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 15:06:02 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int		ft_dot(t_data *head, t_flags fl)
 	struct stat	buff;
 	t_data		*tmp;
 	t_data		*new;
+	int			i;
 
 	tmp = head;
 	if (tmp == NULL)
@@ -110,9 +111,15 @@ int		ft_dot(t_data *head, t_flags fl)
 			push_back(&new, new_file(tmp->name));
 		tmp = tmp->next;
 	}
+	i = ft_list_size(new);
 	if (new)
-		ft_print(new, fl);
-	return (ft_list_size(new));
+	{
+		if (fl.bits.l)
+			ft_simple_l(new, fl);
+		else
+			ft_print(new, fl);
+	}
+	return (i);
 }
 
 void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
@@ -124,7 +131,8 @@ void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
 	if (fl.bits.d)
 		return ;
 	head = av;
-	ft_balanser_sort(&head, fl, head->name);
+	if (head)
+		ft_balanser_sort(&head, fl, head->name);
 	i = ft_dot(head, fl);
 	if (i == -1)
 		return ;
