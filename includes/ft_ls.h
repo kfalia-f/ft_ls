@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 12:59:28 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 14:36:21 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void				ft_d_flag(t_data *head, t_flags fl);
 void				ft_balanser_sort(t_data **head, t_flags fl, char *path);
 
 void				ft_argv_error(char *s);
-void				ft_colorized_output_l(t_data *st);
+void				ft_colorized_output_l(char *perm, char *name);
 void				ft_colorized_output(char *perm, char *name);
 char				*get_permission(mode_t st_mode, char *path);
 void				ft_set_permissions(t_data **head, char *path);

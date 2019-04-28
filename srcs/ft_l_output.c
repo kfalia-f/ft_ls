@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 16:19:19 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 17:05:46 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 14:36:27 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		ft_output_info(t_data *st, t_flags fl)
 		ft_size(tmp, a, ft_corb(st));
 		ft_sps(tmp->l_info->date, 1);
 		if (fl.bits.upper_g)
-			ft_colorized_output_l(tmp);
+			ft_colorized_output_l(tmp->l_info->perm, tmp->l_info->file_name);
 		else
 			ft_putstr(tmp->l_info->file_name);
 		if (tmp->l_info->link)

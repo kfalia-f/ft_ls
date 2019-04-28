@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:11:20 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 14:10:46 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 14:36:16 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,10 @@ size_t	ft_sticky_dir_l(char *perm, char *name)
 	return (0);
 }
 
-void	ft_colorized_output_l(t_data *st)
+void	ft_colorized_output_l(char *perm, char *name)
 {
-	char	*perm;
-	char	*name;
 	char	*tmp;
 
-	perm = st->l_info->perm;
-	name = st->l_info->file_name;
 	tmp = NULL;
 	if (ft_sticky_file_l(perm, name) || ft_sticky_dir_l(perm, name))
 		ft_putstr(RESET);
@@ -82,6 +78,4 @@ void	ft_colorized_output_l(t_data *st)
 		ft_strdel(&tmp);
 	}
 	ft_putstr(RESET);
-	perm = NULL;
-	name = NULL;
 }
