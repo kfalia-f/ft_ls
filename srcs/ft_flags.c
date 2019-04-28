@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 12:25:57 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 16:16:00 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		ft_d_flag(t_data *head, t_flags fl)
 	{
 		if (fl.bits.upper_g)
 			ft_set_permissions(&head, NULL);
-		ft_print(head, fl);
+		ft_print(head, fl, NULL);
 	}
 	else
 		ft_print_simple(head, fl);

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 15:48:48 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 16:13:54 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,11 @@ int					ft_flags(int ac, char **av, t_flags *flags);
 void				ft_argv(t_data **head, int n, t_flags fl);
 
 void				ft_recursion_flag(t_data *av, int flag, t_flags flags);
-int					ft_dot(t_data *head, t_flags fl, int i);
+int					ft_dot(t_data *head, t_flags fl, int i, int flag);
 void				ft_l_flag(t_data *av, int flag, t_flags flags);
 
 t_data				*ft_readdir(DIR *dirp, t_flags fl);
-void				ft_print(t_data *head, t_flags fl);
+void				ft_print(t_data *head, t_flags fl, char *path);
 void				ft_print_first_upper_g(char **names, char **perms,
 					size_t row);
 void				ft_pr_upper_g(char **names, char **perms, size_t row,

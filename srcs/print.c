@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 17:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 14:22:41 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 16:19:47 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	ft_print_simple(t_data *head, t_flags fl)
 	}
 }
 
-void	ft_print(t_data *head, t_flags fl)
+void	ft_print(t_data *head, t_flags fl, char *path)
 {
 	char	**names;
 	char	**perms;
@@ -120,7 +120,7 @@ void	ft_print(t_data *head, t_flags fl)
 		if ((perms = ft_memalloc_2d_clean(list_size, PERM_SIZE)) == NULL)
 			return ;
 		if (!head->perm)
-			ft_set_permissions(&head, NULL);
+			ft_set_permissions(&head, path);
 		ft_lstcontent_to_char_arr(perms, head, 1);
 	}
 	ft_print_contents(names, perms, max_len, fl);

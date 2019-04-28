@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 15:48:05 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 16:06:02 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	head = ft_readdir(dirp, fl);
 	ft_balanser_sort(&head, fl, path_name);
 	tmp = head;
-	pt = ft_strjoin(path_name, "/");
+	pt = ft_strjoin(path_name, "");
 	if (ft_only_files(head, pt))
 	{
 		ft_output(head, fl, 1, pt);
@@ -98,7 +98,7 @@ void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
 	if (av)
 		ft_balanser_sort(&av, fl, av->name);
 	head = av;
-	if ((i = ft_dot(head, fl, 0)) == -1)
+	if ((i = ft_dot(head, fl, 0, flag)) == -1)
 		return ;
 	while (head)
 	{

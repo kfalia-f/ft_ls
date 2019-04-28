@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 15:50:42 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 15:50:47 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 16:16:46 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int		ft_rfile_out(t_data *new, t_flags fl)
 		ft_simple_l(new, fl);
 	else
 	{
-		ft_print(new, fl);
+		ft_print(new, fl, new->name);
 		ft_free_list(&new, 0);
 	}
 	return (i);
 }
 
-int		ft_dot(t_data *head, t_flags fl, int i)
+int		ft_dot(t_data *head, t_flags fl, int i, int flag)
 {
 	DIR			*dirp;
 	struct stat	buff;
@@ -35,7 +35,7 @@ int		ft_dot(t_data *head, t_flags fl, int i)
 	t_data		*new;
 
 	tmp = head;
-	if (tmp == NULL)
+	if (tmp == NULL && flag == 0)
 	{
 		dirp = opendir(".");
 		ft_recurs(".", dirp, fl);

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 15:05:50 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 16:20:18 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 			if (fl.bits.l && !fl.bits.one)
 				ft_simple_l(head, fl);
 			else if (!fl.bits.one)
-				ft_print(head, fl);
+				ft_print(head, fl, path);
 			else
 				ft_print_simple(head, fl);
 			ft_free_list(&head, 0);
@@ -58,7 +58,7 @@ void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 	if (fl.bits.l && !fl.bits.one)
 		ft_l(path, fl);
 	else if (!fl.bits.one)
-		ft_print(head, fl);
+		ft_print(head, fl, path);
 	else
 		ft_print_simple(head, fl);
 	if (to_free == 1)
@@ -71,7 +71,7 @@ void	ft_output_files(t_data *head, t_flags fl, int to_free,
 	if (fl.bits.l && !fl.bits.one)
 		ft_l(path, fl);
 	else if (!fl.bits.one)
-		ft_print(head, fl);
+		ft_print(head, fl, NULL);
 	else
 		ft_print_simple(head, fl);
 	if (to_free)
