@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: koparker <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:38:02 by koparker          #+#    #+#              #
-#    Updated: 2019/04/28 14:05:40 by koparker         ###   ########.fr        #
+#    Updated: 2019/04/28 15:49:30 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SOURCES = $(SRC)main.c \
 		  $(SRC)ft_l_get_info.c \
 		  $(SRC)ft_l_output.c \
 		  $(SRC)upper_g_flag_l.c \
-		  $(SRC)upper_g_flag.c
+		  $(SRC)upper_g_flag.c \
+		  $(SRC)ft_recursion_helpers.c
 
 LIBFT_FOLDER = libft
 

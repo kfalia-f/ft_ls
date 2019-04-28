@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 15:06:02 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 15:48:05 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,41 +87,6 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	free(pt);
 }
 
-int		ft_dot(t_data *head, t_flags fl)
-{
-	DIR			*dirp;
-	struct stat	buff;
-	t_data		*tmp;
-	t_data		*new;
-	int			i;
-
-	tmp = head;
-	if (tmp == NULL)
-	{
-		dirp = opendir(".");
-		ft_recurs(".", dirp, fl);
-		closedir(dirp);
-		return (-1);
-	}
-	new = NULL;
-	while (tmp)
-	{
-		stat(tmp->name, &buff);
-		if (S_ISREG(buff.st_mode))
-			push_back(&new, new_file(tmp->name));
-		tmp = tmp->next;
-	}
-	i = ft_list_size(new);
-	if (new)
-	{
-		if (fl.bits.l)
-			ft_simple_l(new, fl);
-		else
-			ft_print(new, fl);
-	}
-	return (i);
-}
-
 void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
 {
 	DIR			*dirp;
@@ -130,11 +95,10 @@ void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
 
 	if (fl.bits.d)
 		return ;
+	if (av)
+		ft_balanser_sort(&av, fl, av->name);
 	head = av;
-	if (head)
-		ft_balanser_sort(&head, fl, head->name);
-	i = ft_dot(head, fl);
-	if (i == -1)
+	if ((i = ft_dot(head, fl, 0)) == -1)
 		return ;
 	while (head)
 	{
@@ -149,4 +113,5 @@ void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
 		}
 		head = head->next;
 	}
+	ft_free_list(&av, 0);
 }
