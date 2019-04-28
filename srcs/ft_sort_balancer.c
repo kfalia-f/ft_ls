@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 16:20:18 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:38:12 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_output(t_data *head, t_flags fl, int to_free, char *path)
 void	ft_output_files(t_data *head, t_flags fl, int to_free,
 						char *path)
 {
+	ft_balanser_sort(&head, fl, NULL);
 	if (fl.bits.l && !fl.bits.one)
 		ft_l(path, fl);
 	else if (!fl.bits.one)

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 16:40:16 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:42:33 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ size_t	ft_process_files(t_data **head, t_flags fl)
 		flag = 1;
 		if (fl.bits.upper_g)
 			ft_set_permissions(&head_file, NULL);
-		ft_balanser_sort(&head_file, fl, NULL);
 		ft_output_files(head_file, fl, 1, (*head)->name);
 	}
 	return (flag);
@@ -91,10 +90,7 @@ void	ft_process_dirs(t_data **head, size_t flag, t_flags fl, int n)
 		head_dir = ft_readdir(dirp, fl);
 		closedir(dirp);
 		if (flag == 1)
-		{
-			flag = 2;
-			ft_putchar('\n');
-		}
+			ft_process_dirs_helper(&flag);
 		ft_output_dirs(tmp->name, head_dir, n, fl);
 		tmp = tmp->next;
 		if (tmp)
