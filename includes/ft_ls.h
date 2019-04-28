@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 17:41:55 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:51:00 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,4 +160,5 @@ void				ft_set_permissions(t_data **head, char *path);
 void				ft_recurs(char *path_name, DIR *dirp, t_flags fl);
 
 void				ft_process_dirs_helper(size_t *flag);
+void				ft_del_perms(char **perms, size_t list_size, t_data *head);
 #endif

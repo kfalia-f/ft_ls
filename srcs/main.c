@@ -6,11 +6,18 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 17:04:16 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:58:41 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+
+void	ft_with_args_main(t_data *args, size_t n_of_fl, t_flags fl)
+{
+	ft_argv(&args, n_of_fl, fl);
+	if (!fl.bits.d)
+		ft_free_list(&args, 0);
+}
 
 int		main(int ac, char **av)
 {
@@ -36,10 +43,6 @@ int		main(int ac, char **av)
 	else if (fl.bits.upper_r)
 		ft_recursion_flag(args, flag, fl);
 	else
-	{
-		ft_argv(&args, ac - num_of_flags - 1, fl);
-		if (!fl.bits.d)
-			ft_free_list(&args, 0);
-	}
+		ft_with_args_main(args, ac - num_of_flags - 1, fl);
 	return (0);
 }

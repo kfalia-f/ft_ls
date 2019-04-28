@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 17:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 17:12:46 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:49:48 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,5 @@ void	ft_print(t_data *head, t_flags fl, char *path)
 	ft_print_contents(names, perms, max_len, fl);
 	ft_del(&names, list_size);
 	if (fl.bits.upper_g)
-	{
-		ft_del(&perms, list_size);
-		ft_free_perm(&head);
-	}
+		ft_del_perms(perms, list_size, head);
 }
