@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 16:06:02 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 19:54:47 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_only_files(t_data *head, char *path_name)
 			continue ;
 		}
 		path = ft_str_path(path_name, tmp->name);
-		stat(path, &buff);
+		lstat(path, &buff);
 		free(path);
 		if (S_ISDIR(buff.st_mode))
 			return (0);
@@ -41,6 +41,7 @@ void	ft_rec(t_data *tmp, char *pt, t_flags fl)
 {
 	DIR				*dirp2;
 	char			*path;
+	struct stat		buff;
 
 	while (tmp)
 	{
@@ -50,7 +51,8 @@ void	ft_rec(t_data *tmp, char *pt, t_flags fl)
 			continue ;
 		}
 		path = ft_str_path(pt, tmp->name);
-		if ((dirp2 = opendir(path)))
+		lstat(path, &buff);
+		if (S_ISDIR(buff.st_mode) && (dirp2 = opendir(path)))
 		{
 			ft_putendl(path, 2);
 			ft_recurs(path, dirp2, fl);

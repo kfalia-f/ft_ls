@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 17:29:56 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 20:15:16 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void	ft_wrong_flag(char c)
 {
-	ft_putstr("ft_ls: illegal option -- ");
-	ft_putchar(c);
-	ft_putendl("\nusage: ./ft_ls [-GRUadfglrtu1] [file ...]", 0);
+	ft_putstr_base("ft_ls: illegal option -- ", 2);
+	ft_putchar_base(c, 2);
+	ft_putstr_base("\nusage: ./ft_ls [-GRUadfglrtu1] [file ...]", 2);
+	ft_putchar_base('\n', 2);
 	exit(EXIT_FAILURE);
 }
 

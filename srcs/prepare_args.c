@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:37:03 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 12:34:53 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 20:18:05 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	ft_argv_error(char *name)
 			name = tmp;
 		}
 	}
-	ft_putstr("ft_ls: ");
-	ft_putstr(name);
-	ft_putstr(": ");
-	ft_putstr(strerror(errno));
-	ft_putchar('\n');
+	ft_putstr_base("ft_ls: ", 2);
+	ft_putstr_base(name, 2);
+	ft_putstr_base(": ", 2);
+	ft_putstr_base(strerror(errno), 2);
+	ft_putchar_base('\n', 2);
 }
 
 t_data	*ft_convert_args(char **av)

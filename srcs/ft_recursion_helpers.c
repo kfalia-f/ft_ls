@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 15:50:42 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 16:16:46 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 19:42:37 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int		ft_dot(t_data *head, t_flags fl, int i, int flag)
 	new = NULL;
 	while (tmp)
 	{
-		stat(tmp->name, &buff);
-		if (S_ISREG(buff.st_mode))
+		lstat(tmp->name, &buff);
+		if (S_ISREG(buff.st_mode) || S_ISLNK(buff.st_mode))
 			push_back(&new, new_file(tmp->name));
 		tmp = tmp->next;
 	}
