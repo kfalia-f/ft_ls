@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/27 15:26:44 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 16:40:16 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ size_t	ft_process_files(t_data **head, t_flags fl)
 		flag = 1;
 		if (fl.bits.upper_g)
 			ft_set_permissions(&head_file, NULL);
+		ft_balanser_sort(&head_file, fl, NULL);
 		ft_output_files(head_file, fl, 1, (*head)->name);
 	}
 	return (flag);
