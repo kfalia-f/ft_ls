@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 12:25:15 by koparker         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:29:52 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_set_time(t_data **head, t_flags fl, char *path)
 	while (tmp)
 	{
 		if (path == NULL)
-			stat(tmp->name, &buff);
+			lstat(tmp->name, &buff);
 		else
 		{
 			pt = ft_str_path(path, tmp->name);
