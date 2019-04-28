@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 16:50:19 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 12:27:21 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	time_balanser_get_info(t_data *st, t_flags fl, struct stat buff)
 
 void	ft_l(char *path_name, t_flags fl)
 {
-	DIR				*dirp;
-	t_data			*lhead;
-	t_data			*lnode;
-	char			*pt;
+	DIR		*dirp;
+	t_data	*lhead;
+	t_data	*lnode;
+	char	*pt;
 
 	if (!(dirp = opendir(path_name)))
 		return ;
@@ -81,7 +81,7 @@ void	ft_l(char *path_name, t_flags fl)
 	ft_free_list(&lhead, 1);
 }
 
-int			ft_len(size_t n)
+int		ft_len(size_t n)
 {
 	int size;
 
@@ -94,7 +94,7 @@ int			ft_len(size_t n)
 	return (size);
 }
 
-int			ft_max_llen(t_data *st, int flag)
+int		ft_max_llen(t_data *st, int flag)
 {
 	t_data	*tmp;
 	int		len;

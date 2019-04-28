@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 17:53:39 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/24 16:31:31 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 13:23:07 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_path(char *path, int len)
 {
 	char	*res;
-	int 	i;
+	int		i;
 	int		k;
 
 	i = 0;
@@ -32,7 +32,7 @@ char	*ft_path(char *path, int len)
 	return (res);
 }
 
-char	*ft_ls_path_to_file(char *path, int	flag)
+char	*ft_ls_path_to_file(char *path, int flag)
 {
 	int		i;
 	int		len;

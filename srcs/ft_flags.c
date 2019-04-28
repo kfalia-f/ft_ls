@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:03:17 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 15:48:34 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 12:25:57 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	ft_check_flag(char *str, t_flags *flags)
 		flags->value |= (1 << bits_to_shift);
 		i++;
 	}
-//	if (iisaty(1))
 }
 
 int			ft_flags(int ac, char **av, t_flags *flags)

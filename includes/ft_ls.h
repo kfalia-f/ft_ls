@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/27 18:11:50 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 12:59:28 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ typedef struct		s_data
 	long			time;
 }					t_data;
 
-void				ft_lstcontent_to_char_arr(char **arr, t_data *data, size_t flag);
+void				ft_lstcontent_to_char_arr(char **arr, t_data *data,
+					size_t flag);
 t_data				*new_node(struct dirent *dp);
 t_data				*new_file(char *str);
 void				push_back(t_data **head, t_data *node);
@@ -101,7 +102,6 @@ void				ft_free_perm(t_data **head);
 size_t				ft_max_namlen(t_data *data);
 void				ft_output_spaces(char c, size_t len);
 int					ft_flags(int ac, char **av, t_flags *flags);
-//void				ft_sort_params(char **av, int num_of_flags, t_flags fl);
 void				ft_argv(t_data **head, int n, t_flags fl);
 
 void				ft_recursion_flag(t_data *av, int flag, t_flags flags);
@@ -109,8 +109,10 @@ void				ft_l_flag(t_data *av, int flag, t_flags flags);
 
 t_data				*ft_readdir(DIR *dirp, t_flags fl);
 void				ft_print(t_data *head, t_flags fl);
-void				ft_print_first_upper_g(char **names, char **perms, size_t row);
-void				ft_pr_upper_g(char **names, char **perms, size_t row, size_t max_len);
+void				ft_print_first_upper_g(char **names, char **perms,
+					size_t row);
+void				ft_pr_upper_g(char **names, char **perms, size_t row,
+					size_t max_len);
 
 int					ft_timecmp(long a, long b);
 void				ft_time_sort(t_data **head);
@@ -121,10 +123,12 @@ void				ft_set_time(t_data **head, t_flags fl, char *path);
 void				ft_remove_dots(t_data **head);
 t_data				*ft_convert_args(char **av);
 void				ft_print_simple(t_data *head, t_flags fl);
-//void				ft_skip_dots(t_data **head, t_flags fl);
+void				ft_print_simple_colorized(t_data *head);
 void				ft_process_current_dir(char *s, t_flags fl);
-void				ft_output(t_data *head, t_flags fl, int to_free, char *path);
-void				ft_output_files(t_data *head, t_flags fl, int to_free, char *path);
+void				ft_output(t_data *head, t_flags fl, int to_free,
+					char *path);
+void				ft_output_files(t_data *head, t_flags fl, int to_free,
+					char *path);
 
 void				l_push_back(t_lflag **head, t_lflag *node);
 void				new_l_node(t_data **av, char *path, t_flags fl);
@@ -132,7 +136,8 @@ void				ft_l(char *path_name, t_flags fl);
 t_data				*ft_convert_args(char **av);
 void				ft_simple_l(t_data *head, t_flags fl);
 
-void				time_balanser_get_info(t_data *st, t_flags fl, struct stat buff);
+void				time_balanser_get_info(t_data *st, t_flags fl,
+					struct stat buff);
 char				*ft_date(char *data, size_t tm, int i, int j);
 void				ft_link(t_data *av, char *path);
 void				get_info(char *path, t_data *st, t_flags fl);
@@ -153,5 +158,4 @@ void				ft_set_permissions(t_data **head, char *path);
 
 void				ft_recurs(char *path_name, DIR *dirp, t_flags fl);
 
-//void				ft_print_list(t_data *head);
 #endif

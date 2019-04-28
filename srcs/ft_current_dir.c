@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/27 17:22:22 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 12:25:15 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,20 @@ void	ft_set_time(t_data **head, t_flags fl, char *path)
 	}
 }
 
-/*void	ft_output_upper_g_one(char *s)
+void	ft_color_dot(char *s)
 {
-	t_data	*node;
-	t_data	*tmp;
+	char	*tmp;
 
-	node = new_file(s);
-	ft_set_permissions(&node, NULL);
-	tmp = node;
-	while (tmp)
-	{
-		ft_colorized_output(tmp->perm, tmp->name);
-		ft_putchar('\n');
-		tmp = tmp->next;
-	}
-	ft_free_list(node);
-}*/
+	tmp = ft_strjoin(DIR_COLOR, s);
+	ft_putendl(tmp, 0);
+	ft_putstr(RESET);
+	ft_strdel(&tmp);
+}
 
 void	ft_process_current_dir(char *s, t_flags fl)
 {
 	t_data	*head;
-	char	*tmp;
 
-	tmp = NULL;
 	if (fl.bits.d)
 	{
 		if (fl.bits.l && !fl.bits.one)
@@ -83,13 +74,7 @@ void	ft_process_current_dir(char *s, t_flags fl)
 			if (!fl.bits.upper_g)
 				ft_putendl(s, 0);
 			else
-			{
-			//	ft_output_upper_g_one(s);
-				tmp = ft_strjoin(DIR_COLOR, s);
-				ft_putendl(tmp, 0);
-				ft_putstr(RESET);
-				ft_strdel(&tmp);
-			}
+				ft_color_dot(s);
 		}
 		return ;
 	}

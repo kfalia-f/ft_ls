@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 17:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/26 18:36:54 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 12:59:21 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,22 @@ void	ft_pr(char **names, size_t max_len, size_t row, size_t num_of_elems)
 	}
 }
 
-void	ft_print_contents(char **names, char **perms, size_t max_len, t_flags fl)
+void	ft_print_contents(char **names, char **perms, size_t max_len,
+						t_flags fl)
 {
 	struct winsize	w;
 	size_t			row;
 	size_t			len;
 	size_t			col;
-	size_t			num_of_elems;
+	size_t			n_of_elems;
 
 	ioctl(0, TIOCGWINSZ, &w);
 	len = max_len;
-	num_of_elems = ft_2d_strlen(names);
+	n_of_elems = ft_2d_strlen(names);
 	if (fl.bits.upper_g)
 	{
 		(col = (size_t)w.ws_col / (len + 1)) == 0 ? (col++) : col;
-		((row = num_of_elems / col) && (num_of_elems % col == 0)) ? row : (row++);
+		((row = n_of_elems / col) && (n_of_elems % col == 0)) ? row : (row++);
 		col == 1 ? ft_print_first_upper_g(names, perms, row)
 			: ft_pr_upper_g(names, perms, row, max_len);
 	}
@@ -75,42 +76,24 @@ void	ft_print_contents(char **names, char **perms, size_t max_len, t_flags fl)
 		while ((len + 1) % 8 != 0)
 			len++;
 		(col = (size_t)w.ws_col / (len + 1)) == 0 ? (col++) : col;
-		((row = num_of_elems / col) && (num_of_elems % col == 0)) ? row : (row++);
+		((row = n_of_elems / col) && (n_of_elems % col == 0)) ? row : (row++);
 		(col == 1) ? ft_print_first(names, w, row)
-			: ft_pr(names, max_len, row, num_of_elems);
+			: ft_pr(names, max_len, row, n_of_elems);
 	}
 }
 
 void	ft_print_simple(t_data *head, t_flags fl)
 {
 	t_data	*tmp;
-	char	**perms;
-	size_t	i;
-	size_t	list_size;
 
-	i = 0;
-	tmp = head;
+	tmp = NULL;
 	if (head == NULL)
 		return ;
 	if (fl.bits.upper_g)
-	{
-		list_size = ft_list_size(head);
-		if ((perms = ft_memalloc_2d_clean(list_size, PERM_SIZE)) == NULL)
-			return ;
-		if (!head->perm)
-			ft_set_permissions(&head, NULL);
-		ft_lstcontent_to_char_arr(perms, head, 1);
-		while (tmp)
-		{
-			ft_colorized_output(perms[i++], tmp->name);
-			ft_putchar('\n');
-			tmp = tmp->next;
-		}
-		ft_del(&perms, list_size);
-		ft_free_perm(&head);
-	}
+		ft_print_simple_colorized(head);
 	else
 	{
+		tmp = head;
 		while (tmp)
 		{
 			ft_putendl(tmp->name, 0);

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 19:45:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 17:22:37 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 12:21:19 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int		main(int ac, char **av)
 {
 	t_data	*args;
-    t_flags fl;
-    int		num_of_flags;
+	t_flags	fl;
+	int		num_of_flags;
 	int		flag;
 
-    fl.value = 0;
+	fl.value = 0;
 	num_of_flags = ft_flags(ac, av, &fl);
 	flag = ac - num_of_flags - 1;
 	if (fl.bits.d)

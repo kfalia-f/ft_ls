@@ -6,13 +6,13 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:37:03 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/24 19:25:14 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 12:34:53 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void    ft_argv_error(char *name)
+void	ft_argv_error(char *name)
 {
 	char	*tmp;
 
@@ -44,7 +44,7 @@ t_data	*ft_convert_args(char **av)
 	i = 0;
 	head = NULL;
 	while (av[i])
-	{	
+	{
 		if ((dirp = opendir(av[i])) == NULL)
 		{
 			if (errno != 20 && errno != 13)
