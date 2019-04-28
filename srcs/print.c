@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 17:08:44 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 16:19:47 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:12:46 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ft_print_first(char **names, struct winsize w, size_t row)
 		len = ft_strlen(names[i]);
 		if (len <= (size_t)w.ws_col)
 			ft_output_spaces(' ', (size_t)w.ws_col - len);
-		if (i + 1 == row)
-			break ;
 		ft_putchar('\n');
 		i++;
 	}
