@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:03:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/27 15:52:53 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/06 16:27:55 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,22 @@ char	get_acl(char *path)
 	acl_entry_t	dummy;
 	int			xattr;
 
+	acl = NULL;
+	xattr = 0;
 	acl = acl_get_link_np(path, ACL_TYPE_EXTENDED);
 	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1)
-	{
 		acl_free(acl);
-		acl = NULL;
-	}
 	xattr = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
-	if (acl != NULL)
+	if (xattr > 0)
 	{
 		acl_free(acl);
-		acl = NULL;
+		return ('@');
+	}
+	else if (acl != NULL)
+	{
+		acl_free(acl);
 		return ('+');
 	}
-	else if (xattr > 0)
-		return ('@');
 	return (' ');
 }
 
