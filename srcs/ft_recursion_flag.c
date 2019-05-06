@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 19:54:47 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/06 17:36:04 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ int		ft_only_files(t_data *head, char *path_name)
 			continue ;
 		}
 		path = ft_str_path(path_name, tmp->name);
-		lstat(path, &buff);
-		free(path);
-		if (S_ISDIR(buff.st_mode))
-			return (0);
+		if (lstat(path, &buff) >= 0)
+		{
+			ft_strdel(&path);
+			if (S_ISDIR(buff.st_mode))
+				return (0);
+		}
+		if (path)
+			free(path);
 		if (tmp)
 			tmp = tmp->next;
 	}
