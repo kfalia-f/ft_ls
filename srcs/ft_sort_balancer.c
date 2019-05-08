@@ -16,8 +16,10 @@ void	ft_balanser_sort(t_data **head, t_flags fl, char *path)
 {
 	if (fl.bits.f)
 		return ;
-	if ((fl.bits.t && !fl.bits.l) || (fl.bits.t && !path))
+	if ((fl.bits.t && (*head)->time == 0) || (fl.bits.t && !path && (*head)->time == 0))
+	//if (fl.bits.t && (*head)->time == 0)
 	{
+		ft_putendl("fffff", 0);
 		if (fl.bits.upper_u)
 			ft_set_time(head, fl, path);
 		else if (fl.bits.u)
@@ -27,8 +29,10 @@ void	ft_balanser_sort(t_data **head, t_flags fl, char *path)
 		ft_ascii_sort(head);
 		ft_time_sort(head);
 	}
-	else if (fl.bits.t && fl.bits.l)
+	else if (fl.bits.t && fl.bits.l && (*head)->time != 0)
+//	else if (fl.bits.t)
 	{
+	//	ft_putendl("dddd", 0);
 		ft_ascii_sort(head);
 		ft_time_sort(head);
 	}

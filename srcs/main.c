@@ -37,7 +37,8 @@ int		main(int ac, char **av)
 		return (0);
 	}
 	args = ft_convert_args(av + num_of_flags + 1);
-	ft_balanser_sort(&args, fl, NULL);
+	if (args)
+		ft_balanser_sort(&args, fl, NULL);
 	if (fl.bits.l && !fl.bits.upper_r && !fl.bits.d)
 		ft_l_flag(args, flag, fl);
 	else if (fl.bits.upper_r)

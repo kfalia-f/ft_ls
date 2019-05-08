@@ -74,6 +74,8 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	char			*pt;
 
 	head = ft_readdir(dirp, fl);
+//	ft_putendl(path_name, 0);
+//	ft_putnbr(head->time);
 	ft_balanser_sort(&head, fl, path_name);
 	tmp = head;
 	pt = ft_strjoin(path_name, "");

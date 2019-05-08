@@ -26,6 +26,7 @@ t_data	*new_node(struct dirent *dp)
 	node->perm = NULL;
 	node->next = NULL;
 	node->l_info = NULL;
+	node->time = 0;
 	return (node);
 }
 
@@ -42,6 +43,7 @@ t_data	*new_file(char *str)
 	node->len = ft_strlen(str);
 	node->perm = NULL;
 	node->next = NULL;
+	node->time = 0;
 	return (node);
 }
 

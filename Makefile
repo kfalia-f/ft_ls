@@ -66,3 +66,6 @@ fclean: clean
 	@make -C $(LIBFT_FOLDER) fclean
 
 re: fclean all
+
+test:
+	@gcc -g $(FLAGS) -o $(NAME) $(HEADERS) $(SOURCES) $(LIBFT)
