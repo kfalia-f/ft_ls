@@ -6,24 +6,29 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 17:42:33 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/10 17:55:49 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-t_data	*ft_readdir(DIR *dirp, t_flags fl)
+t_data	*ft_readdir(DIR *dirp, char *path, t_flags fl)
 {
 	struct dirent	*dp;
+	struct stat		buff;
 	t_data			*head;
+	char			*pt;
 
 	head = NULL;
 	while ((dp = readdir(dirp)) != NULL)
 	{
+		pt = ft_str_path(path, dp->d_name);
 		if (*(dp->d_name) == '.')
 			if (!fl.bits.a && !fl.bits.f)
 				continue ;
-		push_back(&head, new_node(dp));
+		if (lstat(pt, &buff) >= 0)
+			push_back(&head, new_node(dp));
+		free(pt);
 	}
 	return (head);
 }
@@ -87,7 +92,7 @@ void	ft_process_dirs(t_data **head, size_t flag, t_flags fl, int n)
 			tmp = tmp->next;
 			continue ;
 		}
-		head_dir = ft_readdir(dirp, fl);
+		head_dir = ft_readdir(dirp, tmp->name, fl);  //LOOK HERE
 		closedir(dirp);
 		if (flag == 1)
 			ft_process_dirs_helper(&flag);

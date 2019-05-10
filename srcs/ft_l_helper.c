@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:26:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 12:27:21 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/10 17:51:45 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_l(char *path_name, t_flags fl)
 
 	if (!(dirp = opendir(path_name)))
 		return ;
-	lhead = ft_readdir(dirp, fl);
+	lhead = ft_readdir(dirp, path_name, fl);
 	lnode = lhead;
 	while (lnode)
 	{

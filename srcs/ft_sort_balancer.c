@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:44:26 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 17:38:12 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:49:35 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_balanser_sort(t_data **head, t_flags fl, char *path)
 	if ((fl.bits.t && (*head)->time == 0) || (fl.bits.t && !path && (*head)->time == 0))
 	//if (fl.bits.t && (*head)->time == 0)
 	{
-		ft_putendl("fffff", 0);
+		//ft_putendl("fffff", 0);
 		if (fl.bits.upper_u)
 			ft_set_time(head, fl, path);
 		else if (fl.bits.u)

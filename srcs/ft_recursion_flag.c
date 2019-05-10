@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/05/06 17:36:04 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/10 17:56:13 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	t_data			*tmp;
 	char			*pt;
 
-	head = ft_readdir(dirp, fl);
+	head = ft_readdir(dirp, path_name, fl);
 //	ft_putendl(path_name, 0);
 //	ft_putnbr(head->time);
 	ft_balanser_sort(&head, fl, path_name);
