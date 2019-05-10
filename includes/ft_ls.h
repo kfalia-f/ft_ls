@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/05/10 18:43:18 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:49:12 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define SIMLNK_BASE_COLOR	"\x1B[35m"
 # define BLOCK_COLOR	"\x1B[34m\x1B[46m"
 # define CHAR_COLOR	"\x1B[34m\x1B[43m"
+# define SOCKET_COLOR	"\x1B[32m"
 # define EXE_SETUID_COLOR	"\x1B[30m\x1B[41m"
 # define EXE_SETGID_COLOR	"\x1B[30m\x1B[46m"
 # define STICKY_BIT_COLOR	"\x1B[30m\x1B[42m"

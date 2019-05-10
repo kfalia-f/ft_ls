@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:48:00 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 16:19:21 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:56:24 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ void	ft_colorized_output(char *perm, char *name)
 	char	*tmp;
 
 	tmp = NULL;
-	if (ft_sticky_file(perm, name))
-		ft_putstr(RESET);
-	else if (ft_sticky_dir(perm, name))
+	if (ft_sticky_file(perm, name) || ft_sticky_dir(perm, name))
 		ft_putstr(RESET);
 	else if (*perm == 'd')
 		tmp = ft_strjoin(DIR_COLOR, name);
@@ -93,6 +91,8 @@ void	ft_colorized_output(char *perm, char *name)
 		tmp = ft_strjoin(SIMLNK_BASE_COLOR, name);
 	else if (ft_strchr(perm, 'x'))
 		tmp = ft_strjoin(EXE_COLOR, name);
+	else if (*perm == 's')
+		tmp = ft_strjoin(SOCKET_COLOR, name);
 	else
 		ft_putstr(name);
 	if (tmp)

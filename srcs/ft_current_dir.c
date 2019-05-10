@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 21:52:55 by koparker          #+#    #+#             */
-/*   Updated: 2019/05/10 17:58:20 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:53:07 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_data	*ft_current_dir(char *s, t_flags fl)
 
 	head = NULL;
 	dirp = opendir(s);
-	head = ft_readdir(dirp, s, fl);  //If dont work - look here
+	head = ft_readdir(dirp, s, fl);
 	closedir(dirp);
 	return (head);
 }

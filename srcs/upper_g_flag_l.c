@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:11:20 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 14:36:16 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:56:44 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	ft_colorized_output_l(char *perm, char *name)
 		tmp = ft_strjoin(CHAR_COLOR, name);
 	else if (*perm == 'l')
 		tmp = ft_strjoin(SIMLNK_BASE_COLOR, name);
+	else if (*perm == 's')
+		tmp = ft_strjoin(SOCKET_COLOR, name);
 	else if (ft_strchr(perm, 'x'))
 		tmp = ft_strjoin(EXE_COLOR, name);
 	else
