@@ -6,11 +6,23 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 15:50:42 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 19:42:37 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/10 18:53:40 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+
+void	ft_error(char *path, char *file)
+{
+	ft_putchar_base('\n', 1);
+	ft_putstr_base(path, 1);
+	ft_putstr_base(":\n", 1);
+	ft_putstr_base("ft_ls: ", 2);
+	ft_putstr_base(file, 2);
+	ft_putstr_base(": ", 2);
+	ft_putstr_base(strerror(errno), 2);
+	ft_putchar_base('\n', 2);
+}
 
 int		ft_rfile_out(t_data *new, t_flags fl)
 {

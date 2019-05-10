@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/05/10 17:56:13 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/10 18:59:10 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	ft_rec(t_data *tmp, char *pt, t_flags fl)
 			ft_recurs(path, dirp2, fl);
 			closedir(dirp2);
 		}
+		else if (EACCES && S_ISDIR(buff.st_mode))
+			ft_error(path, tmp->name);
 		tmp = tmp->next;
 		free(path);
 	}
