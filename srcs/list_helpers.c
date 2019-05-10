@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 13:40:08 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 13:44:34 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/10 20:37:53 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	new_l_node(t_data **av, char *path, t_flags fl)
 	}
 	(*av)->l_info->file_name = ft_strdup(pt);
 	(*av)->l_info->link = NULL;
+	(*av)->l_info->links = 0;
+	(*av)->l_info->file_size = 0;
+	(*av)->l_info->total = 0;
+	(*av)->l_info->perm = NULL;
+	(*av)->l_info->owner = NULL;
+	(*av)->l_info->group = NULL;
+	(*av)->l_info->date = NULL;
 }
 
 void	ft_free_l_info(t_data **node)

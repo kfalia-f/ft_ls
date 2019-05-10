@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/05/10 19:55:36 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/10 20:38:32 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ t_data	*ft_readdir(DIR *dirp, char *path, t_flags fl)
 	head = NULL;
 	while ((dp = readdir(dirp)) != NULL)
 	{
-		pt = ft_str_path(path, dp->d_name);
 		if (*(dp->d_name) == '.')
 			if (!fl.bits.a && !fl.bits.f)
 				continue ;
+		pt = ft_str_path(path, dp->d_name);
 		if (lstat(pt, &buff) >= 0)
 			push_back(&head, new_node(dp));
 		free(pt);
@@ -92,7 +92,7 @@ void	ft_process_dirs(t_data **head, size_t flag, t_flags fl, int n)
 			tmp = tmp->next;
 			continue ;
 		}
-		head_dir = ft_readdir(dirp, tmp->name, fl);
+		head_dir = ft_readdir(dirp, tmp->name, fl);  //LOOK HERE
 		closedir(dirp);
 		if (flag == 1)
 			ft_process_dirs_helper(&flag);
