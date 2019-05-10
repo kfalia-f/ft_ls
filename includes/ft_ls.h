@@ -6,7 +6,7 @@
 /*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/05/10 19:49:12 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/10 20:20:08 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define TAB	8
 # define RESET	"\x1B[0m"
 # define EXE_COLOR	"\x1B[31m"
-# define DIR_COLOR	"\x1B[34m"
+# define DIR_COLOR	"\x1B[1m\x1B[34m"
 # define SIMLNK_BASE_COLOR	"\x1B[35m"
 # define BLOCK_COLOR	"\x1B[34m\x1B[46m"
 # define CHAR_COLOR	"\x1B[34m\x1B[43m"
