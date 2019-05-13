@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 15:50:42 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/05/13 15:11:43 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:30:31 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	ft_error(char *path, char *file)
 	ft_putstr_base(path, 1);
 	ft_putstr_base(":\n", 1);
 	ft_putstr_base("ft_ls: ", 2);
-	ft_putstr_base(file, 2);
-	ft_putstr_base(": ", 2);
-	ft_putstr_base(strerror(errno), 2);
-	ft_putchar_base('\n', 2);
+	perror(file);
 }
 
 int		ft_rfile_out(t_data *new, t_flags fl)

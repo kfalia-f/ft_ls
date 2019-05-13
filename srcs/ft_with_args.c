@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/05/13 17:46:34 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:24:00 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ size_t	ft_process_files(t_data **head, t_flags fl)
 	return (flag);
 }
 
+/*
+** With errors there are 3 cases:
+** 1: there are no files before Permission denied for dirs
+** 2: there are files -//- (case: flag + 2)
+** 3: there are dirs after Permission denied for dirs
+*/
+
 void	ft_process_dirs(t_data **head, size_t flag, t_flags fl, int n)
 {
 	DIR		*dirp;
@@ -89,7 +96,7 @@ void	ft_process_dirs(t_data **head, size_t flag, t_flags fl, int n)
 		{
 			if (errno == 13)
 				(tmp->next) ? ft_argv_error(tmp->name, flag) :
-				ft_argv_error(tmp->name, flag + 1);
+				ft_argv_error(tmp->name, flag + 2);
 			tmp = tmp->next;
 			continue ;
 		}
