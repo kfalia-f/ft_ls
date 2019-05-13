@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_recursion_flag.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/05/10 19:18:17 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/13 14:41:49 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ft_rec(t_data *tmp, char *pt, t_flags fl)
 			ft_error(path, tmp->name);
 		tmp = tmp->next;
 		free(path);
+		path = NULL;
 	}
 }
 

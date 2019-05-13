@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 21:43:49 by koparker          #+#    #+#             */
-/*   Updated: 2019/05/10 20:20:08 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/13 17:41:01 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void				ft_sps(char *str, size_t len);
 void				ft_d_flag(t_data *head, t_flags fl);
 void				ft_balanser_sort(t_data **head, t_flags fl, char *path);
 
-void				ft_argv_error(char *s);
+void				ft_argv_error(char *s, size_t flag);
 void				ft_colorized_output_l(char *perm, char *name);
 void				ft_colorized_output(char *perm, char *name);
 char				*get_permission(mode_t st_mode, char *path);

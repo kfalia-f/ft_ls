@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_with_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:28:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/05/10 20:38:32 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/05/13 17:46:34 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,14 @@ void	ft_process_dirs(t_data **head, size_t flag, t_flags fl, int n)
 		if ((dirp = opendir(tmp->name)) == NULL)
 		{
 			if (errno == 13)
-				ft_argv_error(tmp->name);
+				(tmp->next) ? ft_argv_error(tmp->name, flag) :
+				ft_argv_error(tmp->name, flag + 1);
 			tmp = tmp->next;
 			continue ;
 		}
-		head_dir = ft_readdir(dirp, tmp->name, fl);  //LOOK HERE
+		head_dir = ft_readdir(dirp, tmp->name, fl);
 		closedir(dirp);
-		if (flag == 1)
+		if (flag != 0)
 			ft_process_dirs_helper(&flag);
 		ft_output_dirs(tmp->name, head_dir, n, fl);
 		tmp = tmp->next;
