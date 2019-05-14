@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:27:53 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/04/28 13:43:24 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/14 15:22:32 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_data	*new_file(char *str)
 	node->len = ft_strlen(str);
 	node->perm = NULL;
 	node->next = NULL;
+	node->l_info = NULL;
 	node->time = 0;
 	return (node);
 }
