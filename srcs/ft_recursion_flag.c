@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:32:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/05/13 14:41:49 by koparker         ###   ########.fr       */
+/*   Updated: 2019/05/14 18:34:12 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,30 +96,41 @@ void	ft_recurs(char *path_name, DIR *dirp, t_flags fl)
 	free(pt);
 }
 
+int		ft_lorn(t_data *head, t_flags fl)
+{
+	struct stat buff;
+
+	lstat(head->name, &buff);
+	if (!fl.bits.l)
+		return (1);
+	if (!S_ISDIR(buff.st_mode))
+		return (0);
+	return (1);
+}
+
 void	ft_recursion_flag(t_data *av, int flag, t_flags fl)
 {
 	DIR			*dirp;
 	t_data		*head;
 	int			i;
 
-	if (fl.bits.d)
-		return ;
 	if (av)
 		ft_balanser_sort(&av, fl, av->name);
 	head = av;
-	if ((i = ft_dot(head, fl, 0, flag)) == -1)
+	if ((i = ft_dot(head, fl, 0, flag)) == -1 || fl.bits.d)
 		return ;
 	while (head)
 	{
-		if ((dirp = opendir(head->name)))
-		{
-			if (i == 0 && flag > 1 && (i += 1))
-				ft_putendl(head->name, 1);
-			else if (flag > 1)
-				ft_putendl(head->name, 2);
-			ft_recurs(head->name, dirp, fl);
-			closedir(dirp);
-		}
+		if (ft_lorn(head, fl))
+			if ((dirp = opendir(head->name)))
+			{
+				if (i == 0 && flag > 1 && (i += 1))
+					ft_putendl(head->name, 1);
+				else if (flag > 1)
+					ft_putendl(head->name, 2);
+				ft_recurs(head->name, dirp, fl);
+				closedir(dirp);
+			}
 		head = head->next;
 	}
 	ft_free_list(&av, 0);
