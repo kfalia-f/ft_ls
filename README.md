@@ -1,6 +1,6 @@
 # ls
 
-Custom realization of UNIX utility ls
+Custom realization of UNIX utility ls (for MacOS)
 
 ## Compile
 
@@ -11,7 +11,7 @@ make
 ## Usage
 
 ```
-./ft_ls [-flags] [files or dirs]
+./ft_ls [-flags] [files or/and dirs]
 ```
 
 ## Flags
@@ -39,3 +39,10 @@ make
 -1 -- Force output to be one entry per line.  This is the default 
       when output is not to a terminal
 ```
+
+General impact by author **kfalia-f** R, l; by **koparker** [(llama-0)] G, U, a, d, f, g, r, t, u, 1
+
+Architecture is based on linked list data structure, sorting - on merge sort algorithm.
+
+
+[(llama-0)]: https://github.com/llama-0
